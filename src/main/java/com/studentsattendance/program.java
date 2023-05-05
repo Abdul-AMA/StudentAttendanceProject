@@ -12,12 +12,10 @@ public class program extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(program.class.getResource("login-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(),1280,800);
+        Scene scene = new Scene(fxmlLoader.load(),800,600);
         stage.setTitle("program");
         stage.setScene(scene);
-        stage.setResizable(true);
-        stage.setMinHeight(700);
-        stage.setMinWidth(800);
+        stage.setResizable(false);
         stage.show();
 
     }
