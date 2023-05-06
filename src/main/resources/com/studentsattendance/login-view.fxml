@@ -7,9 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="488.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studentsattendance.controllers.LoginController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="488.0" stylesheets="@MyCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studentsattendance.controllers.LoginController">
    <children>
-      <Button fx:id="buttonLogin" layoutX="286.0" layoutY="204.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="25.0" prefWidth="59.0" text="login" />
       <Label layoutX="64.0" layoutY="120.0" prefWidth="222.0" text="Username">
          <font>
             <Font size="16.0" />
@@ -21,12 +20,14 @@
          </font>
       </Label>
       <TextField fx:id="usernameInput" layoutX="156.0" layoutY="120.0" prefHeight="25.0" prefWidth="190.0" />
+      <PasswordField fx:id="passwordInput" layoutX="156.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" />
+      <Button fx:id="buttonLogin" layoutX="286.0" layoutY="204.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="25.0" prefWidth="59.0" text="login" />
       <Button fx:id="buttonForgetUsername" layoutX="156.0" layoutY="204.0" mnemonicParsing="false" onAction="#onForgetUsername" prefHeight="25.0" prefWidth="111.0" text="forget userame ?" />
       <Label layoutX="64.0" layoutY="65.0" prefHeight="25.0" prefWidth="360.0" text="Welcome to the program the best in the west .......">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <PasswordField fx:id="passwordInput" layoutX="156.0" layoutY="158.0" prefHeight="25.0" prefWidth="190.0" />
+      <Label fx:id="labelWrongPass" layoutX="156.0" layoutY="242.0" prefHeight="17.0" prefWidth="190.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

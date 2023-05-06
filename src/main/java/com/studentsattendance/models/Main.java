@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-
-
+//
+//
 //        Administrator administrator = new Administrator("admin","admin", "aboodabuamouna@gmail.com");
 //        Course course1 = new Course("ECOM2450","Digital Design",
 //                4,"moris manos","logic design");
@@ -81,18 +81,18 @@ public class Main {
 //            throw new RuntimeException(e);
 //        }
 ////////////////////////////////
-        Administrator administrator = null;
-        try (FileInputStream fis = new FileInputStream(new File("src/main/java/com/studentsattendance/models/Files/admin.bin"))) {
-            try (ObjectInputStream ois = new ObjectInputStream(fis)) {
-                administrator = (Administrator) ois.readObject();
-            } catch (Exception e) {
-
-            }
-        } catch (Exception e) {
-
-        }
-        System.out.println(administrator);
-        System.out.println(administrator.getEmail());
+//        Administrator administrator = null;
+//        try (FileInputStream fis = new FileInputStream(new File("src/main/java/com/studentsattendance/models/Files/admin.bin"))) {
+//            try (ObjectInputStream ois = new ObjectInputStream(fis)) {
+//                administrator = (Administrator) ois.readObject();
+//            } catch (Exception e) {
+//
+//            }
+//        } catch (Exception e) {
+//
+//        }
+//        System.out.println(administrator);
+//        System.out.println(administrator.getEmail());
 
 
 
