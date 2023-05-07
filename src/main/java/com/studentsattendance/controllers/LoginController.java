@@ -33,8 +33,7 @@ public class LoginController implements  Initializable  {
     public Button buttonLogin;
     @FXML
     public TextField usernameInput;
-    @FXML
-    public Button buttonForgetUsername;
+
     @FXML
     public PasswordField passwordInput;
     @FXML
@@ -51,6 +50,13 @@ public class LoginController implements  Initializable  {
         administrator = dataModel.getAdministrator();
     }
     public void onLogin() {
+        if (usernameInput.getText().isEmpty()){
+            labelWrongPass.setText("Enter username");
+            return;
+        }else if (passwordInput.getText().isEmpty()){
+            labelWrongPass.setText("Enter password");
+            return;
+        }
         if (administrator.getUsername().equals(usernameInput.getText()) &&
                 administrator.getPassword().equals(passwordInput.getText())) {
                 openAdminWindow();
