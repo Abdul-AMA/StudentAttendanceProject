@@ -1,5 +1,7 @@
 package com.studentsattendance.controllers;
 
+import com.studentsattendance.models.Administrator;
+import com.studentsattendance.models.Course;
 import com.studentsattendance.program;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -10,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -29,6 +32,22 @@ public class AdminController implements Initializable {
     private Button button3;
     @FXML
     private Button logout;
+    @FXML
+    private Button creat;
+    @FXML
+    private TextField coursebook;
+
+    @FXML
+    private TextField coursedes;
+
+    @FXML
+    private TextField coursehour;
+
+    @FXML
+    private TextField courseid;
+
+    @FXML
+    private TextField coursename;
 
     @FXML
     private AnchorPane page1;
@@ -84,6 +103,12 @@ public class AdminController implements Initializable {
         logout.setOnMouseExited(e -> {
             logout.setStyle("-fx-background-color: #0598ff;");
         });
+        creat.setOnMouseEntered(e -> {
+            creat.setStyle("-fx-background-color: #4997D0;");
+        });
+        creat.setOnMouseExited(e -> {
+            creat.setStyle("-fx-background-color: #0598ff;");
+        });
 
     }
     public void logout(){
@@ -92,13 +117,21 @@ public class AdminController implements Initializable {
         });
 
     }
+//    public void creat() {
+//        Course course = new Course(courseid.getText(), coursename.getText(), Integer.parseInt(coursehour.getText()), coursebook.getText(), coursedes.getText());
+//        Administrator admin = new Administrator();
+//        admin.addCourse(course);
+//        System.out.println(admin.courseList);
+//    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         hover();
         logout();
+       // creat();
     }
+
 
 
 
