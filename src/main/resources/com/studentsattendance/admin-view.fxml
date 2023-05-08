@@ -53,7 +53,7 @@
                         <TextField fx:id="courseid" alignment="CENTER_RIGHT" layoutX="367.0" layoutY="203.0" prefHeight="35.0" prefWidth="235.0" promptText="رقم المساق" />
                         <TextField fx:id="coursename" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="266.0" prefHeight="35.0" prefWidth="235.0" promptText="اسم المساق" />
                         <TextField fx:id="coursehour" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="329.0" prefHeight="35.0" prefWidth="235.0" promptText="عدد ساعات المساق" />
-                        <Button fx:id="creat" layoutX="404.0" layoutY="567.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #0598FF; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
+                        <Button fx:id="creat" layoutX="404.0" layoutY="567.0" mnemonicParsing="false" onAction="#creat" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #0598FF; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
                         <Text layoutX="342.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة إنشاء المساقات" wrappingWidth="289.775390625">
                            <font>
                               <Font size="31.0" />

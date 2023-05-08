@@ -117,19 +117,24 @@ public class AdminController implements Initializable {
         });
 
     }
-//    public void creat() {
-//        Course course = new Course(courseid.getText(), coursename.getText(), Integer.parseInt(coursehour.getText()), coursebook.getText(), coursedes.getText());
-//        Administrator admin = new Administrator();
-//        admin.addCourse(course);
-//        System.out.println(admin.courseList);
-//    }
+    public void creat() {
+        Course course = new Course(courseid.getText(), coursename.getText(), Integer.parseInt(coursehour.getText()), coursebook.getText(), coursedes.getText());
+        Administrator admin = new Administrator();
+        admin.addCourse(course);
+        System.out.println(admin.courseList);
+        courseid.setText("");
+        coursename.setText("");
+        coursehour.setText("");
+        coursebook.setText("");
+        coursedes.setText("");
+    }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         hover();
         logout();
-       // creat();
+
     }
 
 
