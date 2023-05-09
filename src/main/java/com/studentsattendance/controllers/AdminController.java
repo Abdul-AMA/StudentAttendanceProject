@@ -1,5 +1,6 @@
 package com.studentsattendance.controllers;
 
+import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.Course;
 import com.studentsattendance.program;
@@ -15,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
+    public StackPane stackPane;
     @FXML
     private Button button1;
 
@@ -49,6 +52,7 @@ public class AdminController implements Initializable {
     @FXML
     private TextField coursename;
 
+
     @FXML
     private AnchorPane page1;
 
@@ -57,6 +61,8 @@ public class AdminController implements Initializable {
 
     @FXML
     private AnchorPane page3;
+
+    Navigation navigation = new Navigation();
 
     public void switchPage(ActionEvent event){
         if(event.getSource() == button1){
@@ -111,12 +117,7 @@ public class AdminController implements Initializable {
         });
 
     }
-    public void logout(){
-        logout.setOnAction(e -> {
-           System.exit(0);
-        });
 
-    }
     public void creat() {
         Course course = new Course(courseid.getText(), coursename.getText(), Integer.parseInt(coursehour.getText()), coursebook.getText(), coursedes.getText());
         Administrator admin = new Administrator();
@@ -133,11 +134,11 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         hover();
-        logout();
 
     }
 
 
-
-
+    public void onLogOut( ) {
+        navigation.navigateTo(stackPane,Navigation.Login_FXML);
+    }
 }

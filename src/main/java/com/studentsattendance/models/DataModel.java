@@ -1,10 +1,6 @@
 package com.studentsattendance.models;
 
-import com.studentsattendance.controllers.AdminController;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DataModel {
 

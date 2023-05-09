@@ -1,5 +1,6 @@
 package com.studentsattendance.controllers;
 
+import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.DataModel;
 import com.studentsattendance.models.TeacherAssistant;
@@ -13,16 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LoginController implements  Initializable  {
@@ -38,18 +36,18 @@ public class LoginController implements  Initializable  {
     public PasswordField passwordInput;
     @FXML
     public Label labelWrongPass;
-    Navigation navigation;
+
+    Navigation navigation = new Navigation();
 
     DataModel dataModel;
     Administrator administrator;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        navigation = new Navigation();
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
     }
-    public void onLogin() {
+    public void onLogin(ActionEvent actionEvent) {
         if (usernameInput.getText().isEmpty()){
             labelWrongPass.setText("Enter username");
             return;
@@ -76,20 +74,19 @@ public class LoginController implements  Initializable  {
     }
 
 
-    public void onForgetUsername() {
 
-    }
 
-    public void openAdminWindow(){
-        navigation.navigateTo(rootPane, navigation.Admin_FXML);
+    public void openAdminWindow( ){
+        navigation.navigateTo(rootPane,navigation.Admin_FXML);
 
     }
 
     public void openTeacherWindow(TeacherAssistant teacherAssistant){
-        navigation.navigateTo(rootPane, navigation.Teacher_FXML);
+        navigation.navigateTo(rootPane,navigation.Teacher_FXML);
+    }
+    public void onForgetUsername() {
 
     }
-
 
 
 }
