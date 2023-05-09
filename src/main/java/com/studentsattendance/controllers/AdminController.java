@@ -3,6 +3,7 @@ package com.studentsattendance.controllers;
 import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.Course;
+import com.studentsattendance.models.DataModel;
 import com.studentsattendance.program;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -36,21 +37,21 @@ public class AdminController implements Initializable {
     @FXML
     private Button logout;
     @FXML
-    private Button creat;
+    private Button buttonCreate;
     @FXML
-    private TextField coursebook;
+    private TextField textCourseBook;
 
     @FXML
-    private TextField coursedes;
+    private TextField textCourseDescription;
 
     @FXML
-    private TextField coursehour;
+    private TextField textCourseHour;
 
     @FXML
-    private TextField courseid;
+    private TextField textCourseId;
 
     @FXML
-    private TextField coursename;
+    private TextField textCourseName;
 
 
     @FXML
@@ -64,6 +65,16 @@ public class AdminController implements Initializable {
 
     Navigation navigation = new Navigation();
 
+    DataModel dataModel;
+    Administrator administrator;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        dataModel = new DataModel();
+        administrator = dataModel.getAdministrator();
+        hover();
+
+    }
     public void switchPage(ActionEvent event){
         if(event.getSource() == button1){
             page1.setVisible(true);
@@ -81,6 +92,7 @@ public class AdminController implements Initializable {
 
         }
     }
+
     public void hover(){
         button1.setStyle("-fx-background-color:  #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
         button1.setOnMouseEntered(e -> {
@@ -109,33 +121,24 @@ public class AdminController implements Initializable {
         logout.setOnMouseExited(e -> {
             logout.setStyle("-fx-background-color: #0598ff;");
         });
-        creat.setOnMouseEntered(e -> {
-            creat.setStyle("-fx-background-color: #4997D0;");
+        buttonCreate.setOnMouseEntered(e -> {
+            buttonCreate.setStyle("-fx-background-color: #4997D0;");
         });
-        creat.setOnMouseExited(e -> {
-            creat.setStyle("-fx-background-color: #0598ff;");
+        buttonCreate.setOnMouseExited(e -> {
+            buttonCreate.setStyle("-fx-background-color: #0598ff;");
         });
 
     }
 
-    public void creat() {
-        Course course = new Course(courseid.getText(), coursename.getText(), Integer.parseInt(coursehour.getText()), coursebook.getText(), coursedes.getText());
-        Administrator admin = new Administrator();
-        admin.addCourse(course);
-        System.out.println(admin.courseList);
-        courseid.setText("");
-        coursename.setText("");
-        coursehour.setText("");
-        coursebook.setText("");
-        coursedes.setText("");
+    public void onCreate() {
+//            public Course(String courseId, String courseName, int courseHours, String book, String description) {
+        Course course = new Course(textCourseId.getText(),textCourseName.getText(),Integer.parseInt(textCourseHour.getText()),
+                textCourseBook.getText(),textCourseDescription.getText());
+        administrator.addCourse(course);
     }
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        hover();
 
-    }
 
 
     public void onLogOut( ) {

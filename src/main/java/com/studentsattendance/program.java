@@ -11,13 +11,14 @@ public class program extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(program.class.getResource
-                ("loginView.fxml"));
+                ("views/login-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(),800,600);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("program");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        stage.centerOnScreen();
 
     }
 

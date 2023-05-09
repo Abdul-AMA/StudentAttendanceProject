@@ -11,12 +11,13 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-public class Navigation {
+public class    Navigation {
 
-    public static final String Login_FXML = "loginView.fxml";
-    public static final String Teacher_FXML = "teacher-view.fxml";
+    public static final String Login_FXML = "views/login-view.fxml";
+    public static final String Teacher_FXML = "views/teacher-view.fxml";
+    public static final String Admin_FXML = "views/admin-view.fxml";
+    public static final String FORGET_FXML = "views/forget-view.fxml";
 
-    public static final String Admin_FXML = "admin-view.fxml";
 
     public void navigateTo(Parent rootPane, String path) {
         try {

@@ -84,8 +84,10 @@ public class LoginController implements  Initializable  {
     public void openTeacherWindow(TeacherAssistant teacherAssistant){
         navigation.navigateTo(rootPane,navigation.Teacher_FXML);
     }
-    public void onForgetUsername() {
 
+
+    public void onForget(){
+        navigation.navigateTo(rootPane,navigation.FORGET_FXML);
     }
 
 

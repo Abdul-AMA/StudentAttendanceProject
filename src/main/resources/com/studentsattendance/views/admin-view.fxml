@@ -15,9 +15,9 @@
          <right>
             <AnchorPane prefHeight="739.0" prefWidth="151.0" style="-fx-background-color: #D3D3D3;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="button1" mnemonicParsing="false" onAction="#switchPage" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" styleClass="button" stylesheets="@MyCss.css" text="إنشاء مساق" />
+                  <Button fx:id="button1" mnemonicParsing="false" onAction="#switchPage" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" styleClass="button" stylesheets="@../MyCss.css" text="إنشاء مساق" />
                   <Button fx:id="button2" layoutY="60.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء حسابات المستخدمين" />
-                  <Button fx:id="button3" layoutY="120.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" text="ابصر شو" />
+                  <Button fx:id="button3" layoutY="120.0" mnemonicParsing="false" onAction="#switchPage" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" text="عرض المساقات" />
                   <Button layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء مساق" />
                   <Button layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء مساق" />
                   <Button layoutY="300.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="228.0" style="-fx-background-color: #D3D3D3; -fx-border-color: #808080; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء مساق" />
@@ -32,12 +32,12 @@
          <top>
             <AnchorPane prefHeight="61.0" prefWidth="1200.0" style="-fx-background-color: #0598FF;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="1045.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="المستخدم:Admin" wrappingWidth="132.13671875">
+                  <Text fill="WHITE" layoutX="1011.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" textAlignment="CENTER" wrappingWidth="144.13671875">
                      <font>
                         <Font name="Comic Sans MS" size="18.0" />
                      </font>
                   </Text>
-                  <Button fx:id="logout" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#onLogOut" style="-fx-background-color: #0598ff;" text="تسجيل خروج" textFill="WHITE">
+                  <Button fx:id="logout" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#onLogOut" style="-fx-background-color: #0598ff;" text="Logout" textFill="WHITE">
                      <font>
                         <Font name="Comic Sans MS Bold" size="18.0" />
                      </font>
@@ -50,17 +50,17 @@
                <children>
                   <AnchorPane fx:id="page1" prefHeight="739.0" prefWidth="972.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TextField fx:id="courseid" alignment="CENTER_RIGHT" layoutX="367.0" layoutY="203.0" prefHeight="35.0" prefWidth="235.0" promptText="رقم المساق" />
-                        <TextField fx:id="coursename" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="266.0" prefHeight="35.0" prefWidth="235.0" promptText="اسم المساق" />
-                        <TextField fx:id="coursehour" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="329.0" prefHeight="35.0" prefWidth="235.0" promptText="عدد ساعات المساق" />
-                        <Button fx:id="creat" layoutX="404.0" layoutY="567.0" mnemonicParsing="false" onAction="#creat" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #0598FF; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
+                        <TextField fx:id="textCourseId" alignment="CENTER_RIGHT" layoutX="367.0" layoutY="203.0" prefHeight="35.0" prefWidth="235.0" promptText="رقم المساق" />
+                        <TextField fx:id="textCourseName" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="266.0" prefHeight="35.0" prefWidth="235.0" promptText="اسم المساق" />
+                        <TextField fx:id="textCourseHour" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="329.0" prefHeight="35.0" prefWidth="235.0" promptText="عدد ساعات المساق" />
+                        <Button fx:id="buttonCreate" layoutX="404.0" layoutY="567.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #0598FF; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
                         <Text layoutX="342.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة إنشاء المساقات" wrappingWidth="289.775390625">
                            <font>
                               <Font size="31.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="coursebook" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="386.0" prefHeight="35.0" prefWidth="235.0" promptText="كتاب المساق" />
-                        <TextField fx:id="coursedes" alignment="TOP_RIGHT" layoutX="369.0" layoutY="448.0" prefHeight="71.0" prefWidth="235.0" promptText="وصف المساق" />
+                        <TextField fx:id="textCourseBook" alignment="CENTER_RIGHT" layoutX="368.0" layoutY="386.0" prefHeight="35.0" prefWidth="235.0" promptText="كتاب المساق" />
+                        <TextField fx:id="textCourseDescription" alignment="TOP_RIGHT" layoutX="369.0" layoutY="448.0" prefHeight="71.0" prefWidth="235.0" promptText="وصف المساق" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="page2" layoutX="10.0" layoutY="10.0" prefHeight="749.0" prefWidth="982.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

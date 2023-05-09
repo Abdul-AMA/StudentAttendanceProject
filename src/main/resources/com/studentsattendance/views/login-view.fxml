@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>-->
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -38,7 +39,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Hyperlink layoutX="121.0" layoutY="435.0" prefHeight="25.0" prefWidth="143.0" text="Forget Your Password?">
+                  <Hyperlink fx:id="linkForget" layoutX="121.0" layoutY="435.0" onAction="#onForget" prefHeight="25.0" prefWidth="143.0" text="Forget Your Password?">
                      <font>
                         <Font size="13.0" />
                      </font>
