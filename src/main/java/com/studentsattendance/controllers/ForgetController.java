@@ -56,7 +56,7 @@ public class ForgetController implements Initializable {
     }
 
     public void onResend(ActionEvent event) {
-        labelWrongPass.setText("خلاص ياخي حل عني");
+        labelWrongPass.setText("بلاش");
     }
 
     public void onBack(ActionEvent event) {

@@ -17,3 +17,16 @@
     -fx-background-color: #0598ff;
 }
 
+.checkbox .box{
+    -fx-background-color:   white;
+    -fx-border-color: grey;
+    -fx-border-radius: 3px;
+}
+
+.checkbox:selected .mark{
+        -fx-background-color: white;
+}
+
+.checkbox:selected .box{
+    -fx-background-color: #0598ff
+}

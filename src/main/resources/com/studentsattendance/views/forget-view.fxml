@@ -21,7 +21,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Hyperlink fx:id="linkResend" alignment="CENTER" contentDisplay="CENTER" layoutX="170.0" layoutY="412.0" onAction="#onResend" prefHeight="25.0" prefWidth="70.0" text="Resent" textAlignment="CENTER" visible="false">
+                  <Hyperlink fx:id="linkResend" alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="415.0" onAction="#onResend" prefHeight="25.0" prefWidth="206.0" text="didn't receive password?" textAlignment="CENTER" visible="false">
                      <font>
                         <Font size="13.0" />
                      </font>

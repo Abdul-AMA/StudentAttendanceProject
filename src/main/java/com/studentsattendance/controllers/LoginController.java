@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -36,6 +33,8 @@ public class LoginController implements  Initializable  {
     public PasswordField passwordInput;
     @FXML
     public Label labelWrongPass;
+    public CheckBox checkShowPass;
+    public TextField passShow;
 
     Navigation navigation = new Navigation();
 
@@ -91,4 +90,16 @@ public class LoginController implements  Initializable  {
     }
 
 
+    public void onShowPass(ActionEvent event) {
+        if (checkShowPass.isSelected()){
+            passShow.setText(passwordInput.getText());
+            passShow.setVisible(true);
+            passwordInput.setVisible(false);
+        }else {
+            passwordInput.setText(passShow.getText());
+            passShow.setVisible(false);
+            passwordInput.setVisible(true);
+        }
+
+    }
 }
