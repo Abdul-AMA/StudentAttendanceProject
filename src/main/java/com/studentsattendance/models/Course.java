@@ -10,6 +10,8 @@ public class Course implements Serializable {
 //----------------------------------------------------------------
     private String courseId;
     private String courseName;
+    private String courseDoctor;
+
     private int courseHours;
     private String book;
     private String description;
@@ -24,9 +26,10 @@ public class Course implements Serializable {
         this.lecturesList = new ArrayList<>();
     }
 
-    public Course(String courseId, String courseName, int courseHours, String book, String description) {
+    public Course(String courseId, String courseName,String courseDoctor, int courseHours, String book, String description) {
         this.courseId = courseId;
         this.courseName = courseName;
+        this.courseDoctor = courseDoctor;
         this.courseHours = courseHours;
         this.book = book;
         this.description = description;
@@ -260,20 +263,34 @@ public class Course implements Serializable {
         this.lecturesList = lecturesList;
     }
 
+    public String getCourseDoctor() {
+        return courseDoctor;
+    }
 
+    public void setDoctor(String courseDoctor) {
+        this.courseDoctor = courseDoctor;
+    }
+
+    public int getMaximumAbsence() {
+        return maximumAbsence;
+    }
+
+    public void setMaximumAbsence(int maximumAbsence) {
+        this.maximumAbsence = maximumAbsence;
+    }
 
     @Override
     public String toString() {
         return "Course{" +
-                "courseId='" + courseId + '\'' +
+                "doctor='" + courseDoctor + '\'' +
+                ", courseId='" + courseId + '\'' +
                 ", courseName='" + courseName + '\'' +
                 ", courseHours=" + courseHours +
                 ", book='" + book + '\'' +
                 ", description='" + description + '\'' +
+                ", maximumAbsence=" + maximumAbsence +
                 ", studentsList=" + studentsList +
                 ", lecturesList=" + lecturesList +
                 '}';
     }
-
-
 }

@@ -6,6 +6,7 @@ import com.studentsattendance.models.Course;
 import com.studentsattendance.models.DataModel;
 import com.studentsattendance.program;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -26,6 +30,16 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
     public StackPane stackPane;
+    public TableColumn columnCourseId;
+    public TableColumn columnCourseName;
+    public TableColumn columnCourseDoctor;
+    public TableColumn columnCourseHours;
+    public TableColumn columnCourseBook;
+    public TableColumn columnCourseDescription;
+    public TableColumn columnCourseMaximumAbsence;
+    public TableColumn columnCourseStudents;
+    public TableColumn columnCourseLectures;
+    public TableView<Course> tableCourses;
     @FXML
     private Button button1;
 
@@ -52,6 +66,9 @@ public class AdminController implements Initializable {
 
     @FXML
     private TextField textCourseName;
+    @FXML
+    private TextField textCourseDoctor;
+
 
 
     @FXML
@@ -72,6 +89,20 @@ public class AdminController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
+
+        tableCourses.setItems(FXCollections.observableArrayList(administrator.courseList));
+
+        columnCourseId.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+        columnCourseName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        columnCourseDoctor.setCellValueFactory(new PropertyValueFactory<>("courseDoctor"));
+        columnCourseHours.setCellValueFactory(new PropertyValueFactory<>("courseHours"));
+        columnCourseBook.setCellValueFactory(new PropertyValueFactory<>("book"));
+        columnCourseDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        columnCourseMaximumAbsence.setCellValueFactory(new PropertyValueFactory<>("maximumAbsence"));
+//        columnCourseId.setCellValueFactory(new PropertyValueFactory<>("aa"));
+//        columnCourseId.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+
         hover();
 
     }
@@ -132,7 +163,7 @@ public class AdminController implements Initializable {
 
     public void onCreate() {
 //            public Course(String courseId, String courseName, int courseHours, String book, String description) {
-        Course course = new Course(textCourseId.getText(),textCourseName.getText(),Integer.parseInt(textCourseHour.getText()),
+        Course course = new Course(textCourseId.getText(),textCourseName.getText(),textCourseDoctor.getText(),Integer.parseInt(textCourseHour.getText()),
                 textCourseBook.getText(),textCourseDescription.getText());
         administrator.addCourse(course);
     }

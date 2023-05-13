@@ -26,4 +26,5 @@ public class TeacherController {
     public void onTeatcher() throws IOException {
         navigation.navigateTo(rootPane,Navigation.Login_FXML);
     }
+
 }
