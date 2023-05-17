@@ -90,22 +90,11 @@ public class AdminController implements Initializable {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
 
-        tableCourses.setItems(FXCollections.observableArrayList(administrator.courseList));
-
-        columnCourseId.setCellValueFactory(new PropertyValueFactory<>("courseId"));
-        columnCourseName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        columnCourseDoctor.setCellValueFactory(new PropertyValueFactory<>("courseDoctor"));
-        columnCourseHours.setCellValueFactory(new PropertyValueFactory<>("courseHours"));
-        columnCourseBook.setCellValueFactory(new PropertyValueFactory<>("book"));
-        columnCourseDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        columnCourseMaximumAbsence.setCellValueFactory(new PropertyValueFactory<>("maximumAbsence"));
-//        columnCourseId.setCellValueFactory(new PropertyValueFactory<>("aa"));
-//        columnCourseId.setCellValueFactory(new PropertyValueFactory<>("name"));
-
-
         hover();
 
     }
+
+
     public void switchPage(ActionEvent event){
         if(event.getSource() == button1){
             page1.setVisible(true);

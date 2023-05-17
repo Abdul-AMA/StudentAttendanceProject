@@ -25,7 +25,7 @@ public class DataModel {
 
     public void save_date(){
         try(FileOutputStream fos = new FileOutputStream(new File("src/main/java/com/studentsattendance/models/Files/admin.bin"))){
-            try(ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                try(ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(administrator);
             }catch(IOException e){
                 throw new RuntimeException(e);
