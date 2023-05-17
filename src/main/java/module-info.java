@@ -1,7 +1,9 @@
 module com.studentsattendance {
+
     requires javafx.controls;
     requires javafx.fxml;
 
+    opens com.studentsattendance.models to javafx.base;
 
     opens com.studentsattendance to javafx.fxml;
     exports com.studentsattendance;

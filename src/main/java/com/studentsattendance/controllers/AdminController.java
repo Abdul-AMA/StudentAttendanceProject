@@ -7,6 +7,8 @@ import com.studentsattendance.models.DataModel;
 import com.studentsattendance.program;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,15 +32,15 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
     public StackPane stackPane;
-    public TableColumn columnCourseId;
-    public TableColumn columnCourseName;
-    public TableColumn columnCourseDoctor;
-    public TableColumn columnCourseHours;
-    public TableColumn columnCourseBook;
-    public TableColumn columnCourseDescription;
-    public TableColumn columnCourseMaximumAbsence;
-    public TableColumn columnCourseStudents;
-    public TableColumn columnCourseLectures;
+    public TableColumn<Course, Integer> columnCourseId;
+    public TableColumn<Course,String> columnCourseName;
+    public TableColumn<Course,String> columnCourseDoctor;
+    public TableColumn<Course,Integer> columnCourseHours;
+    public TableColumn<Course,String> columnCourseBook;
+    public TableColumn<Course,String> columnCourseDescription;
+    public TableColumn<Course,Integer> columnCourseMaximumAbsence;
+    public TableColumn<Course,String> columnCourseStudents;
+    public TableColumn<Course,String> columnCourseLectures;
     public TableView<Course> tableCourses;
     @FXML
     private Button button1;
@@ -85,11 +87,22 @@ public class AdminController implements Initializable {
     DataModel dataModel;
     Administrator administrator;
 
+    ObservableList<Course> observableListCourses ;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
+        observableListCourses = FXCollections.observableArrayList(administrator.getCourseList());
+        columnCourseId.setCellValueFactory(new PropertyValueFactory<Course,Integer>("courseId"));
+        columnCourseName.setCellValueFactory(new PropertyValueFactory<Course,String>("courseName"));
+        columnCourseDoctor.setCellValueFactory(new PropertyValueFactory<Course,String>("courseDoctor"));
+        columnCourseHours.setCellValueFactory(new PropertyValueFactory<Course,Integer>("courseHours"));
+        columnCourseBook.setCellValueFactory(new PropertyValueFactory<Course,String>("book"));
+        columnCourseDescription.setCellValueFactory(new PropertyValueFactory<Course,String>("description"));
+        columnCourseMaximumAbsence.setCellValueFactory(new PropertyValueFactory<Course,Integer>("maximumAbsence"));
 
+        tableCourses.setItems(observableListCourses);
         hover();
 
     }
@@ -111,6 +124,10 @@ public class AdminController implements Initializable {
             page3.setVisible(true);
 
         }
+    }
+
+    public void onCreateCourse(){
+
     }
 
     public void hover(){
