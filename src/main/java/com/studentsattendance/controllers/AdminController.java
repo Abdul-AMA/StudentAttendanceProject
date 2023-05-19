@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,18 +17,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
@@ -39,47 +40,38 @@ public class AdminController implements Initializable {
     public TableColumn<Course,String> columnCourseBook;
     public TableColumn<Course,String> columnCourseDescription;
     public TableColumn<Course,Integer> columnCourseMaximumAbsence;
-    public TableColumn<Course,String> columnCourseStudents;
-    public TableColumn<Course,String> columnCourseLectures;
+
     public TableView<Course> tableCourses;
+    public AnchorPane pageDefault;
+    public Button buttonPageDefault;
+    public Button buttonCreateNewCourse;
+    public MenuButton menuButtonEditCourse;
+    public TextField textEditCourseId;
+    public TextField textEditCourseName;
+    public TextField textEditCourseHour;
+    public TextField textEditCourseBook;
+    public TextField textEditCourseDoctor;
+    public TextField textEditCourseDescription;
     @FXML
-    private Button button1;
+    private Button buttonCreateCourse;
 
     @FXML
-    private Button button2;
+    private Button buttonShowTeacher;
 
     @FXML
-    private Button button3;
+    private Button buttonEditCourse;
     @FXML
-    private Button button4;
+    private Button buttonShowCourses;
 
     @FXML
-    private Button button5;
+    private Button buttonEditTeacher;
 
     @FXML
-    private Button button6;
+    private Button buttonCreateTeacher;
 
-    @FXML
-    private Button buttonCreate;
-
-    @FXML
-    private Button buttonCreate1;
-
-    @FXML
-    private Button buttonCreate3;
-
-    @FXML
-    private Button buttonCreate31;
-
-    @FXML
-    private Button buttonCreate311;
-
-    @FXML
-    private Button buttonCreate32;
     @FXML
     private Button logout;
-    @FXML
-    private Button buttonCreate11;
+
     @FXML
     private TextField textCourseBook;
 
@@ -121,13 +113,226 @@ public class AdminController implements Initializable {
     DataModel dataModel;
     Administrator administrator;
 
-    ObservableList<Course> observableListCourses ;
+    ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsNames = new ArrayList<String>();
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
-        observableListCourses = FXCollections.observableArrayList(administrator.getCourseList());
+        hover();
+
+
+    }
+
+
+
+    public void setAllNotVisible() {
+        page1.setVisible(false);
+        page2.setVisible(false);
+        page3.setVisible(false);
+        page4.setVisible(false);
+        page5.setVisible(false);
+        page6.setVisible(false);
+        pageDefault.setVisible(false);
+
+    }
+
+
+    public void hover(){
+
+        String style1 = "-fx-background-color: #dad7cd; -fx-text-fill : #588157; -fx-border-color:  #A3B18A; -fx-border-width:  0px 0px 2px 0px;";
+        String style2 = "-fx-background-color:  #588157; -fx-text-fill : #dad7cd;-fx-border-color:  #A3B18A; -fx-border-width:  0px 0px 2px 0px;";
+
+
+        buttonCreateCourse.setStyle(style1);
+        buttonCreateCourse.setOnMouseEntered(e -> {
+            buttonCreateCourse.setStyle(style2);
+        });
+        buttonCreateCourse.setOnMouseExited(e -> {
+            buttonCreateCourse.setStyle(style1);
+        });
+
+        buttonShowCourses.setStyle(style1);
+        buttonShowCourses.setOnMouseEntered(e -> {
+            buttonShowCourses.setStyle(style2);
+        });
+        buttonShowCourses.setOnMouseExited(e -> {
+            buttonShowCourses.setStyle(style1);
+        });
+
+        buttonEditCourse.setStyle(style1);
+        buttonEditCourse.setOnMouseEntered(e -> {
+            buttonEditCourse.setStyle(style2);
+        });
+        buttonEditCourse.setOnMouseExited(e -> {
+            buttonEditCourse.setStyle(style1);
+        });
+
+        buttonCreateTeacher.setStyle(style1);
+        buttonCreateTeacher.setOnMouseEntered(e -> {
+            buttonCreateTeacher.setStyle(style2);
+        });
+        buttonCreateTeacher.setOnMouseExited(e -> {
+            buttonCreateTeacher.setStyle(style1);
+        });
+
+        buttonShowTeacher.setStyle(style1);
+        buttonShowTeacher.setOnMouseEntered(e -> {
+            buttonShowTeacher.setStyle(style2);
+        });
+        buttonShowTeacher.setOnMouseExited(e -> {
+            buttonShowTeacher.setStyle(style1);
+        });
+
+        buttonEditTeacher.setStyle(style1);
+        buttonEditTeacher.setOnMouseEntered(e -> {
+            buttonEditTeacher.setStyle(style2);
+        });
+        buttonEditTeacher.setOnMouseExited(e -> {
+            buttonEditTeacher.setStyle(style1);
+        });
+
+        buttonPageDefault.setStyle(style1);
+        buttonPageDefault.setOnMouseEntered(e -> {
+            buttonPageDefault.setStyle(style2);
+        });
+        buttonPageDefault.setOnMouseExited(e -> {
+            buttonPageDefault.setStyle(style1);
+        });
+
+        logout.setStyle(style1);
+        logout.setOnMouseEntered(e -> {
+            logout.setStyle(style2);
+        });
+        logout.setOnMouseExited(e -> {
+            logout.setStyle(style1);
+        });
+    }
+
+
+
+    public void onPageDefault(ActionEvent event) {
+        setAllNotVisible();
+        pageDefault.setVisible(true);
+    }
+    public void onCreateCourse( ){
+        setAllNotVisible();
+        page1.setVisible(true);
+        textCourseId.clear();
+        textCourseName.clear();
+        textCourseDoctor.clear();
+        textCourseHour.clear();
+        textCourseBook.clear();
+        textCourseDescription.clear();
+
+    }
+    public void onShowCourses(ActionEvent event) {
+        setAllNotVisible();
+        page2.setVisible(true);
+        fillCoursesTable();
+        tableCourses.refresh();
+
+
+    }
+    public void onEditCourse() {
+        setAllNotVisible();
+        page3.setVisible(true);
+        menuButtonEditCourse.getItems().clear();
+        menuItems.clear();
+        menuItemsNames.clear();
+        menuButtonEditCourse.setText("Courses");
+        for (int i = 0; i < administrator.getCourseList().size(); i++) {
+            menuItems.add(new MenuItem(administrator.getCourseList().get(i).getCourseName()));
+            menuItemsNames.add(administrator.getCourseList().get(i).getCourseName());
+            int finalI = i;
+            menuItems.get(i).setOnAction(e -> handleMenuItem(menuItemsNames.get(finalI)));
+
+        }
+        menuButtonEditCourse.getItems().addAll(menuItems);
+        textEditCourseId.clear();
+        textEditCourseName.clear();
+        textEditCourseDoctor.clear();
+        textEditCourseBook.clear();
+        textEditCourseDescription.clear();
+        textEditCourseHour.clear();
+
+
+
+    }
+    public void onCreateTeacher(ActionEvent event) {
+        setAllNotVisible();
+        page4.setVisible(true);
+    }
+    public void onShowTeacher(ActionEvent event) {
+        setAllNotVisible();
+        page5.setVisible(true);
+    }
+    public void onEditTeacher(ActionEvent event) {
+        setAllNotVisible();
+        page6.setVisible(true);
+    }
+    public void onLogOut( ) {
+        navigation.navigateTo(stackPane,Navigation.Login_FXML);
+
+    }
+
+    public void onCreateNewCourse(ActionEvent event) {
+        Course course = new Course(textCourseId.getText(),textCourseName.getText(),textCourseDoctor.getText(),Integer.parseInt(textCourseHour.getText()),
+                textCourseBook.getText(),textCourseDescription.getText());
+        administrator.addCourse(course);
+        onCreateCourse();
+    }
+
+
+
+    public void onCreate(ActionEvent event) {
+    }
+
+    public void onButtonEditCourse(ActionEvent event) {
+        if (!menuButtonEditCourse.getText().equals("Courses")){
+            int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
+            Course course = administrator.courseList.get(index);
+            if (!textEditCourseId.getText().isEmpty()){
+                course.setCourseId(textEditCourseId.getText());
+            }
+            if (!textEditCourseName.getText().isEmpty()){
+                course.setCourseName(textEditCourseName.getText());
+            }
+            if (!textEditCourseDoctor.getText().isEmpty()){
+                course.setDoctor(textEditCourseDoctor.getText());
+            }
+            if (!textEditCourseBook.getText().isEmpty()){
+                course.setBook(textEditCourseBook.getText());
+            }
+            if (!textEditCourseDescription.getText().isEmpty()){
+                course.setDescription(textEditCourseDescription.getText());
+            }
+            if (!textEditCourseHour.getText().isEmpty()){
+                course.setCourseHours(Integer.parseInt(textEditCourseHour.getText()));
+            }
+            onEditCourse();
+
+        }
+    }
+
+    public void onButtonDeleteCourse(ActionEvent event) {
+        if (!menuButtonEditCourse.getText().equals("Courses")){
+            int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
+            administrator.courseList.remove(administrator.courseList.get(index));
+        }
+        onEditCourse();
+
+    }
+
+    private void handleMenuItem(String menuItemText) {
+            menuButtonEditCourse.setText(menuItemText);
+
+    }
+
+    public void fillCoursesTable(){
         columnCourseId.setCellValueFactory(new PropertyValueFactory<Course,Integer>("courseId"));
         columnCourseName.setCellValueFactory(new PropertyValueFactory<Course,String>("courseName"));
         columnCourseDoctor.setCellValueFactory(new PropertyValueFactory<Course,String>("courseDoctor"));
@@ -135,139 +340,7 @@ public class AdminController implements Initializable {
         columnCourseBook.setCellValueFactory(new PropertyValueFactory<Course,String>("book"));
         columnCourseDescription.setCellValueFactory(new PropertyValueFactory<Course,String>("description"));
         columnCourseMaximumAbsence.setCellValueFactory(new PropertyValueFactory<Course,Integer>("maximumAbsence"));
-
+        ObservableList<Course> observableListCourses = FXCollections.observableArrayList(administrator.getCourseList());
         tableCourses.setItems(observableListCourses);
-        hover();
-
-    }
-
-
-    public void switchPage(ActionEvent event){
-        if(event.getSource() == button1){
-            page1.setVisible(true);
-            page2.setVisible(false);
-            page3.setVisible(false);
-            page4.setVisible(false);
-            page5.setVisible(false);
-            page6.setVisible(false);
-
-        } else if (event.getSource() == button2) {
-            page1.setVisible(false);
-            page2.setVisible(true);
-            page3.setVisible(false);
-            page4.setVisible(false);
-            page5.setVisible(false);
-            page6.setVisible(false);
-        } else if (event.getSource() == button3) {
-            page1.setVisible(false);
-            page2.setVisible(false);
-            page3.setVisible(true);
-            page4.setVisible(false);
-            page5.setVisible(false);
-            page6.setVisible(false);
-
-        }
-        else if (event.getSource() == button4) {
-            page1.setVisible(false);
-            page2.setVisible(false);
-            page3.setVisible(false);
-            page4.setVisible(true);
-            page5.setVisible(false);
-            page6.setVisible(false);
-
-        }
-        else if (event.getSource() == button5) {
-            page1.setVisible(false);
-            page2.setVisible(false);
-            page3.setVisible(false);
-            page4.setVisible(false);
-            page5.setVisible(true);
-            page6.setVisible(false);
-
-        }
-        else if (event.getSource() == button6) {
-            page1.setVisible(false);
-            page2.setVisible(false);
-            page3.setVisible(false);
-            page4.setVisible(false);
-            page5.setVisible(false);
-            page6.setVisible(true);
-
-        }
-
-    }
-
-    public void onCreateCourse(){
-
-    }
-
-    public void hover(){
-        button1.setStyle("-fx-background-color:  #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        button1.setOnMouseEntered(e -> {
-            button1.setStyle("-fx-background-color: #89cfff; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button1.setOnMouseExited(e -> {
-            button1.setStyle("-fx-background-color: #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button2.setStyle("-fx-background-color:  #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        button2.setOnMouseEntered(e -> {
-            button2.setStyle("-fx-background-color: #89cfff; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button2.setOnMouseExited(e -> {
-            button2.setStyle("-fx-background-color: #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button3.setStyle("-fx-background-color:  #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        button3.setOnMouseEntered(e -> {
-            button3.setStyle("-fx-background-color: #89cfff; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button3.setOnMouseExited(e -> {
-            button3.setStyle("-fx-background-color: #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button4.setOnMouseEntered(e -> {
-            button4.setStyle("-fx-background-color: #89cfff; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button4.setOnMouseExited(e -> {
-            button4.setStyle("-fx-background-color: #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button5.setOnMouseEntered(e -> {
-            button5.setStyle("-fx-background-color: #89cfff; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button5.setOnMouseExited(e -> {
-            button5.setStyle("-fx-background-color: #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button6.setOnMouseEntered(e -> {
-            button6.setStyle("-fx-background-color: #89cfff; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        button6.setOnMouseExited(e -> {
-            button6.setStyle("-fx-background-color: #D3D3D3; -fx-border-color:  #808080; -fx-border-width:  0px 0px 2px 0px;");
-        });
-        logout.setOnMouseEntered(e -> {
-            logout.setStyle("-fx-background-color: #4997D0;");
-        });
-        logout.setOnMouseExited(e -> {
-            logout.setStyle("-fx-background-color: #0598ff;");
-        });
-        buttonCreate.setOnMouseEntered(e -> {
-            buttonCreate.setStyle("-fx-background-color: #4997D0;");
-        });
-        buttonCreate.setOnMouseExited(e -> {
-            buttonCreate.setStyle("-fx-background-color: #0598ff;");
-        });
-
-    }
-
-    public void onCreate() {
-//            public Course(String courseId, String courseName, int courseHours, String book, String description) {
-        Course course = new Course(textCourseId.getText(),textCourseName.getText(),textCourseDoctor.getText(),Integer.parseInt(textCourseHour.getText()),
-                textCourseBook.getText(),textCourseDescription.getText());
-        administrator.addCourse(course);
-    }
-
-
-
-
-
-    public void onLogOut( ) {
-        navigation.navigateTo(stackPane,Navigation.Login_FXML);
     }
 }

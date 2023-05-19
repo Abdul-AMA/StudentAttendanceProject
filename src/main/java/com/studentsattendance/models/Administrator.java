@@ -122,6 +122,17 @@ public class Administrator  implements Serializable {
     }
 
 
+    public int getCourseIndexByName(String courseName) {
+        for (int i = 0; i < courseList.size(); i++) {
+            if (courseList.get(i).getCourseName().equals(courseName)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+
 
 
 
