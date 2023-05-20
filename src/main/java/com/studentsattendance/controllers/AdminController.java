@@ -4,6 +4,7 @@ import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.Course;
 import com.studentsattendance.models.DataModel;
+import com.studentsattendance.models.TeacherAssistant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,8 +28,26 @@ public class AdminController implements Initializable {
     public TableColumn<Course,String> columnCourseBook;
     public TableColumn<Course,String> columnCourseDescription;
     public TableColumn<Course,Integer> columnCourseMaximumAbsence;
+    @FXML
+    private TableColumn<TeacherAssistant, Course> columnCourseTA;
+
+    @FXML
+    private TableColumn<TeacherAssistant, String> columnEmailTA;
+
+    @FXML
+    private TableColumn<TeacherAssistant, String> columnFirstNameTA;
+
+    @FXML
+    private TableColumn<TeacherAssistant, String> columnLastNameTA;
+
+    @FXML
+    private TableColumn<TeacherAssistant, String> columnPassTA;
+
+    @FXML
+    private TableColumn<TeacherAssistant, String> columnUserNameTA;
 
     public TableView<Course> tableCourses;
+    public TableView<TeacherAssistant> tableTA;
     public AnchorPane pageDefault;
     public Button buttonPageDefault;
     public Button buttonCreateNewCourse;
@@ -58,6 +77,13 @@ public class AdminController implements Initializable {
     private Button buttonCreateTeacher;
 
     @FXML
+    private Button buttonCreateAccountTA;
+    @FXML
+    private Button buttonDelTA;
+    @FXML
+    private Button buttonEditTA;
+
+    @FXML
     private Button logout;
 
     @FXML
@@ -76,7 +102,34 @@ public class AdminController implements Initializable {
     private TextField textCourseName;
     @FXML
     private TextField textCourseDoctor;
+    @FXML
+    private TextField textEmailTA;
 
+    @FXML
+    private TextField textFirstNameTA;
+
+    @FXML
+    private TextField textLastNameTA;
+
+    @FXML
+    private TextField textPassTA;
+
+    @FXML
+    private TextField textUserNameTA;
+    @FXML
+    private TextField textCourseTA;
+    @FXML
+    private TextField textCourseTAedit;
+    @FXML
+    private TextField textEmailTAedit;
+    @FXML
+    private TextField textFirstNameTAedit;
+    @FXML
+    private TextField textLastNameTAedit;
+    @FXML
+    private TextField textPassTAedit;
+    @FXML
+    private TextField textUserNameTAedit;
 
 
     @FXML
@@ -340,6 +393,43 @@ public class AdminController implements Initializable {
         columnCourseMaximumAbsence.setCellValueFactory(new PropertyValueFactory<Course,Integer>("maximumAbsence"));
         ObservableList<Course> observableListCourses = FXCollections.observableArrayList(administrator.getCourseList());
         tableCourses.setItems(observableListCourses);
+    }
+
+    public void onCreateAccount(){
+        setAllNotVisible();
+        page4.setVisible(true);
+        textUserNameTA.clear();
+        textPassTA.clear();
+        textFirstNameTA.clear();
+        textLastNameTA.clear();
+        textEmailTA.clear();
+        textCourseTA.clear();
+
+    }
+    public void onCreateNewAccount(ActionEvent event){
+        TeacherAssistant ta = new TeacherAssistant(textUserNameTA.getText(), textPassTA.getText(), textFirstNameTA.getText(), textLastNameTA.getText(),
+                textEmailTA.getText(), new Course());
+        administrator.addTeacher(ta);
+        onCreateAccount();
+    }
+    public void fillTeacherTable(){
+        columnUserNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("username"));
+        columnPassTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("password"));
+        columnFirstNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("firstName"));
+        columnLastNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("lastName"));
+        columnEmailTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("email"));
+        columnCourseTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,Course>("course"));
+
+        ObservableList<TeacherAssistant> observableListCourses = FXCollections.observableArrayList(administrator.getTeacherAssistantList());
+        tableTA.setItems(observableListCourses);
+    }
+    public void onShowTA(ActionEvent event) {
+        setAllNotVisible();
+        page5.setVisible(true);
+        fillTeacherTable();
+        tableTA.refresh();
+
+
     }
 
     public void onSetTeacher(ActionEvent event) {
