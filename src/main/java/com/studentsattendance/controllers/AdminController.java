@@ -198,6 +198,14 @@ public class AdminController implements Initializable {
         logout.setOnMouseExited(e -> {
             logout.setStyle(style1);
         });
+
+        buttonSetTeacher.setStyle(style1);
+        buttonSetTeacher.setOnMouseEntered(e -> {
+            buttonSetTeacher.setStyle(style2);
+        });
+        buttonSetTeacher.setOnMouseExited(e -> {
+            buttonSetTeacher.setStyle(style1);
+        });
     }
 
 
