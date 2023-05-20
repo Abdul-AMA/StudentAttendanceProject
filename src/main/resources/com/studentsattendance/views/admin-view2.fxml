@@ -34,7 +34,7 @@
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="buttonShowTeacher" layoutY="300.0" mnemonicParsing="false" onAction="#onShowTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض حسابات المستخدمين" textFill="#588157">
+                  <Button fx:id="buttonShowTeacher" layoutY="300.0" mnemonicParsing="false" onAction="#onShowTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض حسابات المعيدين" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
@@ -46,7 +46,7 @@
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="buttonCreateTeacher" layoutY="240.0" mnemonicParsing="false" onAction="#onCreateTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء حسابات المستخدمين" textFill="#588157">
+                  <Button fx:id="buttonCreateTeacher" layoutY="240.0" mnemonicParsing="false" onAction="#onCreateTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء حسابات المعيدين" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
@@ -60,7 +60,12 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonEditTeacher" layoutY="360.0" mnemonicParsing="false" onAction="#onEditTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير حسابات المستخدمين" textFill="#588157">
+                  <Button fx:id="buttonEditTeacher" layoutY="360.0" mnemonicParsing="false" onAction="#onEditTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير حسابات المعيدين" textFill="#588157">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="buttonSetTeacher" layoutY="420.0" mnemonicParsing="false" onAction="#onSetTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تعيين معيد المساق" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>

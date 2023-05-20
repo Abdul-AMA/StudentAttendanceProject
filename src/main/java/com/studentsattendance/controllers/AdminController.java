@@ -4,36 +4,23 @@ import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.Course;
 import com.studentsattendance.models.DataModel;
-import com.studentsattendance.program;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.css.Style;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
     public StackPane stackPane;
-    public TableColumn<Course, Integer> columnCourseId;
+    public TableColumn<Course, String> columnCourseId;
     public TableColumn<Course,String> columnCourseName;
     public TableColumn<Course,String> columnCourseDoctor;
     public TableColumn<Course,Integer> columnCourseHours;
@@ -52,6 +39,7 @@ public class AdminController implements Initializable {
     public TextField textEditCourseBook;
     public TextField textEditCourseDoctor;
     public TextField textEditCourseDescription;
+    public Button buttonSetTeacher;
     @FXML
     private Button buttonCreateCourse;
 
@@ -250,14 +238,17 @@ public class AdminController implements Initializable {
             int finalI = i;
             menuItems.get(i).setOnAction(e -> handleMenuItem(menuItemsNames.get(finalI)));
 
+
         }
         menuButtonEditCourse.getItems().addAll(menuItems);
+
         textEditCourseId.clear();
         textEditCourseName.clear();
         textEditCourseDoctor.clear();
         textEditCourseBook.clear();
         textEditCourseDescription.clear();
         textEditCourseHour.clear();
+
 
 
 
@@ -329,11 +320,10 @@ public class AdminController implements Initializable {
 
     private void handleMenuItem(String menuItemText) {
             menuButtonEditCourse.setText(menuItemText);
-
     }
 
     public void fillCoursesTable(){
-        columnCourseId.setCellValueFactory(new PropertyValueFactory<Course,Integer>("courseId"));
+        columnCourseId.setCellValueFactory(new PropertyValueFactory<Course,String>("courseId"));
         columnCourseName.setCellValueFactory(new PropertyValueFactory<Course,String>("courseName"));
         columnCourseDoctor.setCellValueFactory(new PropertyValueFactory<Course,String>("courseDoctor"));
         columnCourseHours.setCellValueFactory(new PropertyValueFactory<Course,Integer>("courseHours"));
@@ -342,5 +332,8 @@ public class AdminController implements Initializable {
         columnCourseMaximumAbsence.setCellValueFactory(new PropertyValueFactory<Course,Integer>("maximumAbsence"));
         ObservableList<Course> observableListCourses = FXCollections.observableArrayList(administrator.getCourseList());
         tableCourses.setItems(observableListCourses);
+    }
+
+    public void onSetTeacher(ActionEvent event) {
     }
 }
