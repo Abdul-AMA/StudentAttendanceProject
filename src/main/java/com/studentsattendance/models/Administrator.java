@@ -11,7 +11,7 @@ public class Administrator  implements Serializable {
     private String password;
     private String email;
 
-    public ArrayList<Course> courseList;
+    private ArrayList<Course> courseList;
     private ArrayList<TeacherAssistant> teacherAssistantList;
 
 //----------------------------------------------------------------
@@ -125,6 +125,15 @@ public class Administrator  implements Serializable {
     public int getCourseIndexByName(String courseName) {
         for (int i = 0; i < courseList.size(); i++) {
             if (courseList.get(i).getCourseName().equals(courseName)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int getTeacherIndexByName(String TeacherUserName) {
+        for (int i = 0; i < teacherAssistantList.size(); i++) {
+            if (teacherAssistantList.get(i).getUsername().equals(TeacherUserName)){
                 return i;
             }
         }

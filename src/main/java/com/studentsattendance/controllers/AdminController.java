@@ -5,6 +5,7 @@ import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.Course;
 import com.studentsattendance.models.DataModel;
 import com.studentsattendance.models.TeacherAssistant;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
@@ -28,8 +30,11 @@ public class AdminController implements Initializable {
     public TableColumn<Course,String> columnCourseBook;
     public TableColumn<Course,String> columnCourseDescription;
     public TableColumn<Course,Integer> columnCourseMaximumAbsence;
+    public MenuButton menuButtonTA;
+    public MenuButton menuButtonAddCourse;
+    public MenuButton menuButtonEditTACourse;
     @FXML
-    private TableColumn<TeacherAssistant, Course> columnCourseTA;
+    private TableColumn<TeacherAssistant, String> columnCourseNameTA;
 
     @FXML
     private TableColumn<TeacherAssistant, String> columnEmailTA;
@@ -58,7 +63,6 @@ public class AdminController implements Initializable {
     public TextField textEditCourseBook;
     public TextField textEditCourseDoctor;
     public TextField textEditCourseDescription;
-    public Button buttonSetTeacher;
     @FXML
     private Button buttonCreateCourse;
 
@@ -75,14 +79,6 @@ public class AdminController implements Initializable {
 
     @FXML
     private Button buttonCreateTeacher;
-
-    @FXML
-    private Button buttonCreateAccountTA;
-    @FXML
-    private Button buttonDelTA;
-    @FXML
-    private Button buttonEditTA;
-
     @FXML
     private Button logout;
 
@@ -116,10 +112,7 @@ public class AdminController implements Initializable {
 
     @FXML
     private TextField textUserNameTA;
-    @FXML
-    private TextField textCourseTA;
-    @FXML
-    private TextField textCourseTAedit;
+
     @FXML
     private TextField textEmailTAedit;
     @FXML
@@ -154,8 +147,17 @@ public class AdminController implements Initializable {
     DataModel dataModel;
     Administrator administrator;
 
-    ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
-    ArrayList<String> menuItemsNames = new ArrayList<String>();
+    ArrayList<MenuItem> menuItemsCourse1 = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsCourseNames1 = new ArrayList<String>();
+
+    ArrayList<MenuItem> menuItemsCourse2 = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsCourseNames2 = new ArrayList<String>();
+
+    ArrayList<MenuItem> menuItemsCourse3 = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsCourseNames3 = new ArrayList<String>();
+    ArrayList<MenuItem> menuItemsTA1 = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsNamesTA1 = new ArrayList<String>();
+
 
 
 
@@ -252,13 +254,7 @@ public class AdminController implements Initializable {
             logout.setStyle(style1);
         });
 
-        buttonSetTeacher.setStyle(style1);
-        buttonSetTeacher.setOnMouseEntered(e -> {
-            buttonSetTeacher.setStyle(style2);
-        });
-        buttonSetTeacher.setOnMouseExited(e -> {
-            buttonSetTeacher.setStyle(style1);
-        });
+
     }
 
 
@@ -289,19 +285,20 @@ public class AdminController implements Initializable {
     public void onEditCourse() {
         setAllNotVisible();
         page3.setVisible(true);
+
         menuButtonEditCourse.getItems().clear();
-        menuItems.clear();
-        menuItemsNames.clear();
+        menuItemsCourse1.clear();
+        menuItemsCourseNames1.clear();
         menuButtonEditCourse.setText("Courses");
         for (int i = 0; i < administrator.getCourseList().size(); i++) {
-            menuItems.add(new MenuItem(administrator.getCourseList().get(i).getCourseName()));
-            menuItemsNames.add(administrator.getCourseList().get(i).getCourseName());
+            menuItemsCourse1.add(new MenuItem(administrator.getCourseList().get(i).getCourseName()));
+            menuItemsCourseNames1.add(administrator.getCourseList().get(i).getCourseName());
             int finalI = i;
-            menuItems.get(i).setOnAction(e -> handleMenuItem(menuItemsNames.get(finalI)));
+            menuItemsCourse1.get(i).setOnAction(e -> handleMenuItem(menuItemsCourseNames1.get(finalI) , menuButtonEditCourse));
 
 
         }
-        menuButtonEditCourse.getItems().addAll(menuItems);
+        menuButtonEditCourse.getItems().addAll(menuItemsCourse1);
 
         textEditCourseId.clear();
         textEditCourseName.clear();
@@ -314,19 +311,100 @@ public class AdminController implements Initializable {
 
 
     }
-    public void onCreateTeacher(ActionEvent event) {
+
+
+
+    public void onCreateTeacher() {
         setAllNotVisible();
         page4.setVisible(true);
+
+
+        menuButtonAddCourse.getItems().clear();
+        menuItemsCourse2.clear();
+        menuItemsCourseNames2.clear();
+        menuButtonAddCourse.setText("Courses");
+        for (int i = 0; i < administrator.getCourseList().size(); i++) {
+            menuItemsCourse2.add(new MenuItem(administrator.getCourseList().get(i).getCourseName()));
+            menuItemsCourseNames2.add(administrator.getCourseList().get(i).getCourseName());
+            int finalI = i;
+            menuItemsCourse2.get(i).setOnAction(e -> handleMenuItem(menuItemsCourseNames2.get(finalI) , menuButtonAddCourse));
+        }
+        menuButtonAddCourse.getItems().addAll(menuItemsCourse2);
+
+
+        textUserNameTA.clear();
+        textPassTA.clear();
+        textFirstNameTA.clear();
+        textLastNameTA.clear();
+        textEmailTA.clear();
+
+
+
     }
-    public void onShowTeacher(ActionEvent event) {
+    public void onShowTA(ActionEvent event) {
         setAllNotVisible();
         page5.setVisible(true);
+        fillTeacherTable();
+        tableTA.refresh();
+
     }
-    public void onEditTeacher(ActionEvent event) {
+
+    public void onEditTeacher( ) {
         setAllNotVisible();
         page6.setVisible(true);
+
+        menuButtonTA.getItems().clear();
+        menuItemsTA1.clear();
+        menuItemsNamesTA1.clear();
+        menuButtonTA.setText("Teachers");
+        for (int i = 0; i < administrator.getTeacherAssistantList().size(); i++) {
+            menuItemsTA1.add(new MenuItem(administrator.getTeacherAssistantList().get(i).getUsername()));
+            menuItemsNamesTA1.add(administrator.getTeacherAssistantList().get(i).getUsername());
+            int finalI = i;
+            menuItemsTA1.get(i).setOnAction(e -> handleMenuItemTA    (menuItemsNamesTA1.get(finalI) , menuButtonTA));
+
+        }
+        menuButtonTA.getItems().addAll(menuItemsTA1);
+
+        menuButtonEditTACourse.getItems().clear();
+        menuItemsCourse3.clear();
+        menuItemsCourseNames3.clear();
+        menuButtonEditTACourse.setText("Courses");
+        for (int i = 0; i < administrator.getCourseList().size(); i++) {
+            menuItemsCourse3.add(new MenuItem(administrator.getCourseList().get(i).getCourseName()));
+            menuItemsCourseNames3.add(administrator.getCourseList().get(i).getCourseName());
+            int finalI = i;
+            menuItemsCourse3.get(i).setOnAction(e -> handleMenuItem(menuItemsCourseNames3.get(finalI) , menuButtonEditTACourse));
+        }
+        menuButtonEditTACourse.getItems().addAll(menuItemsCourse3);
+
+
+        textUserNameTAedit.clear();
+        textPassTAedit.clear();
+        textFirstNameTAedit.clear();
+        textLastNameTAedit.clear();
+        textEmailTAedit.clear();
+
     }
-    public void onLogOut( ) {
+    public void onLogOut(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Do you want to save the changed data?");
+        alert.setContentText(null);
+
+        ButtonType save = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.FINISH);
+        ButtonType do_not_save = new ButtonType("Don't Save", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(save, cancel, do_not_save);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == save) {
+            dataModel.save_date();
+        } else if (result.get() == cancel) {
+            event.consume();
+        }
         navigation.navigateTo(stackPane,Navigation.Login_FXML);
 
     }
@@ -339,14 +417,10 @@ public class AdminController implements Initializable {
     }
 
 
-
-    public void onCreate(ActionEvent event) {
-    }
-
     public void onButtonEditCourse(ActionEvent event) {
         if (!menuButtonEditCourse.getText().equals("Courses")){
             int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
-            Course course = administrator.courseList.get(index);
+            Course course = administrator.getCourseList().get(index);
             if (!textEditCourseId.getText().isEmpty()){
                 course.setCourseId(textEditCourseId.getText());
             }
@@ -373,14 +447,18 @@ public class AdminController implements Initializable {
     public void onButtonDeleteCourse(ActionEvent event) {
         if (!menuButtonEditCourse.getText().equals("Courses")){
             int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
-            administrator.courseList.remove(administrator.courseList.get(index));
+            administrator.getCourseList().remove(administrator.getCourseList().get(index));
         }
         onEditCourse();
 
     }
 
-    private void handleMenuItem(String menuItemText) {
-            menuButtonEditCourse.setText(menuItemText);
+    private void handleMenuItem(String menuItemText, MenuButton menuButton) {
+        menuButton.setText(menuItemText);
+    }
+
+    private void handleMenuItemTA(String menuItemText, MenuButton menuButton) {
+        menuButton.setText(menuItemText);
     }
 
     public void fillCoursesTable(){
@@ -395,43 +473,86 @@ public class AdminController implements Initializable {
         tableCourses.setItems(observableListCourses);
     }
 
-    public void onCreateAccount(){
-        setAllNotVisible();
-        page4.setVisible(true);
-        textUserNameTA.clear();
-        textPassTA.clear();
-        textFirstNameTA.clear();
-        textLastNameTA.clear();
-        textEmailTA.clear();
-        textCourseTA.clear();
 
-    }
     public void onCreateNewAccount(ActionEvent event){
-        TeacherAssistant ta = new TeacherAssistant(textUserNameTA.getText(), textPassTA.getText(), textFirstNameTA.getText(), textLastNameTA.getText(),
-                textEmailTA.getText(), new Course());
-        administrator.addTeacher(ta);
-        onCreateAccount();
+
+        if (!menuButtonAddCourse.getText().equals("Courses")) {
+            int index = administrator.getCourseIndexByName(menuButtonAddCourse.getText());
+            Course course = administrator.getCourseList().get(index);
+            TeacherAssistant ta = new TeacherAssistant(textUserNameTA.getText(), textPassTA.getText(), textFirstNameTA.getText(), textLastNameTA.getText(),
+                    textEmailTA.getText(), course);
+            administrator.addTeacher(ta);
+
+
+            onCreateTeacher();
+        }
     }
+
     public void fillTeacherTable(){
         columnUserNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("username"));
         columnPassTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("password"));
         columnFirstNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("firstName"));
         columnLastNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("lastName"));
         columnEmailTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("email"));
-        columnCourseTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,Course>("course"));
+        columnCourseNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("courseName"));
+
+
+
 
         ObservableList<TeacherAssistant> observableListCourses = FXCollections.observableArrayList(administrator.getTeacherAssistantList());
         tableTA.setItems(observableListCourses);
     }
-    public void onShowTA(ActionEvent event) {
-        setAllNotVisible();
-        page5.setVisible(true);
-        fillTeacherTable();
-        tableTA.refresh();
 
+
+    public void onEditTA(ActionEvent event) {
+
+        if (!menuButtonTA.getText().equals("Teachers")){
+            int index = administrator.getTeacherIndexByName(menuButtonTA.getText());
+            TeacherAssistant teacherAssistant = administrator.getTeacherAssistantList().get(index);
+
+            if (!textUserNameTAedit.getText().isEmpty()){
+                teacherAssistant.setUsername(textUserNameTAedit.getText());
+            }
+            if (!textPassTAedit.getText().isEmpty()){
+                teacherAssistant.setPassword(textPassTAedit.getText());
+            }
+            if (!textFirstNameTAedit.getText().isEmpty()){
+                teacherAssistant.setFirstName(textFirstNameTAedit.getText());
+            }
+            if (!textLastNameTAedit.getText().isEmpty()){
+                teacherAssistant.setLastName(textLastNameTAedit.getText());
+            }
+            if (!textEmailTAedit.getText().isEmpty()){
+                teacherAssistant.setEmail(textEmailTAedit.getText());
+            }
+            if (!menuButtonEditTACourse.getText().equals("Courses")) {
+                int indexCourse = administrator.getCourseIndexByName(menuButtonEditTACourse.getText());
+                Course course = administrator.getCourseList().get(indexCourse);
+                System.out.println(course.getCourseName());
+                teacherAssistant.setCourse(course);
+                System.out.println(teacherAssistant.getCourse().getCourseName());
+
+            }
+
+            onEditTeacher();
+
+
+        }
+    }
+
+    public void onDeleteTA(ActionEvent event) {
+        if (!menuButtonTA.getText().equals("Teachers")){
+            int index = administrator.getTeacherIndexByName(menuButtonTA.getText());
+            administrator.getTeacherAssistantList().remove(administrator.getTeacherAssistantList().get(index));
+        }
+        onEditTeacher();
 
     }
 
-    public void onSetTeacher(ActionEvent event) {
-    }
+
+
+
+
+
+
 }

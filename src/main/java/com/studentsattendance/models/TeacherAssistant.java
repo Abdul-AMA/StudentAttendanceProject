@@ -13,6 +13,8 @@ public class TeacherAssistant implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private String courseName;
+
 //----------------------------------------------------------------
 // Constructors
 // ----------------------------------------------------------------
@@ -25,6 +27,7 @@ public class TeacherAssistant implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        courseName = course.getCourseName();
     }
 
 
@@ -81,6 +84,7 @@ public class TeacherAssistant implements Serializable {
 
     public void setCourse(Course course) {
         this.course = course;
+        setCourseName(course.getCourseName());
     }
 
     @Override
@@ -106,8 +110,11 @@ public class TeacherAssistant implements Serializable {
     }
 
 
+    public String getCourseName() {
+        return courseName;
+    }
 
-
-
-
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 }

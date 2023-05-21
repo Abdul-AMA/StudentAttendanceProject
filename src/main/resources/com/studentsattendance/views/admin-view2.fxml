@@ -65,17 +65,13 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonSetTeacher" layoutY="420.0" mnemonicParsing="false" onAction="#onSetTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تعيين معيد المساق" textFill="#588157">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
          </right>
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" BorderPane.alignment="CENTER">
                <children>
+                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" />
                   <AnchorPane fx:id="page1" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <TextField fx:id="textCourseId" alignment="CENTER_RIGHT" layoutX="197.0" layoutY="100.0" prefHeight="35.0" prefWidth="235.0" promptText="رقم المساق" />
@@ -85,7 +81,7 @@
                            </rotationAxis></TextField>
                         <TextField fx:id="textCourseHour" alignment="CENTER_RIGHT" layoutX="197.0" layoutY="235.0" prefHeight="35.0" prefWidth="235.0" promptText="عدد ساعات المساق" />
                         <Button fx:id="buttonCreateNewCourse" layoutX="232.0" layoutY="423.0" mnemonicParsing="false" onAction="#onCreateNewCourse" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
-                        <Text fill="#344e41" layoutX="153.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة إنشاء المساقات" wrappingWidth="324.775390625">
+                        <Text fill="#344e41" layoutX="153.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة إنشاء المساقات" wrappingWidth="324.775390625">
                            <font>
                               <Font size="34.0" />
                            </font>
@@ -112,18 +108,18 @@
                   </AnchorPane>
                   <AnchorPane fx:id="page3" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
-                        <TextField fx:id="textEditCourseId" alignment="CENTER_RIGHT" layoutX="95.0" layoutY="120.0" prefHeight="35.0" prefWidth="235.0" promptText="رقم المساق الجديد" />
-                        <TextField fx:id="textEditCourseName" alignment="CENTER_RIGHT" layoutX="95.0" layoutY="165.0" prefHeight="35.0" prefWidth="235.0" promptText="اسم المساق الجديد" />
-                        <TextField fx:id="textEditCourseHour" alignment="CENTER_RIGHT" layoutX="95.0" layoutY="255.0" prefHeight="35.0" prefWidth="235.0" promptText="عدد ساعات المساق الجديد" />
-                        <TextField fx:id="textEditCourseBook" alignment="CENTER_RIGHT" layoutX="95.0" layoutY="300.0" prefHeight="35.0" prefWidth="235.0" promptText="كتاب المساق الجديد" />
-                        <TextField fx:id="textEditCourseDescription" alignment="TOP_RIGHT" layoutX="95.0" layoutY="345.0" prefHeight="71.0" prefWidth="235.0" promptText="وصف المساق الجديد" />
-                        <TextField fx:id="textEditCourseDoctor" alignment="CENTER_RIGHT" layoutX="94.0" layoutY="210.0" prefHeight="35.0" prefWidth="235.0" promptText="مدرس المساق الجديد" />
-                        <Text fill="#344e41" layoutX="161.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة تحرير المساقات">
+                        <TextField fx:id="textEditCourseId" alignment="CENTER_RIGHT" layoutX="80.0" layoutY="120.0" prefHeight="35.0" prefWidth="235.0" promptText="رقم المساق الجديد" />
+                        <TextField fx:id="textEditCourseName" alignment="CENTER_RIGHT" layoutX="80.0" layoutY="165.0" prefHeight="35.0" prefWidth="235.0" promptText="اسم المساق الجديد" />
+                        <TextField fx:id="textEditCourseHour" alignment="CENTER_RIGHT" layoutX="80.0" layoutY="255.0" prefHeight="35.0" prefWidth="235.0" promptText="عدد ساعات المساق الجديد" />
+                        <TextField fx:id="textEditCourseBook" alignment="CENTER_RIGHT" layoutX="80.0" layoutY="300.0" prefHeight="35.0" prefWidth="235.0" promptText="كتاب المساق الجديد" />
+                        <TextField fx:id="textEditCourseDescription" alignment="TOP_RIGHT" layoutX="80.0" layoutY="345.0" prefHeight="71.0" prefWidth="235.0" promptText="وصف المساق الجديد" />
+                        <TextField fx:id="textEditCourseDoctor" alignment="CENTER_RIGHT" layoutX="79.0" layoutY="210.0" prefHeight="35.0" prefWidth="235.0" promptText="مدرس المساق الجديد" />
+                        <Text fill="#344e41" layoutX="158.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة تحرير المساقات">
                            <font>
                               <Font size="34.0" />
                            </font>
                         </Text>
-                        <MenuButton fx:id="menuButtonEditCourse" alignment="CENTER" contentDisplay="CENTER" layoutX="344.0" layoutY="120.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="262.0" text="Courses" textAlignment="CENTER" textFill="#dad7cd">
+                        <MenuButton fx:id="menuButtonEditCourse" alignment="CENTER" contentDisplay="CENTER" layoutX="344.0" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="260.0" text="Courses" textAlignment="CENTER" textFill="#dad7cd">
                            <items>
                               <MenuItem mnemonicParsing="false" text="Action 1" />
                               <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -132,67 +128,82 @@
                               <Font size="20.0" />
                            </font>
                         </MenuButton>
-                        <Button fx:id="buttonDoEditCourse" layoutX="95.0" layoutY="439.0" mnemonicParsing="false" onAction="#onButtonEditCourse" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="#dad7cd" />
-                        <Button fx:id="buttonDeleteCourse" layoutX="236.0" layoutY="439.0" mnemonicParsing="false" onAction="#onButtonDeleteCourse" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="#dad7cd" />
+                        <Button fx:id="buttonDoEditCourse" layoutX="220.0" layoutY="440.0" mnemonicParsing="false" onAction="#onButtonEditCourse" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="#dad7cd" />
+                        <Button fx:id="buttonDeleteCourse" layoutX="79.0" layoutY="440.0" mnemonicParsing="false" onAction="#onButtonDeleteCourse" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="#dad7cd" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="page4" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
-                        <Text layoutX="94.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة إنشاء حسابات المستخدمين" wrappingWidth="442.5679473876953">
+                        <TextField fx:id="textUserNameTA" layoutX="198.0" layoutY="90.0" prefHeight="35.0" prefWidth="235.0" promptText="User Name" />
+                        <TextField fx:id="textFirstNameTA" layoutX="198.0" layoutY="205.0" prefHeight="35.0" prefWidth="235.0" promptText="First Name" />
+                        <Button fx:id="buttonCreateAccountTA" layoutX="232.0" layoutY="445.0" mnemonicParsing="false" onAction="#onCreateNewAccount" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
+                        <TextField fx:id="textPassTA" layoutX="198.0" layoutY="150.0" prefHeight="35.0" prefWidth="235.0" promptText="Password" />
+                        <TextField fx:id="textLastNameTA" layoutX="197.0" layoutY="262.0" prefHeight="35.0" prefWidth="235.0" promptText="Last Name" />
+                        <TextField fx:id="textEmailTA" layoutX="197.0" layoutY="319.0" prefHeight="35.0" prefWidth="235.0" promptText="Email" />
+                        <Text fill="#344e41" layoutX="104.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة إنشاء حسابات المعيدين" wrappingWidth="423.775390625">
                            <font>
-                              <Font size="32.0" />
+                              <Font size="34.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="textUserNameTA" layoutX="198.0" layoutY="138.0" prefHeight="35.0" prefWidth="235.0" promptText="User Name" />
-                        <TextField fx:id="textFirstNameTA" layoutX="198.0" layoutY="253.0" prefHeight="35.0" prefWidth="235.0" promptText="First Name" />
-                        <Button fx:id="buttonCreateAccountTA" layoutX="232.0" layoutY="478.0" mnemonicParsing="false" onAction="#onCreateNewAccount" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
-                        <TextField fx:id="textPassTA" layoutX="198.0" layoutY="198.0" prefHeight="35.0" prefWidth="235.0" promptText="Password" />
-                        <TextField fx:id="textLastNameTA" layoutX="197.0" layoutY="310.0" prefHeight="35.0" prefWidth="235.0" promptText="Last Name" />
-                        <TextField fx:id="textEmailTA" layoutX="197.0" layoutY="367.0" prefHeight="35.0" prefWidth="235.0" promptText="Email" />
-                        <TextField fx:id="textCourseTA" layoutX="197.0" layoutY="423.0" prefHeight="35.0" prefWidth="235.0" promptText="Course" />
+                        <MenuButton fx:id="menuButtonAddCourse" alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="377.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="235.0" text="Courses" textAlignment="CENTER" textFill="#dad7cd">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </MenuButton>
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="page5" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <TableView fx:id="tableTA" prefHeight="540.0" prefWidth="630.0">
                            <columns>
-                              <TableColumn fx:id="columnUserNameTA" prefWidth="132.0" text="User Name" />
-                              <TableColumn fx:id="columnPassTA" prefWidth="120.0" text="Password" />
-                              <TableColumn fx:id="columnFirstNameTA" prefWidth="79.19999694824219" text="First Name" />
-                              <TableColumn fx:id="columnLastNameTA" prefWidth="102.39996337890625" text="Last Name" />
-                              <TableColumn fx:id="columnEmailTA" prefWidth="76.80010986328125" text="Email" />
-                              <TableColumn fx:id="columnCourseTA" prefWidth="76.80010986328125" text="Course " />
+                              <TableColumn fx:id="columnUserNameTA" prefWidth="77.0" text="User Name" />
+                              <TableColumn fx:id="columnPassTA" prefWidth="93.0" text="Password" />
+                              <TableColumn fx:id="columnFirstNameTA" prefWidth="92.0" text="First Name" />
+                              <TableColumn fx:id="columnLastNameTA" prefWidth="93.0" text="Last Name" />
+                              <TableColumn fx:id="columnEmailTA" prefWidth="166.0" text="Email" />
+                              <TableColumn fx:id="columnCourseNameTA" prefWidth="108.0" text="Course Name" />
                            </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="page6" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
+                  <AnchorPane fx:id="page6" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
-                        <Text layoutX="157.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة تحرير حسابات المستخدمين">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Text>
-                        <MenuButton fx:id="menuButtonTA" alignment="CENTER" layoutX="402.0" layoutY="139.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="198.0" text="Teacher">
+                        <MenuButton fx:id="menuButtonTA" alignment="CENTER" layoutX="344.0" layoutY="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="260.0" text="Teacher" textFill="#dad7cd">
                            <items>
                               <MenuItem mnemonicParsing="false" text="Action 1" />
                               <MenuItem mnemonicParsing="false" text="Action 2" />
                            </items>
                            <font>
-                              <Font size="16.0" />
+                              <Font size="20.0" />
                            </font>
                         </MenuButton>
-                        <Button fx:id="buttonEditTA" layoutX="269.0" layoutY="441.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="WHITE" />
-                        <Button fx:id="buttonDelTA" layoutX="129.0" layoutY="441.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="WHITE" />
-                        <TextField fx:id="textUserNameTAedit" layoutX="129.0" layoutY="140.0" prefHeight="35.0" prefWidth="235.0" promptText="User Name" />
-                        <TextField fx:id="textFirstNameTAedit" layoutX="129.0" layoutY="234.0" prefHeight="35.0" prefWidth="235.0" promptText="First Name" />
-                        <TextField fx:id="textPassTAedit" layoutX="129.0" layoutY="187.0" prefHeight="35.0" prefWidth="235.0" promptText="Password" />
-                        <TextField fx:id="textLastNameTAedit" layoutX="129.0" layoutY="287.0" prefHeight="35.0" prefWidth="235.0" promptText="Last Name" />
-                        <TextField fx:id="textEmailTAedit" layoutX="129.0" layoutY="336.0" prefHeight="35.0" prefWidth="235.0" promptText="Email" />
-                        <TextField fx:id="textCourseTAedit" layoutX="129.0" layoutY="386.0" prefHeight="35.0" prefWidth="235.0" promptText="Course" />
+                        <Button fx:id="buttonEditTA" layoutX="221.0" layoutY="440.0" mnemonicParsing="false" onAction="#onEditTA" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="WHITE" />
+                        <Button fx:id="buttonDelTA" layoutX="81.0" layoutY="440.0" mnemonicParsing="false" onAction="#onDeleteTA" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="WHITE" />
+                        <TextField fx:id="textUserNameTAedit" layoutX="80.0" layoutY="120.0" prefHeight="35.0" prefWidth="235.0" promptText="اسم المستخدم الجديد" />
+                        <TextField fx:id="textFirstNameTAedit" layoutX="80.0" layoutY="214.0" prefHeight="35.0" prefWidth="235.0" promptText="الاسم الاول الجديد" />
+                        <TextField fx:id="textPassTAedit" layoutX="80.0" layoutY="167.0" prefHeight="35.0" prefWidth="235.0" promptText="كلمة المرور الجديدة" />
+                        <TextField fx:id="textLastNameTAedit" layoutX="80.0" layoutY="267.0" prefHeight="35.0" prefWidth="235.0" promptText="الاسم الاخير الجديد" />
+                        <TextField fx:id="textEmailTAedit" layoutX="80.0" layoutY="316.0" prefHeight="35.0" prefWidth="235.0" promptText="البريد الالكتروني الجديد" />
+                        <Text fill="#344e41" layoutX="81.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="صفحة تحرير حسابات المستخدمين">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                        </Text>
+                        <MenuButton fx:id="menuButtonEditTACourse" alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="364.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="235.0" text="Courses" textAlignment="CENTER" textFill="#dad7cd">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem mnemonicParsing="false" text="Action 2" />
+                           </items>
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </MenuButton>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false" />
                </children>
             </AnchorPane>
          </center>

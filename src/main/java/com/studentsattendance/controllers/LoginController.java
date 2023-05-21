@@ -11,14 +11,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
 
 public class LoginController implements  Initializable  {
 
@@ -35,6 +38,7 @@ public class LoginController implements  Initializable  {
     public Label labelWrongPass;
     public CheckBox checkShowPass;
     public TextField passShow;
+    public ImageView avatar;
 
     Navigation navigation = new Navigation();
 
@@ -45,6 +49,7 @@ public class LoginController implements  Initializable  {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
+
     }
     public void onLogin(ActionEvent actionEvent) {
         if (usernameInput.getText().isEmpty()){
