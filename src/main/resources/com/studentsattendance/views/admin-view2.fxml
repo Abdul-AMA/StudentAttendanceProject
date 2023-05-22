@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studentsattendance.controllers.AdminController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../MyCss.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.studentsattendance.controllers.AdminController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -30,27 +30,27 @@
          <right>
             <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="170.0" style="-fx-background-color: #dad7cd;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="buttonCreateCourse" layoutY="60.0" mnemonicParsing="false" onAction="#onCreateCourse" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" styleClass="button" stylesheets="@../MyCss.css" text="إنشاء مساق" textFill="#588157">
+                  <Button fx:id="buttonCreateCourse" layoutY="60.0" mnemonicParsing="false" onAction="#onCreateCourse" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" styleClass="button" stylesheets="@../MyCss.css" text="إنشاء مساق" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="buttonShowTeacher" layoutY="300.0" mnemonicParsing="false" onAction="#onShowTA" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض حسابات المعيدين" textFill="#588157">
+                  <Button fx:id="buttonShowTeacher" layoutY="300.0" mnemonicParsing="false" onAction="#onShowTA" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض حسابات المعيدين" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="buttonEditCourse" layoutY="180.0" mnemonicParsing="false" onAction="#onEditCourse" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير المساقات" textFill="#588157">
+                  <Button fx:id="buttonEditCourse" layoutY="180.0" mnemonicParsing="false" onAction="#onEditCourse" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير المساقات" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="buttonShowCourses" layoutY="120.0" mnemonicParsing="false" onAction="#onShowCourses" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض المساقات" textFill="#588157">
+                  <Button fx:id="buttonShowCourses" layoutY="120.0" mnemonicParsing="false" onAction="#onShowCourses" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض المساقات" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="buttonCreateTeacher" layoutY="240.0" mnemonicParsing="false" onAction="#onCreateTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء حسابات المعيدين" textFill="#588157">
+                  <Button fx:id="buttonCreateTeacher" layoutY="240.0" mnemonicParsing="false" onAction="#onCreateTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="إنشاء حسابات المعيدين" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button fx:id="buttonPageDefault" mnemonicParsing="false" onAction="#onPageDefault" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="الصفحة الرئيسية" textFill="#588157">
+                  <Button fx:id="buttonPageDefault" mnemonicParsing="false" onAction="#onPageDefault" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="الصفحة الرئيسية" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -60,7 +60,7 @@
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonEditTeacher" layoutY="360.0" mnemonicParsing="false" onAction="#onEditTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير حسابات المعيدين" textFill="#588157">
+                  <Button fx:id="buttonEditTeacher" layoutY="360.0" mnemonicParsing="false" onAction="#onEditTeacher" prefHeight="60.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير حسابات المعيدين" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -71,7 +71,14 @@
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" />
+                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
+                     <children>
+                        <Text fill="#344e41" layoutX="142.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="345.775390625">
+                           <font>
+                              <Font size="83.0" />
+                           </font>
+                        </Text>
+                     </children></AnchorPane>
                   <AnchorPane fx:id="page1" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <TextField fx:id="textCourseId" alignment="CENTER_RIGHT" layoutX="197.0" layoutY="100.0" prefHeight="35.0" prefWidth="235.0" promptText="رقم المساق" />
