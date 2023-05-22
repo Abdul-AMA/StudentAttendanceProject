@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -38,7 +39,6 @@ public class LoginController implements  Initializable  {
     public Label labelWrongPass;
     public CheckBox checkShowPass;
     public TextField passShow;
-    public ImageView avatar;
 
     Navigation navigation = new Navigation();
 
@@ -106,5 +106,25 @@ public class LoginController implements  Initializable  {
             passwordInput.setVisible(true);
         }
 
+    }
+
+    public void onLostData(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Lost data");
+        alert.setHeaderText("Are you sure you want to load the recovery file, you will lose the last data modification!");
+        alert.setContentText(null);
+
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(yes, no);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == yes) {
+            dataModel.loadRecoveryFile();
+        } else if (result.get() == no) {
+            event.consume();
+        }
     }
 }

@@ -33,6 +33,27 @@ public class DataModel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        try(FileOutputStream fos1 = new FileOutputStream(new File("src/main/java/com/studentsattendance/models/Files/adminRecovery.bin"))){
+            try(ObjectOutputStream oos1 = new ObjectOutputStream(fos1)) {
+                oos1.writeObject(administrator);
+            }catch(IOException e){
+                throw new RuntimeException(e);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void loadRecoveryFile() throws IOException {
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream("src/main/java/com/studentsattendance/models/Files/adminRecovery.bin"));
+        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File("src/main/java/com/studentsattendance/models/Files/admin.bin")));
+        while(in.available() > 0) {
+            byte[] bytes = in.readNBytes(in.available());
+            out.write(bytes);
+            out.flush();
+        }
     }
 
     public static Administrator getAdministrator() {
