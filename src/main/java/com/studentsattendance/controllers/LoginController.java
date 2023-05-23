@@ -3,6 +3,8 @@ package com.studentsattendance.controllers;
 import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.DataModel;
+import com.studentsattendance.models.IndexHolder;
+import com.studentsattendance.models.IndexHolder;
 import com.studentsattendance.models.TeacherAssistant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,11 +49,12 @@ public class LoginController implements  Initializable  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dataModel = new DataModel();
-        administrator = dataModel.getAdministrator();
 
     }
     public void onLogin(ActionEvent actionEvent) {
+        dataModel = new DataModel();
+        administrator = dataModel.getAdministrator();
+
         if (usernameInput.getText().isEmpty()){
             labelWrongPass.setText("Enter username");
             return;
@@ -68,7 +71,8 @@ public class LoginController implements  Initializable  {
             for (int i = 0; i < administrator.getTeacherAssistantList().size(); i++) {
                 if (    administrator.getTeacherAssistantList().get(i).getUsername().equals(usernameInput.getText()) &&
                         administrator.getTeacherAssistantList().get(i).getPassword().equals(passwordInput.getText())) {
-                    openTeacherWindow(administrator.getTeacherAssistantList().get(i));
+                    IndexHolder.getInstance().setCurrentIndex(i);
+                    openTeacherWindow();
                     return;
                 }
             }
@@ -85,7 +89,7 @@ public class LoginController implements  Initializable  {
 
     }
 
-    public void openTeacherWindow(TeacherAssistant teacherAssistant){
+    public void openTeacherWindow( ){
         navigation.navigateTo(rootPane,navigation.Teacher_FXML);
     }
 

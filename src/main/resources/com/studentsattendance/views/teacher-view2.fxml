@@ -18,7 +18,7 @@
          <top>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="800.0" style="-fx-background-color: #3a5a40;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#dad7cd" layoutX="14.0" layoutY="37.0" stroke="#dad7cd" strokeType="OUTSIDE" strokeWidth="0.5" text="TA" textAlignment="CENTER" wrappingWidth="144.13671875">
+                  <Text fx:id="TeacherName" fill="#dad7cd" layoutX="14.0" layoutY="37.0" stroke="#dad7cd" strokeType="OUTSIDE" strokeWidth="0.5" text="Teacher:" textAlignment="CENTER" wrappingWidth="144.13671875">
                      <font>
                         <Font name="Comic Sans MS" size="18.0" />
                      </font>
@@ -29,7 +29,7 @@
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
+                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <Text fill="#dad7cd" layoutX="243.0" layoutY="289.0" stroke="#dad7cd" strokeType="OUTSIDE" strokeWidth="0.5" text="Welcome" textAlignment="CENTER" wrappingWidth="144.13671875">
                            <font>
@@ -37,19 +37,19 @@
                            </font>
                         </Text>
                      </children></AnchorPane>
-                  <AnchorPane fx:id="page1" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
+                  <AnchorPane fx:id="page1" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
                      <children>
-                        <TextField fx:id="firstName" layoutX="194.0" layoutY="152.0" prefHeight="35.0" prefWidth="235.0" promptText="firstName" />
-                        <TextField fx:id="lastName" layoutX="194.0" layoutY="208.0" prefHeight="35.0" prefWidth="235.0" promptText="lastName" />
-                        <TextField fx:id="major" layoutX="197.0" layoutY="319.0" prefHeight="35.0" prefWidth="235.0" promptText="major" />
-                        <Button fx:id="buttonCreate" layoutX="231.0" layoutY="459.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
-                        <Text layoutX="194.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="تسجيل طالب جديد" wrappingWidth="241.775390625">
+                        <TextField fx:id="textAddFirstName" layoutX="196.0" layoutY="99.0" prefHeight="35.0" prefWidth="235.0" promptText="firstName" />
+                        <TextField fx:id="textAddLastName" layoutX="196.0" layoutY="155.0" prefHeight="35.0" prefWidth="235.0" promptText="lastName" />
+                        <TextField fx:id="textAddMajor" layoutX="196.0" layoutY="266.0" prefHeight="35.0" prefWidth="235.0" promptText="major" />
+                        <Button fx:id="buttonCreateNewStudent" layoutX="231.0" layoutY="387.0" mnemonicParsing="false" onAction="#onCreateNewStudent" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
+                        <TextField fx:id="textAddPhoneNumber" layoutX="196.0" layoutY="317.0" prefHeight="35.0" prefWidth="235.0" promptText="phoneNumber" />
+                        <TextField fx:id="textAddEmail" layoutX="196.0" layoutY="209.0" prefHeight="35.0" prefWidth="235.0" promptText="email" />
+                        <Text fill="#344e41" layoutX="142.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="تسجيل طالب جديد" textAlignment="CENTER" wrappingWidth="345.775390625">
                            <font>
                               <Font size="31.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="phoneNumber" layoutX="197.0" layoutY="370.0" prefHeight="35.0" prefWidth="235.0" promptText="phoneNumber" />
-                        <TextField fx:id="email" layoutX="194.0" layoutY="262.0" prefHeight="35.0" prefWidth="235.0" promptText="email" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="page2" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">

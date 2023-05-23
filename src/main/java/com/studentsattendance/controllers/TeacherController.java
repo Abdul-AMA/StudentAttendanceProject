@@ -3,6 +3,8 @@ package com.studentsattendance.controllers;
 import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.DataModel;
+import com.studentsattendance.models.IndexHolder;
+import com.studentsattendance.models.TeacherAssistant;
 import com.studentsattendance.program;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,9 +36,12 @@ public class TeacherController implements Initializable {
     public Button buttonRegisterAttendance;
     public Button buttonReports;
     public Button logout;
+    public Text TeacherName;
+
     Navigation navigationn = new Navigation();
     DataModel dataModel;
     Administrator administrator;
+    TeacherAssistant teacherAssistant;
     @FXML
     public StackPane StackPane;
     public AnchorPane pageDefault;
@@ -104,7 +110,12 @@ public class TeacherController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dataModel = new DataModel();
+        administrator = dataModel.getAdministrator();
+        teacherAssistant = administrator.getTeacherAssistantList().get(IndexHolder.getInstance().getCurrentIndex());
+        TeacherName.setText("Teacher: " + teacherAssistant.getUsername());
         hover();
+
     }
 
 
@@ -141,7 +152,6 @@ public class TeacherController implements Initializable {
     }
     public void onReports(ActionEvent actionEvent) {
     }
-
 
 
     public void onCreate(ActionEvent actionEvent) {

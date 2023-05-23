@@ -2,6 +2,7 @@ module com.studentsattendance {
 
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.mail;
 
     opens com.studentsattendance.models to javafx.base;
 

@@ -3,6 +3,7 @@ package com.studentsattendance.controllers;
 import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.DataModel;
+import com.studentsattendance.models.EmailSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,6 +30,8 @@ public class ForgetController implements Initializable {
 
     Navigation  navigation  = new Navigation();
 
+//    EmailSender emailSender = new EmailSender();
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
@@ -41,12 +44,17 @@ public class ForgetController implements Initializable {
         if (administrator.getUsername().equals(usernameInput.getText())) {
             labelWrongPass.setText("We sent your password to the email: \n" + administrator.getEmail());
             email = administrator.getEmail();
+//            emailSender.sendEmail(email,"Password recovery","you forgot your password?\n" +
+//                    "you is your password: " + administrator.getPassword() );
             linkResend.setVisible(true);
             return;
         }else
             for (int i = 0; i < administrator.getTeacherAssistantList().size(); i++) {
                 if (    administrator.getTeacherAssistantList().get(i).getUsername().equals(usernameInput.getText())) {
                     labelWrongPass.setText("We sent your password to the email: \n" + administrator.getTeacherAssistantList().get(i).getEmail());
+                    email = administrator.getTeacherAssistantList().get(i).getEmail();
+//                    emailSender.sendEmail(email,"Password recovery","you forgot your password?\n" +
+//                            "you is your password: " + administrator.getTeacherAssistantList().get(i).getEmail());
                     linkResend.setVisible(true);
                     return;
                 }
