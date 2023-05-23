@@ -23,7 +23,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -192,8 +194,7 @@ public class TeacherController implements Initializable {
     @FXML
     private TextField textLectureClassRome;
 
-    @FXML
-    private TextField textLectureDate;
+
 
     @FXML
     private TextField textLectureTitle;
@@ -203,6 +204,8 @@ public class TeacherController implements Initializable {
 
     @FXML
     private TextField textPhoneNumber;
+    @FXML
+    private DatePicker textLectureDate;
     Navigation navigationn = new Navigation();
     DataModel dataModel;
     Administrator administrator;
@@ -277,7 +280,7 @@ public class TeacherController implements Initializable {
     public void onShowStudents(ActionEvent actionEvent) {
         setAllNotVisible();
         page2.setVisible(true);
-      //  fillStudentTable();
+        fillStudentTable();
         tableStudent.refresh();
     }
     public void onEditStudent(ActionEvent actionEvent) {
@@ -295,7 +298,7 @@ public class TeacherController implements Initializable {
     public void onShowLectures(ActionEvent actionEvent) {
         setAllNotVisible();
         page5.setVisible(true);
-      //  fillLectureTable();
+        fillLectureTable();
         tableLecture.refresh();
     }
     public void onRegisterAttendance(ActionEvent actionEvent) {
@@ -309,11 +312,13 @@ public class TeacherController implements Initializable {
 
     }
 
-//    public void onCreatNewLecture(ActionEvent event) throws ParseException {
-//        Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()));
-//        teacherAssistant.addLecture(lecture);
-//        onCreatLecture();
-//    }
+    public void onCreatNewLecture(ActionEvent event) {
+        Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), new Date());
+        teacherAssistant.addLecture(lecture);
+        onCreatLecture();
+        System.out.println(textLectureDate.getValue().toString());
+
+    }
     public void onCreatStudent(){
         setAllNotVisible();
         page1.setVisible(true);
@@ -323,35 +328,35 @@ public class TeacherController implements Initializable {
         textMajor.clear();
         textPhoneNumber.clear();
     }
-//    public void onCreatLecture(){
-//        setAllNotVisible();
-//        page4.setVisible(true);
-//        textLectureTitle.clear();
-//        textLectureClassRome.clear();
-//        textDuration.clear();
-//        textLectureDate.clear();
-//    }
+    public void onCreatLecture(){
+        setAllNotVisible();
+        page4.setVisible(true);
+        textLectureTitle.clear();
+        textLectureClassRome.clear();
+        textDuration.clear();
+
+    }
 //
-//    public void fillStudentTable(){
-//        columnFirstName.setCellValueFactory(new PropertyValueFactory<Student,String>("firstName"));
-//        columnLastName.setCellValueFactory(new PropertyValueFactory<Student,String>("lastName"));
-//        columnEmail.setCellValueFactory(new PropertyValueFactory<Student,String>("email"));
-//        columnMajor.setCellValueFactory(new PropertyValueFactory<Student,String>("major"));
-//        columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Student,Integer>("phoneNumber"));
-//
-//        ObservableList<Student> observableListStudent = FXCollections.observableArrayList(teacherAssistant.getStudentList());
-//        tableStudent.setItems(observableListStudent);
-//    }
-//    public void fillLectureTable(){
-//        columnLectureTitle.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureTitle"));
-//        columnLectureClassRome.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureClassRome"));
-//        columnDuration.setCellValueFactory(new PropertyValueFactory<Lecture,Double>("duration"));
-//     //   columnLectureDate.setCellValueFactory(new PropertyValueFactory<Lecture,Date>("lectureDate"));
-//
-//
-//        ObservableList<Lecture> observableListLecture = FXCollections.observableArrayList(teacherAssistant.getLecturesList());
-//        tableLecture.setItems(observableListLecture);
-//    }
+    public void fillStudentTable(){
+        columnFirstName.setCellValueFactory(new PropertyValueFactory<Student,String>("firstName"));
+        columnLastName.setCellValueFactory(new PropertyValueFactory<Student,String>("lastName"));
+        columnEmail.setCellValueFactory(new PropertyValueFactory<Student,String>("email"));
+        columnMajor.setCellValueFactory(new PropertyValueFactory<Student,String>("major"));
+        columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Student,Integer>("phoneNumber"));
+
+        ObservableList<Student> observableListStudent = FXCollections.observableArrayList(teacherAssistant.getStudentList());
+        tableStudent.setItems(observableListStudent);
+    }
+    public void fillLectureTable(){
+        columnLectureTitle.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureTitle"));
+        columnLectureClassRome.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureClassRome"));
+        columnDuration.setCellValueFactory(new PropertyValueFactory<Lecture,Double>("duration"));
+        columnLectureDate.setCellValueFactory(new PropertyValueFactory<Lecture, Date>("lectureDate"));
+
+
+        ObservableList<Lecture> observableListLecture = FXCollections.observableArrayList(teacherAssistant.getLecturesList());
+        tableLecture.setItems(observableListLecture);
+    }
 
 
 

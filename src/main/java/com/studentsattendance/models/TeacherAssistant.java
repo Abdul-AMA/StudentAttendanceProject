@@ -31,11 +31,14 @@ public class TeacherAssistant implements Serializable {
         this.email = email;
         courseName = course.getCourseName();
         this.StudentList = new ArrayList<>();
+        this.lecturesList = new ArrayList<>();
     }
 
 
     public TeacherAssistant() {
         this.StudentList = new ArrayList<>();
+        this.lecturesList = new ArrayList<>();
+
     }
 
 // ----------------------------------------------------------------

@@ -1,6 +1,9 @@
 package com.studentsattendance.models;
 
+import javafx.scene.control.DatePicker;
+
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,6 +15,9 @@ public class Lecture implements Serializable {
     private String lectureClassRome;
     private double duration;
     private Date lectureDate;
+    private DatePicker datePicker;
+    private LocalDate localDate;
+    private String date;
 
     private ArrayList<Attendance> attendanceList;
 //----------------------------------------------------------------
@@ -42,6 +48,27 @@ public class Lecture implements Serializable {
         this.lectureTitle = lectureTitle;
         this.lectureClassRome = lectureClassRome;
         this.duration = duration;
+    }
+
+    public Lecture(String lectureTitle, String lectureClassRome, double duration, DatePicker datePicker) {
+        this.lectureTitle = lectureTitle;
+        this.lectureClassRome = lectureClassRome;
+        this.duration = duration;
+        this.datePicker = datePicker;
+    }
+
+    public Lecture(String lectureTitle, String lectureClassRome, double duration, LocalDate localDate) {
+        this.lectureTitle = lectureTitle;
+        this.lectureClassRome = lectureClassRome;
+        this.duration = duration;
+        this.localDate = localDate;
+    }
+
+    public Lecture(String lectureTitle, String lectureClassRome, double duration, String date) {
+        this.lectureTitle = lectureTitle;
+        this.lectureClassRome = lectureClassRome;
+        this.duration = duration;
+        this.date = date;
     }
 
     // ----------------------------------------------------------------
@@ -112,6 +139,7 @@ public class Lecture implements Serializable {
     public void setAttendanceList(ArrayList<Attendance> attendanceList) {
         this.attendanceList = attendanceList;
     }
+
 
     @Override
     public String toString() {
