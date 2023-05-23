@@ -3,7 +3,6 @@ package com.studentsattendance.controllers;
 import com.studentsattendance.Navigation;
 import com.studentsattendance.models.Administrator;
 import com.studentsattendance.models.DataModel;
-import com.studentsattendance.models.EmailSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

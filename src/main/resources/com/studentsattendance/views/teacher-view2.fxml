@@ -37,7 +37,7 @@
                            </font>
                         </Text>
                      </children></AnchorPane>
-                  <AnchorPane fx:id="page1" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
+                  <AnchorPane fx:id="page1" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <TextField fx:id="textAddFirstName" layoutX="196.0" layoutY="99.0" prefHeight="35.0" prefWidth="235.0" promptText="firstName" />
                         <TextField fx:id="textAddLastName" layoutX="196.0" layoutY="155.0" prefHeight="35.0" prefWidth="235.0" promptText="lastName" />
@@ -90,7 +90,7 @@
                         <Button fx:id="buttonCreate31" layoutX="86.0" layoutY="456.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="WHITE" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="page4" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
+                  <AnchorPane fx:id="page4" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
                      <children>
                         <Text layoutX="173.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="إضافة محاضرة جديدة" wrappingWidth="283.36793518066406">
                            <font>
@@ -99,7 +99,7 @@
                         </Text>
                         <TextField fx:id="textLectureTitle" layoutX="198.0" layoutY="134.0" prefHeight="35.0" prefWidth="235.0" promptText="lectureTitle" />
                         <TextField fx:id="textDuration" layoutX="198.0" layoutY="282.0" prefHeight="35.0" prefWidth="235.0" promptText="duration" />
-                        <Button fx:id="buttonCreate1" layoutX="232.0" layoutY="440.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
+                        <Button fx:id="buttonCreate1" layoutX="232.0" layoutY="440.0" mnemonicParsing="false" onAction="#onCreatNewLecture" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
                         <TextField fx:id="textLectureClassRome" layoutX="198.0" layoutY="203.0" prefHeight="35.0" prefWidth="235.0" promptText="lectureClassRome" />
                         <TextField fx:id="textLectureDate" layoutX="197.0" layoutY="353.0" prefHeight="35.0" prefWidth="235.0" promptText="lectureDate" />
                      </children>

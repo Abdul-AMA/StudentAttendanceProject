@@ -5,6 +5,8 @@ import java.io.*;
 public class DataModel {
 
     private static Administrator administrator;
+    private static TeacherAssistant teacherAssistant;
+
 
     public DataModel() {
         initialize();
@@ -62,5 +64,13 @@ public class DataModel {
 
     public static void setAdministrator(Administrator administrator) {
         DataModel.administrator = administrator;
+    }
+
+    public static TeacherAssistant getTeacherAssistant() {
+        return teacherAssistant;
+    }
+
+    public static void setTeacherAssistant(TeacherAssistant teacherAssistant) {
+        DataModel.teacherAssistant = teacherAssistant;
     }
 }

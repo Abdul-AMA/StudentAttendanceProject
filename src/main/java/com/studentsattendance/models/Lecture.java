@@ -37,7 +37,14 @@ public class Lecture implements Serializable {
         this.lectureDate = lectureDate;
         this.attendanceList = new ArrayList<Attendance>();
     }
-// ----------------------------------------------------------------
+
+    public Lecture(String lectureTitle, String lectureClassRome, double duration) {
+        this.lectureTitle = lectureTitle;
+        this.lectureClassRome = lectureClassRome;
+        this.duration = duration;
+    }
+
+    // ----------------------------------------------------------------
 // methods
 // ----------------------------------------------------------------
     public void addAttendance(Attendance attendance) {

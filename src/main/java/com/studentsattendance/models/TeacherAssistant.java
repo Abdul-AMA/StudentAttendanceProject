@@ -14,6 +14,8 @@ public class TeacherAssistant implements Serializable {
     private String lastName;
     private String email;
     private String courseName;
+    private ArrayList<Student> StudentList;
+    private  ArrayList<Lecture> lecturesList;
 
 //----------------------------------------------------------------
 // Constructors
@@ -28,10 +30,12 @@ public class TeacherAssistant implements Serializable {
         this.lastName = lastName;
         this.email = email;
         courseName = course.getCourseName();
+        this.StudentList = new ArrayList<>();
     }
 
 
     public TeacherAssistant() {
+        this.StudentList = new ArrayList<>();
     }
 
 // ----------------------------------------------------------------
@@ -85,6 +89,31 @@ public class TeacherAssistant implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
         setCourseName(course.getCourseName());
+    }
+
+    public ArrayList<Student> getStudentList() {
+        return StudentList;
+    }
+
+    public void setStudentList(ArrayList<Student> studentList) {
+        StudentList = studentList;
+    }
+    public void addStudent(Student student){
+        this.StudentList.add(student);
+  }
+    public void removeStudent(Student student){
+        this.StudentList.remove(student);
+    }
+    public void addLecture(Lecture lecture){
+        this.lecturesList.add(lecture);
+    }
+
+    public ArrayList<Lecture> getLecturesList() {
+        return lecturesList;
+    }
+
+    public void setLecturesList(ArrayList<Lecture> lecturesList) {
+        this.lecturesList = lecturesList;
     }
 
     @Override

@@ -17,7 +17,15 @@ public class Student implements Serializable {
     private int phoneNumber;
 
 
-//----------------------------------------------------------------
+    public Student(String firstName, String lastName, String email, String major, int phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.major = major;
+        this.phoneNumber = phoneNumber;
+    }
+
+    //----------------------------------------------------------------
 // Constructors
 // ----------------------------------------------------------------
     public Student(String username, String password, String firstName, String lastName, String email, String major, int phoneNumber) {

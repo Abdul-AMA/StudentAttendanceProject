@@ -13,6 +13,7 @@ public class Administrator  implements Serializable {
 
     private ArrayList<Course> courseList;
     private ArrayList<TeacherAssistant> teacherAssistantList;
+  //  private ArrayList<Student> StudentList;//new
 
 //----------------------------------------------------------------
 // Constructors
@@ -23,11 +24,13 @@ public class Administrator  implements Serializable {
         this.email = email;
         this.courseList = new ArrayList<>();
         this.teacherAssistantList = new ArrayList<>();
+       // this.StudentList = new ArrayList<>();
     }
 
     public Administrator() {
         this.courseList = new ArrayList<>();
         this.teacherAssistantList = new ArrayList<>();
+      //  this.StudentList = new ArrayList<>();
     }
 
 // ----------------------------------------------------------------
@@ -107,6 +110,17 @@ public class Administrator  implements Serializable {
 
         this.teacherAssistantList.remove(teacherAssistant);
     }
+
+//    public ArrayList<Student> getStudentList() {
+//        return StudentList;
+//    }
+//
+//    public void addStudent(Student student){
+//        this.StudentList.add(student);
+//    }
+//    public void removeStudent(Student student){
+//        this.StudentList.remove(student);
+//    }
 
     public void linkCourseTeacher(TeacherAssistant teacherAssistant , Course course) {
         teacherAssistant.setCourse(course);
