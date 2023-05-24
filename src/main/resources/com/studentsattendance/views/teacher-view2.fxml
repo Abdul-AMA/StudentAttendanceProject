@@ -57,11 +57,11 @@
                      <children>
                         <TableView fx:id="tableStudent" prefHeight="540.0" prefWidth="630.0">
                            <columns>
-                              <TableColumn fx:id="columnFirstName" prefWidth="75.0" text="firstName" />
-                              <TableColumn fx:id="columnLastName" prefWidth="91.0" text="lastName" />
-                              <TableColumn fx:id="columnEmail" prefWidth="88.0" text="email" />
-                              <TableColumn fx:id="columnMajor" prefWidth="83.0" text="major" />
-                              <TableColumn fx:id="columnPhoneNumber" minWidth="3.0" prefWidth="100.800048828125" text="phoneNumber" />
+                              <TableColumn fx:id="columnFirstName" onEditCommit="#onEditStudentFirstName" prefWidth="75.0" text="firstName" />
+                              <TableColumn fx:id="columnLastName" onEditCommit="#onEditStudentLastName" prefWidth="91.0" text="lastName" />
+                              <TableColumn fx:id="columnEmail" onEditCommit="#onEditStudentEmail" prefWidth="88.0" text="email" />
+                              <TableColumn fx:id="columnMajor" onEditCommit="#onEditStudentMajor" prefWidth="83.0" text="major" />
+                              <TableColumn fx:id="columnPhoneNumber" minWidth="3.0" onEditCommit="#onEditStudentPhoneNumber" prefWidth="100.800048828125" text="phoneNumber" />
                            </columns>
                         </TableView>
                      </children>
@@ -91,7 +91,7 @@
                         <Button fx:id="buttonCreate31" layoutX="86.0" layoutY="456.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="WHITE" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="page4" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
+                  <AnchorPane fx:id="page4" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <Text layoutX="173.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="إضافة محاضرة جديدة" wrappingWidth="283.36793518066406">
                            <font>
@@ -105,14 +105,14 @@
                         <DatePicker fx:id="textLectureDate" layoutX="199.0" layoutY="351.0" prefHeight="35.0" prefWidth="234.0" promptText="Enter Date" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="page5" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
+                  <AnchorPane fx:id="page5" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
                      <children>
                         <TableView fx:id="tableLecture" prefHeight="540.0" prefWidth="630.0">
                            <columns>
-                              <TableColumn fx:id="columnLectureTitle" prefWidth="158.39996033906937" text="lectureTitle" />
-                              <TableColumn fx:id="columnLectureClassRome" prefWidth="164.00001525878906" text="lectureClassRome" />
-                              <TableColumn fx:id="columnDuration" prefWidth="141.0" text="duration" />
-                              <TableColumn fx:id="columnLectureDate" prefWidth="215.0" text="lectureDate" />
+                              <TableColumn fx:id="columnLectureTitle" onEditCommit="#onEditLectureTitle" prefWidth="158.39996033906937" text="lectureTitle" />
+                              <TableColumn fx:id="columnLectureClassRome" onEditCommit="#onEditLectureClassRome" prefWidth="164.00001525878906" text="lectureClassRome" />
+                              <TableColumn fx:id="columnDuration" onEditCommit="#onEditLectureDuration" prefWidth="141.0" text="duration" />
+                              <TableColumn fx:id="columnLectureDate" onEditCommit="#onEditLectureDate" prefWidth="215.0" text="lectureDate" />
                            </columns>
                         </TableView>
                      </children>
@@ -147,62 +147,52 @@
          <right>
             <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="170.0" style="-fx-background-color: #dad7cd;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="buttonPageDefault" mnemonicParsing="false" onAction="#onPageDefault" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="الصفحة الرئيسية" textFill="#588157">
+                  <Button fx:id="buttonPageDefault" mnemonicParsing="false" onAction="#onPageDefault" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="الصفحة الرئيسية" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="empty2" layoutY="495.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="empty" textFill="#588157">
+                  <Button fx:id="buttonRegisterStudent" layoutY="52.0" mnemonicParsing="false" onAction="#onRegisterStudent" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" styleClass="button" stylesheets="@../MyCss.css" text="تسجيل طالب جديد" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonRegisterStudent" layoutY="45.0" mnemonicParsing="false" onAction="#onRegisterStudent" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" styleClass="button" stylesheets="@../MyCss.css" text="تسجيل طالب جديد" textFill="#588157">
+                  <Button fx:id="buttonShowLectures" layoutY="260.0" mnemonicParsing="false" onAction="#onShowLectures" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض المحاضرات" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonShowLectures" layoutY="225.0" mnemonicParsing="false" onAction="#onShowLectures" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض المحاضرات" textFill="#588157">
+                  <Button fx:id="buttonEditStudent" layoutY="156.0" mnemonicParsing="false" onAction="#onEditStudent" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير الطلاب" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonEditStudent" layoutY="135.0" mnemonicParsing="false" onAction="#onEditStudent" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير الطلاب" textFill="#588157">
+                  <Button fx:id="buttonShowStudents" layoutY="104.0" mnemonicParsing="false" onAction="#onShowStudents" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض الطلاب المسجلين" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonShowStudents" layoutY="90.0" mnemonicParsing="false" onAction="#onShowStudents" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="عرض الطلاب المسجلين" textFill="#588157">
+                  <Button fx:id="buttonEditLectures" layoutY="312.0" mnemonicParsing="false" onAction="#onEditLectures" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير المحاضرات" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonEditLectures" layoutY="270.0" mnemonicParsing="false" onAction="#onEditLectures" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تحرير المحاضرات" textFill="#588157">
+                  <Button fx:id="buttonAddLecture" layoutY="208.0" mnemonicParsing="false" onAction="#onAddLecture" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="إضافة محاضرة جديدة" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonAddLecture" layoutY="180.0" mnemonicParsing="false" onAction="#onAddLecture" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="إضافة محاضرة جديدة" textFill="#588157">
+                  <Button fx:id="buttonRegisterAttendance" layoutY="364.0" mnemonicParsing="false" onAction="#onRegisterAttendance" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تسجيل الحضور" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonRegisterAttendance" layoutY="315.0" mnemonicParsing="false" onAction="#onRegisterAttendance" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تسجيل الحضور" textFill="#588157">
+                  <Button fx:id="buttonReports" layoutY="416.0" mnemonicParsing="false" onAction="#onReports" prefHeight="52.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="استخراج التقارير والكشوفات" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buttonReports" layoutY="360.0" mnemonicParsing="false" onAction="#onReports" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: #A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="استخراج التقارير والكشوفات" textFill="#588157">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="logout" layoutY="405.0" mnemonicParsing="false" onAction="#onLogOut" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تسجيل الخروج" textFill="#588157">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="empty1" layoutY="450.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="empty" textFill="#588157">
+                  <Button fx:id="logout" layoutY="468.0" mnemonicParsing="false" onAction="#onLogOut" prefHeight="72.0" prefWidth="170.0" style="-fx-background-color: #dad7cd; -fx-border-color: A3B18A; -fx-border-width: 0px 0px 2px 0px;" text="تسجيل الخروج" textFill="#588157">
                      <font>
                         <Font size="13.0" />
                      </font>

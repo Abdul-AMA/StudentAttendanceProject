@@ -71,7 +71,7 @@
          <center>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
+                  <AnchorPane fx:id="pageDefault" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <Text fill="#344e41" layoutX="142.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="345.775390625">
                            <font>
@@ -102,13 +102,13 @@
                      <children>
                         <TableView fx:id="tableCourses" prefHeight="540.0" prefWidth="630.0">
                            <columns>
-                              <TableColumn fx:id="columnCourseId" prefWidth="66.0" text="ID" />
-                              <TableColumn fx:id="columnCourseName" prefWidth="100.0" text="Name" />
-                              <TableColumn fx:id="columnCourseDoctor" prefWidth="77.0" text="Doctor" />
-                              <TableColumn fx:id="columnCourseHours" prefWidth="50.0" text="Hours" />
-                              <TableColumn fx:id="columnCourseBook" minWidth="3.0" prefWidth="71.0" text="Book" />
-                              <TableColumn fx:id="columnCourseDescription" minWidth="0.0" prefWidth="133.0" text="Description" />
-                              <TableColumn fx:id="columnCourseMaximumAbsence" minWidth="0.0" prefWidth="132.0" text="Maximum Absence" />
+                              <TableColumn fx:id="columnCourseId" onEditCommit="#onEditCourseId" prefWidth="66.0" text="ID" />
+                              <TableColumn fx:id="columnCourseName" onEditCommit="#onEditCourseName" prefWidth="100.0" text="Name" />
+                              <TableColumn fx:id="columnCourseDoctor" onEditCommit="#onEditCourseDoctor" prefWidth="77.0" text="Doctor" />
+                              <TableColumn fx:id="columnCourseHours" onEditCommit="#onEditCourseHours" prefWidth="50.0" text="Hours" />
+                              <TableColumn fx:id="columnCourseBook" minWidth="3.0" onEditCommit="#onEditCourseBook" prefWidth="71.0" text="Book" />
+                              <TableColumn fx:id="columnCourseDescription" minWidth="0.0" onEditCommit="#onEditCourseDescription" prefWidth="133.0" text="Description" />
+                              <TableColumn fx:id="columnCourseMaximumAbsence" minWidth="0.0" onEditCommit="#onEditCourseMaxAbs" prefWidth="132.0" text="Maximum Absence" />
                            </columns>
                         </TableView>
                      </children>
@@ -163,16 +163,16 @@
                         </MenuButton>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="page5" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
+                  <AnchorPane fx:id="page5" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
                      <children>
                         <TableView fx:id="tableTA" prefHeight="540.0" prefWidth="630.0">
                            <columns>
-                              <TableColumn fx:id="columnUserNameTA" prefWidth="77.0" text="User Name" />
-                              <TableColumn fx:id="columnPassTA" prefWidth="93.0" text="Password" />
-                              <TableColumn fx:id="columnFirstNameTA" prefWidth="92.0" text="First Name" />
-                              <TableColumn fx:id="columnLastNameTA" prefWidth="93.0" text="Last Name" />
-                              <TableColumn fx:id="columnEmailTA" prefWidth="166.0" text="Email" />
-                              <TableColumn fx:id="columnCourseNameTA" prefWidth="108.0" text="Course Name" />
+                              <TableColumn fx:id="columnUserNameTA" onEditCommit="#onEditTeacherUser" prefWidth="77.0" text="User Name" />
+                              <TableColumn fx:id="columnPassTA" onEditCommit="#onEditTeacherPass" prefWidth="93.0" text="Password" />
+                              <TableColumn fx:id="columnFirstNameTA" onEditCommit="#onEditTeacherFirstName" prefWidth="92.0" text="First Name" />
+                              <TableColumn fx:id="columnLastNameTA" onEditCommit="#onEditTeacherLastName" prefWidth="93.0" text="Last Name" />
+                              <TableColumn fx:id="columnEmailTA" onEditCommit="#onEditTeacherEmail" prefWidth="166.0" text="Email" />
+                              <TableColumn fx:id="columnCourseNameTA" onEditCommit="#onEditTeacherCourseName" prefWidth="108.0" text="Course Name" />
                            </columns>
                         </TableView>
                      </children>

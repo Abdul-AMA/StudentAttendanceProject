@@ -13,11 +13,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -99,7 +101,7 @@ public class TeacherController implements Initializable {
     private TableColumn<Lecture, String> columnLectureClassRome;
 
     @FXML
-    private TableColumn<Lecture, Date> columnLectureDate;
+    private TableColumn<Lecture, String> columnLectureDate;
 
     @FXML
     private TableColumn<Lecture, String> columnLectureTitle;
@@ -108,7 +110,7 @@ public class TeacherController implements Initializable {
     private TableColumn<Student, String> columnMajor;
 
     @FXML
-    private TableColumn<Student, Integer> columnPhoneNumber;
+    private TableColumn<Student, Long> columnPhoneNumber;
 
     @FXML
     private TextField editDuration;
@@ -264,6 +266,7 @@ public class TeacherController implements Initializable {
         teacherAssistant = administrator.getTeacherAssistantList().get(IndexHolder.getInstance().getCurrentIndex());
         TeacherName.setText("Teacher: " + teacherAssistant.getUsername());
 
+
         hover();
     }
 
@@ -306,18 +309,18 @@ public class TeacherController implements Initializable {
     public void onReports(ActionEvent actionEvent) {
     }
     public void onCreateNewStudent(ActionEvent event){
-        Student student = new Student(textAddFirstName.getText(), textAddLastName.getText(),textAddEmail.getText(), textAddMajor.getText(), Integer.parseInt(textAddPhoneNumber.getText()));
+        Student student = new Student(textAddFirstName.getText(), textAddLastName.getText(),textAddEmail.getText(), textAddMajor.getText(), Long.parseLong(textAddPhoneNumber.getText()));
         teacherAssistant.addStudent(student);
         onCreatStudent();
+
+
 
     }
 
     public void onCreatNewLecture(ActionEvent event) {
-        Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), new Date());
+        Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), textLectureDate.getValue().toString());
         teacherAssistant.addLecture(lecture);
         onCreatLecture();
-        System.out.println(textLectureDate.getValue().toString());
-
     }
     public void onCreatStudent(){
         setAllNotVisible();
@@ -342,21 +345,135 @@ public class TeacherController implements Initializable {
         columnLastName.setCellValueFactory(new PropertyValueFactory<Student,String>("lastName"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<Student,String>("email"));
         columnMajor.setCellValueFactory(new PropertyValueFactory<Student,String>("major"));
-        columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Student,Integer>("phoneNumber"));
+        columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Student,Long>("phoneNumber"));
 
         ObservableList<Student> observableListStudent = FXCollections.observableArrayList(teacherAssistant.getStudentList());
         tableStudent.setItems(observableListStudent);
+        //---------------------------------------
+        StringConverter<Integer> integerConverter = new StringConverter<>() {
+            @Override
+            public String toString(Integer value) {
+                if (value == null) {
+                    return "";
+                }
+                return value.toString();
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return 0;
+                }
+                return Integer.parseInt(string);
+            }
+        };
+
+// Custom StringConverter for Double values
+        StringConverter<Double> doubleConverter = new StringConverter<>() {
+            @Override
+            public String toString(Double value) {
+                if (value == null) {
+                    return "";
+                }
+                return value.toString();
+            }
+
+            @Override
+            public Double fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return 0.0;
+                }
+                return Double.parseDouble(string);
+            }
+        };
+        // Custom StringConverter for Long values
+        StringConverter<Long> longConverter = new StringConverter<>() {
+            @Override
+            public String toString(Long value) {
+                if (value == null) {
+                    return "";
+                }
+                return value.toString();
+            }
+
+            @Override
+            public Long fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return 0L;
+                }
+                return Long.parseLong(string);
+            }
+        };
+        //---------------------------------------
+
+        tableStudent.setEditable(true);
+        columnFirstName.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnLastName.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnEmail.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnMajor.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnPhoneNumber.setCellFactory(TextFieldTableCell.forTableColumn(longConverter));
+
     }
     public void fillLectureTable(){
         columnLectureTitle.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureTitle"));
         columnLectureClassRome.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureClassRome"));
         columnDuration.setCellValueFactory(new PropertyValueFactory<Lecture,Double>("duration"));
-        columnLectureDate.setCellValueFactory(new PropertyValueFactory<Lecture, Date>("lectureDate"));
-
+        columnLectureDate.setCellValueFactory(cellData -> {
+            Lecture lecture = cellData.getValue();
+            return lecture.dateStringProperty();
+        });
 
         ObservableList<Lecture> observableListLecture = FXCollections.observableArrayList(teacherAssistant.getLecturesList());
         tableLecture.setItems(observableListLecture);
+        //---------------------------------------
+        StringConverter<Integer> integerConverter = new StringConverter<>() {
+            @Override
+            public String toString(Integer value) {
+                if (value == null) {
+                    return "";
+                }
+                return value.toString();
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return 0;
+                }
+                return Integer.parseInt(string);
+            }
+        };
+
+// Custom StringConverter for Double values
+        StringConverter<Double> doubleConverter = new StringConverter<>() {
+            @Override
+            public String toString(Double value) {
+                if (value == null) {
+                    return "";
+                }
+                return value.toString();
+            }
+
+            @Override
+            public Double fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return 0.0;
+                }
+                return Double.parseDouble(string);
+            }
+        };
+        //---------------------------------------
+
+        tableLecture.setEditable(true);
+        columnLectureTitle.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnLectureClassRome.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnDuration.setCellFactory(TextFieldTableCell.forTableColumn(doubleConverter));
+        columnLectureDate.setCellFactory(TextFieldTableCell.forTableColumn());
+
     }
+
+
+
 
 
 
@@ -364,6 +481,50 @@ public class TeacherController implements Initializable {
     }
 
 
+    public void onEditStudentFirstName(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
+        Student student = tableStudent.getSelectionModel().getSelectedItem();
+        student.setFirstName(studentStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditStudentLastName(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
+        Student student = tableStudent.getSelectionModel().getSelectedItem();
+        student.setLastName(studentStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditStudentEmail(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
+        Student student = tableStudent.getSelectionModel().getSelectedItem();
+        student.setEmail(studentStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditStudentMajor(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
+        Student student = tableStudent.getSelectionModel().getSelectedItem();
+        student.setMajor(studentStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditStudentPhoneNumber(TableColumn.CellEditEvent<Student, Long> studentIntegerCellEditEvent) {
+        Student student = tableStudent.getSelectionModel().getSelectedItem();
+        student.setPhoneNumber(studentIntegerCellEditEvent.getNewValue());
+    }
+
+    public void onEditLectureTitle(TableColumn.CellEditEvent<Lecture, String> lectureStringCellEditEvent) {
+        Lecture lecture = tableLecture.getSelectionModel().getSelectedItem();
+        lecture.setLectureTitle(lectureStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditLectureClassRome(TableColumn.CellEditEvent<Lecture, String> lectureStringCellEditEvent) {
+        Lecture lecture = tableLecture.getSelectionModel().getSelectedItem();
+        lecture.setLectureClassRome(lectureStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditLectureDuration(TableColumn.CellEditEvent<Lecture, Double> lectureDoubleCellEditEvent) {
+        Lecture lecture = tableLecture.getSelectionModel().getSelectedItem();
+        lecture.setDuration(lectureDoubleCellEditEvent.getNewValue());
+    }
+
+    public void onEditLectureDate(TableColumn.CellEditEvent<Lecture, String> lectureStringCellEditEvent) {
+        Lecture lecture = tableLecture.getSelectionModel().getSelectedItem();
+        lecture.setDateString(lectureStringCellEditEvent.getNewValue());
+    }
 }
 
 
