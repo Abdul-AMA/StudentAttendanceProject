@@ -300,7 +300,7 @@ public class TeacherController implements Initializable {
     }
     public void onEditLectures(ActionEvent actionEvent) {
         setAllNotVisible();
-        page5.setVisible(true);
+        page6.setVisible(true);
     }
     public void onShowLectures(ActionEvent actionEvent) {
         setAllNotVisible();
@@ -598,6 +598,12 @@ public class TeacherController implements Initializable {
                 }
             }
         });
+    }
+
+    public void onButtonEditStudent(ActionEvent event) {
+    }
+
+    public void onButtonDeleteStudent(ActionEvent event) {
     }
 }
 

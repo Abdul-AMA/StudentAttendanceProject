@@ -83,7 +83,7 @@
                               <Font size="16.0" />
                            </font>
                         </MenuButton>
-                        <Button fx:id="buttonEditStudent" layoutX="213.0" layoutY="456.0" mnemonicParsing="false" onAction="#onButtonEditStudent" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="WHITE" />
+                        <Button fx:id="buttonEditStudent1" layoutX="213.0" layoutY="456.0" mnemonicParsing="false" onAction="#onButtonEditStudent" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="WHITE" />
                         <Button fx:id="buttonDeleteStudent" layoutX="86.0" layoutY="456.0" mnemonicParsing="false" onAction="#onButtonDeleteStudent" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="WHITE" />
                      </children>
                   </AnchorPane>

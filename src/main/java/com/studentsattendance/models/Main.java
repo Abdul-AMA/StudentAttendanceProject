@@ -28,28 +28,28 @@ public class Main {
         administrator.addTeacher(teacher3);
 
 
-//        ArrayList<Student> studentsCourse1 = new ArrayList<Student>();
-//        for (int i = 0; i < 5; i++) {
-//            studentsCourse1.add(new Student("1student"+i,"1student",""+i,"1student"+i,"computer",i));
-//        }
-//
-//        course1.setStudentsList(studentsCourse1);
-//
-//        ArrayList<Student> studentsCourse2 = new ArrayList<Student>();
-//        for (int i = 0; i < 5; i++) {
-//            studentsCourse2.add(new Student("2student"+i,"2student",""+i,"2student"+i,"computer",i));
-//        }
-//
-//        course2.setStudentsList(studentsCourse2);
-//
-//        ArrayList<Student> studentsCourse3 = new ArrayList<Student>();
-//        for (int i = 0; i < 5; i++) {
-//            studentsCourse3.add(new Student("3student"+i,"3student"+i,"3student",""+i,"3student"+i,"electric",i));
-//        }
-//
-//        course3.setStudentsList(studentsCourse3);
-//
-//
+        ArrayList<Student> studentsCourse1 = new ArrayList<Student>();
+        for (int i = 0; i < 5; i++) {
+            studentsCourse1.add(new Student("1student"+i,"1student"+i,"1student",""+i,"1student"+i,"computer",i));
+        }
+
+        course1.setStudentsList(studentsCourse1);
+
+        ArrayList<Student> studentsCourse2 = new ArrayList<Student>();
+        for (int i = 0; i < 5; i++) {
+            studentsCourse2.add(new Student("2student"+i,"2student"+i,"2student",""+i,"2student"+i,"computer",i));
+        }
+
+        course2.setStudentsList(studentsCourse2);
+
+        ArrayList<Student> studentsCourse3 = new ArrayList<Student>();
+        for (int i = 0; i < 5; i++) {
+            studentsCourse3.add(new Student("3student"+i,"3student"+i,"3student",""+i,"3student"+i,"electric",i));
+        }
+
+        course3.setStudentsList(studentsCourse3);
+
+
 
         System.out.println(teacher1.getCourse().getCourseId());
 
