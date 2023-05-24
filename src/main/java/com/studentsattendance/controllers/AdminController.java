@@ -616,7 +616,7 @@ public class AdminController implements Initializable {
 
     public void onEditCourseDoctor(TableColumn.CellEditEvent<Course, String> courseStringCellEditEvent) {
         Course course = tableCourses.getSelectionModel().getSelectedItem();
-        course.setDoctor(courseStringCellEditEvent.getNewValue());
+        course.setCourseDoctor(courseStringCellEditEvent.getNewValue());
     }
 
     public void onEditCourseHours(TableColumn.CellEditEvent<Course, Integer> courseIntegerCellEditEvent) {

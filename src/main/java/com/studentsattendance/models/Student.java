@@ -12,27 +12,30 @@ public class Student implements Serializable {
     private String email;
     private String major;
     private boolean status;
+    private String address;
 
     private long phoneNumber;
 
 
-    public Student(String firstName, String lastName, String email, String major, long phoneNumber) {
+    public Student(String firstName, String lastName, String email, String major,String address, long phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.major = major;
+        this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
     //----------------------------------------------------------------
 // Constructors
 // ----------------------------------------------------------------
-    public Student(String username, String password, String firstName, String lastName, String email, String major, long phoneNumber) {
+    public Student(String username, String firstName, String lastName, String email, String major, String address,long phoneNumber) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.major = major;
+        this.address = address;
         status = true;
         this.phoneNumber = phoneNumber;
     }
@@ -44,6 +47,14 @@ public class Student implements Serializable {
 // getters and setters
 // ----------------------------------------------------------------
 
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getUsername() {
         return username;

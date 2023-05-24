@@ -30,26 +30,26 @@ public class Main {
 
         ArrayList<Student> studentsCourse1 = new ArrayList<Student>();
         for (int i = 0; i < 5; i++) {
-            studentsCourse1.add(new Student("1student"+i,"1student"+i,"1student",""+i,"1student"+i,"computer",i));
+            studentsCourse1.add(new Student("1student"+i,"1student",""+i,"1student"+i,"computer","gaza",i));
         }
 
         course1.setStudentsList(studentsCourse1);
 
         ArrayList<Student> studentsCourse2 = new ArrayList<Student>();
         for (int i = 0; i < 5; i++) {
-            studentsCourse2.add(new Student("2student"+i,"2student"+i,"2student",""+i,"2student"+i,"computer",i));
+            studentsCourse2.add(new Student("2student"+i,"2student",""+i,"2student"+i,"computer","gaza",i));
         }
 
         course2.setStudentsList(studentsCourse2);
 
         ArrayList<Student> studentsCourse3 = new ArrayList<Student>();
         for (int i = 0; i < 5; i++) {
-            studentsCourse3.add(new Student("3student"+i,"3student"+i,"3student",""+i,"3student"+i,"electric",i));
+            studentsCourse3.add(new Student("3student"+i,"3student",""+i,"3student"+i,"electric","gaza",i));
         }
 
         course3.setStudentsList(studentsCourse3);
 
-        course3.getStudentsList().add(new Student("ali","ali","ali","ali","ali","ali",1));
+        course3.getStudentsList().add(new Student("ali","ali","ali","ali","ali","gaza",1));
 
         System.out.println(teacher1.getCourse().getCourseId());
 

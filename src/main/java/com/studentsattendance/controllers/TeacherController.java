@@ -21,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -36,6 +35,16 @@ import java.util.ResourceBundle;
 
 public class TeacherController implements Initializable {
 
+    public RadioButton radioMale;
+    public RadioButton radioFemale;
+    public ToggleGroup group;
+    public TextField textAddAddress;
+    public ListView listViewAttendance;
+    public TextField textEnterForAttendance;
+    public Button buttonImportXLS;
+    public MenuButton menuAddAttendance;
+    public Button buttonDoneAttendance;
+    public AnchorPane page6;
     @FXML
     private StackPane StackPane;
 
@@ -44,30 +53,6 @@ public class TeacherController implements Initializable {
 
     @FXML
     private Button buttonAddLecture;
-
-    @FXML
-    private Button buttonCreate1;
-
-    @FXML
-    private Button buttonCreate3;
-
-    @FXML
-    private Button buttonCreate31;
-
-    @FXML
-    private Button buttonCreate311;
-
-    @FXML
-    private Button buttonCreate32;
-
-    @FXML
-    private Button buttonCreateNewStudent;
-
-    @FXML
-    private Button buttonEditLectures;
-
-    @FXML
-    private Button buttonEditStudent;
 
     @FXML
     private Button buttonPageDefault;
@@ -113,33 +98,16 @@ public class TeacherController implements Initializable {
 
     @FXML
     private TableColumn<Student, Long> columnPhoneNumber;
-
     @FXML
-    private TextField editDuration;
-
+    private TableColumn<Student, String > columnID;
     @FXML
-    private TextField editLectureClassRome;
+    private TableColumn<Student, String > columnAddress;
 
-    @FXML
-    private TextField editLectureDate;
 
-    @FXML
-    private TextField editLectureTitle;
 
-    @FXML
-    private Button empty1;
-
-    @FXML
-    private Button empty2;
 
     @FXML
     private Button logout;
-
-    @FXML
-    private MenuButton menuButton;
-
-    @FXML
-    private MenuButton menuButton1;
 
     @FXML
     private AnchorPane page1;
@@ -156,8 +124,6 @@ public class TeacherController implements Initializable {
     @FXML
     private AnchorPane page5;
 
-    @FXML
-    private AnchorPane page6;
 
     @FXML
     private AnchorPane pageDefault;
@@ -186,14 +152,7 @@ public class TeacherController implements Initializable {
     @FXML
     private TextField textDuration;
 
-    @FXML
-    private TextField textEmail;
 
-    @FXML
-    private TextField textFirstName;
-
-    @FXML
-    private TextField textLastName;
 
     @FXML
     private TextField textLectureClassRome;
@@ -204,13 +163,8 @@ public class TeacherController implements Initializable {
     private TextField textLectureTitle;
 
     @FXML
-    private TextField textMajor;
-
-    @FXML
-    private TextField textPhoneNumber;
-    @FXML
     private DatePicker textLectureDate;
-    Navigation navigationn = new Navigation();
+    Navigation navigation = new Navigation();
     DataModel dataModel;
     Administrator administrator;
     TeacherAssistant teacherAssistant;
@@ -221,24 +175,21 @@ public class TeacherController implements Initializable {
     public void setAllNotVisible() {
         page1.setVisible(false);
         page2.setVisible(false);
-        page3.setVisible(false);
+//        page3.setVisible(false);
         page4.setVisible(false);
         page5.setVisible(false);
-        page6.setVisible(false);
+//        page6.setVisible(false);
         pageDefault.setVisible(false);
 
     }
-
 
 
     public void hover(){
         buttonEffect(buttonPageDefault);
         buttonEffect(buttonRegisterStudent);
         buttonEffect(buttonShowStudents);
-        buttonEffect(buttonEditStudent);
         buttonEffect(buttonAddLecture);
         buttonEffect(buttonShowLectures);
-        buttonEffect(buttonEditLectures);
         buttonEffect(buttonRegisterAttendance);
         buttonEffect(buttonReports);
         buttonEffect(logout);
@@ -273,9 +224,9 @@ public class TeacherController implements Initializable {
 
         if (result.get() == save) {
             dataModel.save_date();
-            navigationn.navigateTo(StackPane,Navigation.Login_FXML);
+            navigation.navigateTo(StackPane,Navigation.Login_FXML);
         } else if (result.get() == do_not_save) {
-            navigationn.navigateTo(StackPane,Navigation.Login_FXML);
+            navigation.navigateTo(StackPane,Navigation.Login_FXML);
         }    }
 
     @Override
@@ -284,22 +235,25 @@ public class TeacherController implements Initializable {
         administrator = dataModel.getAdministrator();
         teacherAssistant = administrator.getTeacherAssistantList().get(IndexHolder.getInstance().getCurrentIndex());
         TeacherName.setText("Teacher: " + teacherAssistant.getUsername());
-        System.out.println(teacherAssistant.getStudentList());
-
         hover();
     }
 
 
 
-    public void onPageDefault(ActionEvent actionEvent) {
+    public void onPageDefault( ) {
         setAllNotVisible();
         pageDefault.setVisible(true);
     }
-    public void onRegisterStudent(ActionEvent actionEvent) {
+    public void onRegisterStudent() {
         setAllNotVisible();
         page1.setVisible(true);
+        textAddFirstName.clear();
+        textAddLastName.clear();
+        textAddEmail.clear();
+        textAddMajor.clear();
+        textAddPhoneNumber.clear();
     }
-    public void onShowStudents(ActionEvent actionEvent) {
+    public void onShowStudents( ) {
         setAllNotVisible();
         page2.setVisible(true);
         fillStudentTable();
@@ -307,19 +261,21 @@ public class TeacherController implements Initializable {
         deleteRowsStudent();
         tableStudent.refresh();
     }
-    public void onEditStudent(ActionEvent actionEvent) {
+    public void onEditStudent( ) {
         setAllNotVisible();
         page3.setVisible(true);
     }
-    public void onAddLecture(ActionEvent actionEvent) {
+    public void onAddLecture( ) {
         setAllNotVisible();
         page4.setVisible(true);
+        textLectureTitle.clear();
+        textLectureClassRome.clear();
+        textDuration.clear();
+        textLectureDate.setValue(null);
+
     }
-    public void onEditLectures(ActionEvent actionEvent) {
-        setAllNotVisible();
-        page6.setVisible(true);
-    }
-    public void onShowLectures(ActionEvent actionEvent) {
+
+    public void onShowLectures( ) {
         setAllNotVisible();
         page5.setVisible(true);
         fillLectureTable();
@@ -332,47 +288,42 @@ public class TeacherController implements Initializable {
     public void onReports(ActionEvent actionEvent) {
     }
     public void onCreateNewStudent(ActionEvent event){
-        Student student = new Student(textAddFirstName.getText(), textAddLastName.getText(),textAddEmail.getText(), textAddMajor.getText(), Long.parseLong(textAddPhoneNumber.getText()));
-        teacherAssistant.addStudent(student);
-        onCreatStudent();
-
-
+        String  id  = "";
+        if (radioMale.isSelected()){
+            id +=1;
+        }else if(radioFemale.isSelected()){
+            id +=2;
+        }
+        id += LocalDate.now().getYear();
+        id += teacherAssistant.getCourse().getStudentsList().size()+1;
+            Student student = new Student(id,textAddFirstName.getText(), textAddLastName.getText(),textAddEmail.getText(), textAddMajor.getText(),textAddAddress.getText() ,Long.parseLong(textAddPhoneNumber.getText()));
+        teacherAssistant.getCourse().addStudent(student);
+        onRegisterStudent();
+        System.out.println(student.toString());
 
     }
-
-    public void onCreatNewLecture(ActionEvent event) {
+    public void onCreateNewLecture(ActionEvent event) {
         Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), textLectureDate.getValue().toString());
-        teacherAssistant.addLecture(lecture);
-        onCreatLecture();
+        teacherAssistant.getCourse().addLecture(lecture);
+        onAddLecture();
     }
-    public void onCreatStudent(){
-        setAllNotVisible();
-        page1.setVisible(true);
-        textAddFirstName.clear();
-        textAddLastName.clear();
-        textAddEmail.clear();
-        textAddMajor.clear();
-        textAddPhoneNumber.clear();
-    }
-    public void onCreatLecture(){
-        setAllNotVisible();
-        page4.setVisible(true);
-        textLectureTitle.clear();
-        textLectureClassRome.clear();
-        textDuration.clear();
-        textLectureDate.setValue(null);
 
 
-    }
+
+
+
 //
     public void fillStudentTable(){
+        columnID.setCellValueFactory(new PropertyValueFactory<Student,String >("username"));
         columnFirstName.setCellValueFactory(new PropertyValueFactory<Student,String>("firstName"));
         columnLastName.setCellValueFactory(new PropertyValueFactory<Student,String>("lastName"));
         columnEmail.setCellValueFactory(new PropertyValueFactory<Student,String>("email"));
         columnMajor.setCellValueFactory(new PropertyValueFactory<Student,String>("major"));
+        columnAddress.setCellValueFactory(new PropertyValueFactory<Student,String>("address"));
         columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Student,Long>("phoneNumber"));
 
-        ObservableList<Student> observableListStudent = FXCollections.observableArrayList(teacherAssistant.getStudentList());
+
+        ObservableList<Student> observableListStudent = FXCollections.observableArrayList(teacherAssistant.getCourse().getStudentsList());
         tableStudent.setItems(observableListStudent);
         //---------------------------------------
         StringConverter<Integer> integerConverter = new StringConverter<>() {
@@ -432,10 +383,12 @@ public class TeacherController implements Initializable {
         //---------------------------------------
 
         tableStudent.setEditable(true);
+        columnID.setCellFactory(TextFieldTableCell.forTableColumn());
         columnFirstName.setCellFactory(TextFieldTableCell.forTableColumn());
         columnLastName.setCellFactory(TextFieldTableCell.forTableColumn());
         columnEmail.setCellFactory(TextFieldTableCell.forTableColumn());
         columnMajor.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnAddress.setCellFactory(TextFieldTableCell.forTableColumn());
         columnPhoneNumber.setCellFactory(TextFieldTableCell.forTableColumn(longConverter));
 
     }
@@ -448,7 +401,7 @@ public class TeacherController implements Initializable {
             return lecture.dateStringProperty();
         });
 
-        ObservableList<Lecture> observableListLecture = FXCollections.observableArrayList(teacherAssistant.getLecturesList());
+        ObservableList<Lecture> observableListLecture = FXCollections.observableArrayList(teacherAssistant.getCourse().getLecturesList());
         tableLecture.setItems(observableListLecture);
         //---------------------------------------
         StringConverter<Integer> integerConverter = new StringConverter<>() {
@@ -495,6 +448,7 @@ public class TeacherController implements Initializable {
         columnDuration.setCellFactory(TextFieldTableCell.forTableColumn(doubleConverter));
         columnLectureDate.setCellFactory(TextFieldTableCell.forTableColumn());
 
+
     }
 
 
@@ -502,10 +456,10 @@ public class TeacherController implements Initializable {
 
 
 
-    public void onCreate(ActionEvent actionEvent) {
+    public void onEditStudentID(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
+        Student student = tableStudent.getSelectionModel().getSelectedItem();
+        student.setUsername(studentStringCellEditEvent.getNewValue());
     }
-
-
     public void onEditStudentFirstName(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
         Student student = tableStudent.getSelectionModel().getSelectedItem();
         student.setFirstName(studentStringCellEditEvent.getNewValue());
@@ -524,6 +478,11 @@ public class TeacherController implements Initializable {
     public void onEditStudentMajor(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
         Student student = tableStudent.getSelectionModel().getSelectedItem();
         student.setMajor(studentStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditStudentAddress(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
+        Student student = tableStudent.getSelectionModel().getSelectedItem();
+        student.setAddress(studentStringCellEditEvent.getNewValue());
     }
 
     public void onEditStudentPhoneNumber(TableColumn.CellEditEvent<Student, Long> studentIntegerCellEditEvent) {
@@ -550,6 +509,9 @@ public class TeacherController implements Initializable {
         Lecture lecture = tableLecture.getSelectionModel().getSelectedItem();
         lecture.setDateString(lectureStringCellEditEvent.getNewValue());
     }
+
+
+
     public void deleteRowsStudent() {
         // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
         tableStudent.setOnKeyPressed(event -> {
@@ -577,7 +539,7 @@ public class TeacherController implements Initializable {
                     if (result.isPresent() && result.get() == deleteButton) {
                         // قم بتنفيذ عملية الحذف هنا
                         tableStudent.getItems().remove(student);
-                        teacherAssistant.removeStudent(student);
+                        teacherAssistant.getCourse().removeStudent(student);
                     }
                 }
             }
@@ -610,17 +572,21 @@ public class TeacherController implements Initializable {
                     if (result.isPresent() && result.get() == deleteButton) {
                         // قم بتنفيذ عملية الحذف هنا
                         tableLecture.getItems().remove(lecture);
-                        teacherAssistant.removeLecture(lecture);
+                        teacherAssistant.getCourse().removeLecture(lecture);
                     }
                 }
             }
         });
     }
 
-    public void onButtonEditStudent(ActionEvent event) {
+
+    public void onListViewAttendance(ListView.EditEvent editEvent) {
     }
 
-    public void onButtonDeleteStudent(ActionEvent event) {
+    public void onImportXLS(ActionEvent event) {
+    }
+
+    public void onDoneAttendance(ActionEvent event) {
     }
 }
 

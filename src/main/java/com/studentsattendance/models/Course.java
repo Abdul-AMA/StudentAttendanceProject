@@ -50,6 +50,10 @@ public class Course implements Serializable {
     public void addLecture(Lecture lecture) {
         lecturesList.add(lecture);
     }
+    public void removeLecture(Lecture lecture) {
+        lecturesList.remove(lecture);
+    }
+
 
     //عرض تقرير الحضور لكل طالب في مساق معين بسرعة عند طلب الطالب
     // عرض نسبة حضور الطالب بالمحاضرات
@@ -267,7 +271,8 @@ public class Course implements Serializable {
         return courseDoctor;
     }
 
-    public void setDoctor(String courseDoctor) {
+
+    public void setCourseDoctor(String courseDoctor) {
         this.courseDoctor = courseDoctor;
     }
 
