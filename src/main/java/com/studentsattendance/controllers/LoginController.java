@@ -52,7 +52,11 @@ public class LoginController implements  Initializable  {
         administrator = dataModel.getAdministrator();
 
     }
-    public void onLogin(ActionEvent actionEvent) {
+    public void onPasswordInput(ActionEvent actionEvent) {
+        onLogin();
+    }
+
+    public void onLogin() {
         if (usernameInput.getText().isEmpty()){
             labelWrongPass.setText("Enter username");
             return;
@@ -129,4 +133,6 @@ public class LoginController implements  Initializable  {
             event.consume();
         }
     }
+
+
 }

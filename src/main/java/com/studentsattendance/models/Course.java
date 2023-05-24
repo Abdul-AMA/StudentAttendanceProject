@@ -293,4 +293,5 @@ public class Course implements Serializable {
                 ", lecturesList=" + lecturesList +
                 '}';
     }
+
 }

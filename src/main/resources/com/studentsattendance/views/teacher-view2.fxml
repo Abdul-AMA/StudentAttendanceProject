@@ -42,10 +42,10 @@
                      <children>
                         <TextField fx:id="textAddFirstName" layoutX="196.0" layoutY="99.0" prefHeight="35.0" prefWidth="235.0" promptText="firstName" />
                         <TextField fx:id="textAddLastName" layoutX="196.0" layoutY="155.0" prefHeight="35.0" prefWidth="235.0" promptText="lastName" />
-                        <TextField fx:id="textAddMajor" layoutX="196.0" layoutY="266.0" prefHeight="35.0" prefWidth="235.0" promptText="major" />
-                        <Button fx:id="buttonCreateNewStudent" layoutX="231.0" layoutY="387.0" mnemonicParsing="false" onAction="#onCreateNewStudent" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
-                        <TextField fx:id="textAddPhoneNumber" layoutX="196.0" layoutY="317.0" prefHeight="35.0" prefWidth="235.0" promptText="phoneNumber" />
                         <TextField fx:id="textAddEmail" layoutX="196.0" layoutY="209.0" prefHeight="35.0" prefWidth="235.0" promptText="email" />
+                        <TextField fx:id="textAddMajor" layoutX="196.0" layoutY="266.0" prefHeight="35.0" prefWidth="235.0" promptText="major" />
+                        <TextField fx:id="textAddPhoneNumber" layoutX="196.0" layoutY="317.0" prefHeight="35.0" prefWidth="235.0" promptText="phoneNumber" />
+                        <Button fx:id="buttonCreateNewStudent" layoutX="231.0" layoutY="387.0" mnemonicParsing="false" onAction="#onCreateNewStudent" prefHeight="35.0" prefWidth="166.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="إنشاء" textFill="WHITE" />
                         <Text fill="#344e41" layoutX="142.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="تسجيل طالب جديد" textAlignment="CENTER" wrappingWidth="345.775390625">
                            <font>
                               <Font size="31.0" />
@@ -66,7 +66,7 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="page3" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
+                  <AnchorPane fx:id="page3" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
                      <children>
                         <TextField fx:id="textFirstName" layoutX="79.0" layoutY="139.0" prefHeight="35.0" prefWidth="235.0" promptText="firstName" />
                         <TextField fx:id="textLastName" layoutX="79.0" layoutY="203.0" prefHeight="35.0" prefWidth="235.0" promptText="lastName" />
@@ -78,20 +78,16 @@
                               <Font size="34.0" />
                            </font>
                         </Text>
-                        <MenuButton fx:id="menuButton" alignment="CENTER" contentDisplay="CENTER" layoutX="326.0" layoutY="138.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="290.0" text="Student Id" textAlignment="CENTER">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
-                              <MenuItem mnemonicParsing="false" text="Action 2" />
-                           </items>
+                        <MenuButton fx:id="menuButtonEditStudent" alignment="CENTER" contentDisplay="CENTER" layoutX="326.0" layoutY="138.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="290.0" text="Student ID" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </MenuButton>
-                        <Button fx:id="buttonCreate3" layoutX="213.0" layoutY="456.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="WHITE" />
-                        <Button fx:id="buttonCreate31" layoutX="86.0" layoutY="456.0" mnemonicParsing="false" onAction="#onCreate" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="WHITE" />
+                        <Button fx:id="buttonEditStudent" layoutX="213.0" layoutY="456.0" mnemonicParsing="false" onAction="#onButtonEditStudent" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="تعديل" textFill="WHITE" />
+                        <Button fx:id="buttonDeleteStudent" layoutX="86.0" layoutY="456.0" mnemonicParsing="false" onAction="#onButtonDeleteStudent" prefHeight="35.0" prefWidth="94.0" style="-fx-background-color: #354f52; -fx-border-width: 2px 2px 2px 2px;" text="حذف" textFill="WHITE" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="page4" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css">
+                  <AnchorPane fx:id="page4" layoutX="-215.0" layoutY="-170.0" prefHeight="540.0" prefWidth="630.0" styleClass="backgroundColor" stylesheets="@../MyCss.css" visible="false">
                      <children>
                         <Text layoutX="173.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="إضافة محاضرة جديدة" wrappingWidth="283.36793518066406">
                            <font>

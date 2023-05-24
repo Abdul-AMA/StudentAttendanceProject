@@ -7,7 +7,6 @@ public class Student implements Serializable {
 //data fields
 //----------------------------------------------------------------
     private String username;
-    private String password;
     private String firstName;
     private String lastName;
     private String email;
@@ -30,7 +29,6 @@ public class Student implements Serializable {
 // ----------------------------------------------------------------
     public Student(String username, String password, String firstName, String lastName, String email, String major, int phoneNumber) {
         this.username = username;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -55,13 +53,6 @@ public class Student implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -115,7 +106,6 @@ public class Student implements Serializable {
     public String toString() {
         return "Student{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

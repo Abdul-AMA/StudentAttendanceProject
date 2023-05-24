@@ -26,12 +26,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TeacherController implements Initializable {
 
+    public MenuButton menuButtonEditStudent;
     @FXML
     private StackPane StackPane;
 
@@ -211,6 +210,13 @@ public class TeacherController implements Initializable {
     Administrator administrator;
     TeacherAssistant teacherAssistant;
 
+    ArrayList<MenuItem> menuItemsStudents = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsStudentsNames = new ArrayList<String>();
+
+    ArrayList<MenuItem> menuItemsLectures = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsLecturesNames = new ArrayList<String>();
+
+
 
 
 
@@ -253,8 +259,26 @@ public class TeacherController implements Initializable {
             button.setStyle(style1);
         });
     }
-    public void onLogOut( ) {
-        navigationn.navigateTo(StackPane,Navigation.Login_FXML);
+    public void onLogOut(ActionEvent event ) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Do you want to save the changed data?");
+        alert.setContentText(null);
+
+        ButtonType save = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.FINISH);
+        ButtonType do_not_save = new ButtonType("Don't Save", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(save, cancel, do_not_save);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == save) {
+            dataModel.save_date();
+            navigationn.navigateTo(StackPane,Navigation.Login_FXML);
+        } else if (result.get() == do_not_save) {
+            navigationn.navigateTo(StackPane,Navigation.Login_FXML);
+        }
     }
 
     @Override
@@ -273,62 +297,49 @@ public class TeacherController implements Initializable {
         setAllNotVisible();
         pageDefault.setVisible(true);
     }
-    public void onRegisterStudent(ActionEvent actionEvent) {
+    public void onRegisterStudent() {
         setAllNotVisible();
         page1.setVisible(true);
+        setAllNotVisible();
+        page1.setVisible(true);
+        textAddFirstName.clear();
+        textAddLastName.clear();
+        textAddEmail.clear();
+        textAddMajor.clear();
+        textAddPhoneNumber.clear();
     }
-    public void onShowStudents(ActionEvent actionEvent) {
+    public void onShowStudents() {
         setAllNotVisible();
         page2.setVisible(true);
         fillStudentTable();
         tableStudent.refresh();
     }
-    public void onEditStudent(ActionEvent actionEvent) {
+    public void onEditStudent() {
         setAllNotVisible();
         page3.setVisible(true);
-    }
-    public void onAddLecture(ActionEvent actionEvent) {
-        setAllNotVisible();
-        page4.setVisible(true);
-    }
-    public void onEditLectures(ActionEvent actionEvent) {
-        setAllNotVisible();
-        page5.setVisible(true);
-    }
-    public void onShowLectures(ActionEvent actionEvent) {
-        setAllNotVisible();
-        page5.setVisible(true);
-        fillLectureTable();
-        tableLecture.refresh();
-    }
-    public void onRegisterAttendance(ActionEvent actionEvent) {
-    }
-    public void onReports(ActionEvent actionEvent) {
-    }
-    public void onCreateNewStudent(ActionEvent event){
-        Student student = new Student(textAddFirstName.getText(), textAddLastName.getText(),textAddEmail.getText(), textAddMajor.getText(), Integer.parseInt(textAddPhoneNumber.getText()));
-        teacherAssistant.addStudent(student);
-        onCreatStudent();
 
-    }
+        menuButtonEditStudent.getItems().clear();
+        menuItemsStudents.clear();
+        menuItemsStudentsNames.clear();
+        menuButtonEditStudent.setText("Student ID");
+        for (int i = 0; i < teacherAssistant.getCourse().getStudentsList().size(); i++) {
+            menuItemsStudents.add(new MenuItem(teacherAssistant.getCourse().getStudentsList().get(i).getUsername()));
+            menuItemsStudentsNames.add(teacherAssistant.getCourse().getStudentsList().get(i).getUsername());
+            int finalI = i;
+            menuItemsStudents.get(i).setOnAction(e -> handleMenuItem(menuItemsStudentsNames.get(finalI) , menuButtonEditStudent));
 
-    public void onCreatNewLecture(ActionEvent event) {
-        Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), new Date());
-        teacherAssistant.addLecture(lecture);
-        onCreatLecture();
-        System.out.println(textLectureDate.getValue().toString());
 
-    }
-    public void onCreatStudent(){
-        setAllNotVisible();
-        page1.setVisible(true);
+        }
+        menuButtonEditStudent.getItems().addAll(menuItemsStudents);
+
         textFirstName.clear();
         textLastName.clear();
         textEmail.clear();
         textMajor.clear();
         textPhoneNumber.clear();
+
     }
-    public void onCreatLecture(){
+    public void onAddLecture() {
         setAllNotVisible();
         page4.setVisible(true);
         textLectureTitle.clear();
@@ -336,6 +347,36 @@ public class TeacherController implements Initializable {
         textDuration.clear();
 
     }
+    public void onEditLectures() {
+        setAllNotVisible();
+        page6.setVisible(true);
+    }
+    public void onShowLectures( ) {
+        setAllNotVisible();
+        page5.setVisible(true);
+        fillLectureTable();
+        tableLecture.refresh();
+    }
+    public void onRegisterAttendance( ) {
+    }
+    public void onReports( ) {
+    }
+    public void onCreateNewStudent(ActionEvent event){
+        Student student = new Student(textAddFirstName.getText(), textAddLastName.getText(),textAddEmail.getText(), textAddMajor.getText(), Integer.parseInt(textAddPhoneNumber.getText()));
+        teacherAssistant.addStudent(student);
+        onRegisterStudent();
+
+    }
+
+    public void onCreatNewLecture(ActionEvent event) {
+        Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), new Date());
+        teacherAssistant.addLecture(lecture);
+        onAddLecture();
+//        System.out.println(textLectureDate.getValue().toString());
+
+    }
+
+
 //
     public void fillStudentTable(){
         columnFirstName.setCellValueFactory(new PropertyValueFactory<Student,String>("firstName"));
@@ -361,6 +402,41 @@ public class TeacherController implements Initializable {
 
 
     public void onCreate(ActionEvent actionEvent) {
+    }
+
+    private void handleMenuItem(String menuItemText, MenuButton menuButton) {
+        menuButton.setText(menuItemText);
+    }
+
+    public void onButtonEditStudent(ActionEvent event) {
+        if (!menuButtonEditStudent.getText().equals("Courses")){
+            Student student = teacherAssistant.getCourse().getStudentById(menuButtonEditStudent.getText());
+            if (!textFirstName.getText().isEmpty()){
+                student.setFirstName(textFirstName.getText());
+            }
+            if (!textLastName.getText().isEmpty()){
+                student.setLastName(textLastName.getText());
+            }
+            if (!textEmail.getText().isEmpty()){
+                student.setEmail(textEmail.getText());
+            }
+            if (!textMajor.getText().isEmpty()){
+                student.setMajor(textMajor.getText());
+            }
+            if (!textPhoneNumber.getText().isEmpty()){
+                student.setPhoneNumber(Integer.parseInt(textPhoneNumber.getText()));
+            }
+            onEditStudent();
+
+        }
+    }
+
+    public void onButtonDeleteStudent(ActionEvent event) {
+        if (!menuButtonEditStudent.getText().equals("Courses")){
+            teacherAssistant.getCourse().getStudentsList().remove(teacherAssistant.getCourse().getStudentById(menuButtonEditStudent.getText()));
+        }
+        onEditStudent();
+
     }
 
 

@@ -361,7 +361,7 @@ public class AdminController implements Initializable {
             menuItemsTA1.add(new MenuItem(administrator.getTeacherAssistantList().get(i).getUsername()));
             menuItemsNamesTA1.add(administrator.getTeacherAssistantList().get(i).getUsername());
             int finalI = i;
-            menuItemsTA1.get(i).setOnAction(e -> handleMenuItemTA    (menuItemsNamesTA1.get(finalI) , menuButtonTA));
+            menuItemsTA1.get(i).setOnAction(e -> handleMenuItem    (menuItemsNamesTA1.get(finalI) , menuButtonTA));
 
         }
         menuButtonTA.getItems().addAll(menuItemsTA1);
@@ -402,11 +402,10 @@ public class AdminController implements Initializable {
 
         if (result.get() == save) {
             dataModel.save_date();
-        } else if (result.get() == cancel) {
-            event.consume();
+            navigation.navigateTo(stackPane,Navigation.Login_FXML);
+        } else if (result.get() == do_not_save) {
+            navigation.navigateTo(stackPane,Navigation.Login_FXML);
         }
-        navigation.navigateTo(stackPane,Navigation.Login_FXML);
-
     }
 
     public void onCreateNewCourse(ActionEvent event) {
@@ -457,9 +456,7 @@ public class AdminController implements Initializable {
         menuButton.setText(menuItemText);
     }
 
-    private void handleMenuItemTA(String menuItemText, MenuButton menuButton) {
-        menuButton.setText(menuItemText);
-    }
+
 
     public void fillCoursesTable(){
         columnCourseId.setCellValueFactory(new PropertyValueFactory<Course,String>("courseId"));
