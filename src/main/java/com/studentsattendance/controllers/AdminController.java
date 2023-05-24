@@ -13,8 +13,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.util.StringConverter;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -165,6 +168,7 @@ public class AdminController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
+       // deleteRowsCourse();
         hover();
 
 
@@ -279,6 +283,9 @@ public class AdminController implements Initializable {
         page2.setVisible(true);
         fillCoursesTable();
         tableCourses.refresh();
+        deleteRowsCourse();
+        tableCourses.refresh();
+
 
 
     }
@@ -468,6 +475,57 @@ public class AdminController implements Initializable {
         columnCourseMaximumAbsence.setCellValueFactory(new PropertyValueFactory<Course,Integer>("maximumAbsence"));
         ObservableList<Course> observableListCourses = FXCollections.observableArrayList(administrator.getCourseList());
         tableCourses.setItems(observableListCourses);
+
+        //------------------
+        StringConverter<Integer> integerConverter = new StringConverter<>() {
+            @Override
+            public String toString(Integer value) {
+                if (value == null) {
+                    return "";
+                }
+                return value.toString();
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return 0;
+                }
+                return Integer.parseInt(string);
+            }
+        };
+
+// Custom StringConverter for Double values
+        StringConverter<Double> doubleConverter = new StringConverter<>() {
+            @Override
+            public String toString(Double value) {
+                if (value == null) {
+                    return "";
+                }
+                return value.toString();
+            }
+
+            @Override
+            public Double fromString(String string) {
+                if (string == null || string.trim().isEmpty()) {
+                    return 0.0;
+                }
+                return Double.parseDouble(string);
+            }
+        };
+
+//---------------------------
+        //for edit table
+        tableCourses.setEditable(true);
+        columnCourseId.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnCourseName.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnCourseDoctor.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnCourseHours.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+        columnCourseBook.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnCourseDescription.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnCourseMaximumAbsence.setCellFactory(TextFieldTableCell.forTableColumn(integerConverter));
+
+
     }
 
 
@@ -493,11 +551,15 @@ public class AdminController implements Initializable {
         columnEmailTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("email"));
         columnCourseNameTA.setCellValueFactory(new PropertyValueFactory<TeacherAssistant,String>("courseName"));
 
-
-
-
         ObservableList<TeacherAssistant> observableListCourses = FXCollections.observableArrayList(administrator.getTeacherAssistantList());
         tableTA.setItems(observableListCourses);
+        tableTA.setEditable(true);
+        columnUserNameTA.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnPassTA.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnFirstNameTA.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnLastNameTA.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnEmailTA.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnCourseNameTA.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
 
@@ -546,10 +608,108 @@ public class AdminController implements Initializable {
 
     }
 
+//----------------------------------------------------------------------------------
+    //for course table
+    public void onEditCourseName(TableColumn.CellEditEvent<Course, String> courseStringCellEditEvent) {
+        Course course = tableCourses.getSelectionModel().getSelectedItem();
+        course.setCourseName(courseStringCellEditEvent.getNewValue());
+    }
 
+    public void onEditCourseId(TableColumn.CellEditEvent<Course, String> courseStringCellEditEvent) {
+        Course course = tableCourses.getSelectionModel().getSelectedItem();
+        course.setCourseId(courseStringCellEditEvent.getNewValue());
+    }
 
+    public void onEditCourseDoctor(TableColumn.CellEditEvent<Course, String> courseStringCellEditEvent) {
+        Course course = tableCourses.getSelectionModel().getSelectedItem();
+        course.setDoctor(courseStringCellEditEvent.getNewValue());
+    }
 
+    public void onEditCourseHours(TableColumn.CellEditEvent<Course, Integer> courseIntegerCellEditEvent) {
+        Course course = tableCourses.getSelectionModel().getSelectedItem();
+        course.setCourseHours(courseIntegerCellEditEvent.getNewValue());
+    }
 
+    public void onEditCourseBook(TableColumn.CellEditEvent<Course, String> courseStringCellEditEvent) {
+        Course course = tableCourses.getSelectionModel().getSelectedItem();
+        course.setBook(courseStringCellEditEvent.getNewValue());
+    }
 
+    public void onEditCourseDescription(TableColumn.CellEditEvent<Course, String> courseStringCellEditEvent) {
+        Course course = tableCourses.getSelectionModel().getSelectedItem();
+        course.setDescription(courseStringCellEditEvent.getNewValue());
+    }
 
+    public void onEditCourseMaxAbs(TableColumn.CellEditEvent<Course, Integer> courseIntegerCellEditEvent) {
+        Course course = tableCourses.getSelectionModel().getSelectedItem();
+        course.setMaximumAbsence(courseIntegerCellEditEvent.getNewValue());
+    }
+
+//----------------------------------------------------------------------------------
+    //for teacher table
+
+    public void onEditTeacherUser(TableColumn.CellEditEvent<TeacherAssistant, String> teacherAssistantStringCellEditEvent) {
+        TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
+        teacherAssistant.setUsername(teacherAssistantStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditTeacherPass(TableColumn.CellEditEvent<TeacherAssistant, String> teacherAssistantStringCellEditEvent) {
+        TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
+        teacherAssistant.setPassword(teacherAssistantStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditTeacherFirstName(TableColumn.CellEditEvent<TeacherAssistant, String> teacherAssistantStringCellEditEvent) {
+        TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
+        teacherAssistant.setFirstName(teacherAssistantStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditTeacherLastName(TableColumn.CellEditEvent<TeacherAssistant, String> teacherAssistantStringCellEditEvent) {
+        TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
+        teacherAssistant.setLastName(teacherAssistantStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditTeacherEmail(TableColumn.CellEditEvent<TeacherAssistant, String> teacherAssistantStringCellEditEvent) {
+        TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
+        teacherAssistant.setEmail(teacherAssistantStringCellEditEvent.getNewValue());
+    }
+
+    public void onEditTeacherCourseName(TableColumn.CellEditEvent<TeacherAssistant, String> teacherAssistantStringCellEditEvent) {
+        TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
+        teacherAssistant.setCourseName(teacherAssistantStringCellEditEvent.getNewValue());
+    }
+   public void deleteRowsCourse(){
+       // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
+       tableCourses.setOnKeyPressed(event -> {
+           if (event.getCode() == KeyCode.DELETE) {
+               // الحصول على الصف المحدد في الـ TableView
+               ObservableList<Course> allCourses, singleCourse;
+               allCourses = tableCourses.getItems();
+               singleCourse = tableCourses.getSelectionModel().getSelectedItems();
+
+               // التأكد من وجود صف محدد
+               if (singleCourse != null) {
+                   // إنشاء مربع حوار التأكيد
+                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                   alert.setTitle("تأكيد الحذف");
+                   alert.setHeaderText(null);
+                   alert.setContentText("هل أنت متأكد من رغبتك في حذف هذا الصف؟");
+
+                   // إضافة أزرار لمربع الحوار
+                   ButtonType deleteButton = new ButtonType("حذف", ButtonBar.ButtonData.OK_DONE);
+                   ButtonType cancelButton = new ButtonType("إلغاء", ButtonBar.ButtonData.CANCEL_CLOSE);
+                   alert.getButtonTypes().setAll(deleteButton, cancelButton);
+
+                   // عرض مربع الحوار وانتظار الاستجابة
+                   Optional<ButtonType> result = alert.showAndWait();
+
+                   // التحقق من الاستجابة
+                   if (result.isPresent() && result.get() == deleteButton) {
+                       // قم بتنفيذ عملية الحذف هنا
+                       singleCourse.forEach(allCourses::remove);
+                   }
+               }
+           }
+       });
+
+   }
 }

@@ -13,10 +13,10 @@ public class Student implements Serializable {
     private String major;
     private boolean status;
 
-    private int phoneNumber;
+    private long phoneNumber;
 
 
-    public Student(String firstName, String lastName, String email, String major, int phoneNumber) {
+    public Student(String firstName, String lastName, String email, String major, long phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -27,7 +27,7 @@ public class Student implements Serializable {
     //----------------------------------------------------------------
 // Constructors
 // ----------------------------------------------------------------
-    public Student(String username, String password, String firstName, String lastName, String email, String major, int phoneNumber) {
+    public Student(String username, String password, String firstName, String lastName, String email, String major, long phoneNumber) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -94,11 +94,11 @@ public class Student implements Serializable {
         this.status = status;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

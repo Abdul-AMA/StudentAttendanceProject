@@ -9,8 +9,7 @@ public class Main {
 
 
         Administrator administrator = new Administrator("admin","admin", "aboodabuamouna@gmail.com");
-        Course course1 = new Course("ECOM2450","Digital Design","ayman",
-                4,"moris manos","logic design");
+        Course course1 = new Course("ECOM2450","Digital Design","ayman", 4,"moris manos","logic design");
         Course course2 = new Course("ECOM2412","Programming","ayman",
                 4,"yang","OOP programing");
         Course course3 = new Course("EELE2304","Electronics","ayman",
