@@ -179,7 +179,7 @@ public class AdminController implements Initializable {
     public void setAllNotVisible() {
         page1.setVisible(false);
         page2.setVisible(false);
-        page3.setVisible(false);
+//        page3.setVisible(false);
         page4.setVisible(false);
         page5.setVisible(false);
         page6.setVisible(false);
@@ -208,14 +208,6 @@ public class AdminController implements Initializable {
         });
         buttonShowCourses.setOnMouseExited(e -> {
             buttonShowCourses.setStyle(style1);
-        });
-
-        buttonEditCourse.setStyle(style1);
-        buttonEditCourse.setOnMouseEntered(e -> {
-            buttonEditCourse.setStyle(style2);
-        });
-        buttonEditCourse.setOnMouseExited(e -> {
-            buttonEditCourse.setStyle(style1);
         });
 
         buttonCreateTeacher.setStyle(style1);
@@ -289,35 +281,35 @@ public class AdminController implements Initializable {
 
 
     }
-    public void onEditCourse() {
-        setAllNotVisible();
-        page3.setVisible(true);
-
-        menuButtonEditCourse.getItems().clear();
-        menuItemsCourse1.clear();
-        menuItemsCourseNames1.clear();
-        menuButtonEditCourse.setText("Courses");
-        for (int i = 0; i < administrator.getCourseList().size(); i++) {
-            menuItemsCourse1.add(new MenuItem(administrator.getCourseList().get(i).getCourseName()));
-            menuItemsCourseNames1.add(administrator.getCourseList().get(i).getCourseName());
-            int finalI = i;
-            menuItemsCourse1.get(i).setOnAction(e -> handleMenuItem(menuItemsCourseNames1.get(finalI) , menuButtonEditCourse));
-
-
-        }
-        menuButtonEditCourse.getItems().addAll(menuItemsCourse1);
-
-        textEditCourseId.clear();
-        textEditCourseName.clear();
-        textEditCourseDoctor.clear();
-        textEditCourseBook.clear();
-        textEditCourseDescription.clear();
-        textEditCourseHour.clear();
-
-
-
-
-    }
+//    public void onEditCourse() {
+//        setAllNotVisible();
+//        page3.setVisible(true);
+//
+//        menuButtonEditCourse.getItems().clear();
+//        menuItemsCourse1.clear();
+//        menuItemsCourseNames1.clear();
+//        menuButtonEditCourse.setText("Courses");
+//        for (int i = 0; i < administrator.getCourseList().size(); i++) {
+//            menuItemsCourse1.add(new MenuItem(administrator.getCourseList().get(i).getCourseName()));
+//            menuItemsCourseNames1.add(administrator.getCourseList().get(i).getCourseName());
+//            int finalI = i;
+//            menuItemsCourse1.get(i).setOnAction(e -> handleMenuItem(menuItemsCourseNames1.get(finalI) , menuButtonEditCourse));
+//
+//
+//        }
+//        menuButtonEditCourse.getItems().addAll(menuItemsCourse1);
+//
+//        textEditCourseId.clear();
+//        textEditCourseName.clear();
+//        textEditCourseDoctor.clear();
+//        textEditCourseBook.clear();
+//        textEditCourseDescription.clear();
+//        textEditCourseHour.clear();
+//
+//
+//
+//
+//    }
 
 
 
@@ -386,13 +378,13 @@ public class AdminController implements Initializable {
             menuItemsCourse3.get(i).setOnAction(e -> handleMenuItem(menuItemsCourseNames3.get(finalI) , menuButtonEditTACourse));
         }
         menuButtonEditTACourse.getItems().addAll(menuItemsCourse3);
-
-
-        textUserNameTAedit.clear();
-        textPassTAedit.clear();
-        textFirstNameTAedit.clear();
-        textLastNameTAedit.clear();
-        textEmailTAedit.clear();
+//
+//
+//        textUserNameTAedit.clear();
+//        textPassTAedit.clear();
+//        textFirstNameTAedit.clear();
+//        textLastNameTAedit.clear();
+//        textEmailTAedit.clear();
 
     }
     public void onLogOut(ActionEvent event) {
@@ -425,41 +417,41 @@ public class AdminController implements Initializable {
     }
 
 
-    public void onButtonEditCourse(ActionEvent event) {
-        if (!menuButtonEditCourse.getText().equals("Courses")){
-            int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
-            Course course = administrator.getCourseList().get(index);
-            if (!textEditCourseId.getText().isEmpty()){
-                course.setCourseId(textEditCourseId.getText());
-            }
-            if (!textEditCourseName.getText().isEmpty()){
-                course.setCourseName(textEditCourseName.getText());
-            }
-            if (!textEditCourseDoctor.getText().isEmpty()){
-                course.setDoctor(textEditCourseDoctor.getText());
-            }
-            if (!textEditCourseBook.getText().isEmpty()){
-                course.setBook(textEditCourseBook.getText());
-            }
-            if (!textEditCourseDescription.getText().isEmpty()){
-                course.setDescription(textEditCourseDescription.getText());
-            }
-            if (!textEditCourseHour.getText().isEmpty()){
-                course.setCourseHours(Integer.parseInt(textEditCourseHour.getText()));
-            }
-            onEditCourse();
+//    public void onButtonEditCourse(ActionEvent event) {
+//        if (!menuButtonEditCourse.getText().equals("Courses")){
+//            int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
+//            Course course = administrator.getCourseList().get(index);
+//            if (!textEditCourseId.getText().isEmpty()){
+//                course.setCourseId(textEditCourseId.getText());
+//            }
+//            if (!textEditCourseName.getText().isEmpty()){
+//                course.setCourseName(textEditCourseName.getText());
+//            }
+//            if (!textEditCourseDoctor.getText().isEmpty()){
+//                course.setDoctor(textEditCourseDoctor.getText());
+//            }
+//            if (!textEditCourseBook.getText().isEmpty()){
+//                course.setBook(textEditCourseBook.getText());
+//            }
+//            if (!textEditCourseDescription.getText().isEmpty()){
+//                course.setDescription(textEditCourseDescription.getText());
+//            }
+//            if (!textEditCourseHour.getText().isEmpty()){
+//                course.setCourseHours(Integer.parseInt(textEditCourseHour.getText()));
+//            }
+//            onEditCourse();
+//
+//        }
+//    }
 
-        }
-    }
-
-    public void onButtonDeleteCourse(ActionEvent event) {
-        if (!menuButtonEditCourse.getText().equals("Courses")){
-            int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
-            administrator.getCourseList().remove(administrator.getCourseList().get(index));
-        }
-        onEditCourse();
-
-    }
+//    public void onButtonDeleteCourse(ActionEvent event) {
+//        if (!menuButtonEditCourse.getText().equals("Courses")){
+//            int index = administrator.getCourseIndexByName(menuButtonEditCourse.getText());
+//            administrator.getCourseList().remove(administrator.getCourseList().get(index));
+//        }
+//        onEditCourse();
+//
+//    }
 
     private void handleMenuItem(String menuItemText, MenuButton menuButton) {
         menuButton.setText(menuItemText);
@@ -570,22 +562,22 @@ public class AdminController implements Initializable {
         if (!menuButtonTA.getText().equals("Teachers")){
             int index = administrator.getTeacherIndexByName(menuButtonTA.getText());
             TeacherAssistant teacherAssistant = administrator.getTeacherAssistantList().get(index);
-
-            if (!textUserNameTAedit.getText().isEmpty()){
-                teacherAssistant.setUsername(textUserNameTAedit.getText());
-            }
-            if (!textPassTAedit.getText().isEmpty()){
-                teacherAssistant.setPassword(textPassTAedit.getText());
-            }
-            if (!textFirstNameTAedit.getText().isEmpty()){
-                teacherAssistant.setFirstName(textFirstNameTAedit.getText());
-            }
-            if (!textLastNameTAedit.getText().isEmpty()){
-                teacherAssistant.setLastName(textLastNameTAedit.getText());
-            }
-            if (!textEmailTAedit.getText().isEmpty()){
-                teacherAssistant.setEmail(textEmailTAedit.getText());
-            }
+//
+//            if (!textUserNameTAedit.getText().isEmpty()){
+//                teacherAssistant.setUsername(textUserNameTAedit.getText());
+//            }
+//            if (!textPassTAedit.getText().isEmpty()){
+//                teacherAssistant.setPassword(textPassTAedit.getText());
+//            }
+//            if (!textFirstNameTAedit.getText().isEmpty()){
+//                teacherAssistant.setFirstName(textFirstNameTAedit.getText());
+//            }
+//            if (!textLastNameTAedit.getText().isEmpty()){
+//                teacherAssistant.setLastName(textLastNameTAedit.getText());
+//            }
+//            if (!textEmailTAedit.getText().isEmpty()){
+//                teacherAssistant.setEmail(textEmailTAedit.getText());
+//            }
             if (!menuButtonEditTACourse.getText().equals("Courses")) {
                 int indexCourse = administrator.getCourseIndexByName(menuButtonEditTACourse.getText());
                 Course course = administrator.getCourseList().get(indexCourse);
@@ -601,14 +593,14 @@ public class AdminController implements Initializable {
         }
     }
 
-    public void onDeleteTA(ActionEvent event) {
-        if (!menuButtonTA.getText().equals("Teachers")){
-            int index = administrator.getTeacherIndexByName(menuButtonTA.getText());
-            administrator.getTeacherAssistantList().remove(administrator.getTeacherAssistantList().get(index));
-        }
-        onEditTeacher();
-
-    }
+//    public void onDeleteTA(ActionEvent event) {
+//        if (!menuButtonTA.getText().equals("Teachers")){
+//            int index = administrator.getTeacherIndexByName(menuButtonTA.getText());
+//            administrator.getTeacherAssistantList().remove(administrator.getTeacherAssistantList().get(index));
+//        }
+//        onEditTeacher();
+//
+//    }
 
 //----------------------------------------------------------------------------------
     //for course table

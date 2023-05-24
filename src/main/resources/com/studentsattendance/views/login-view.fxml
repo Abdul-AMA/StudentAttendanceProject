@@ -18,6 +18,7 @@
          <children>
             <TextField fx:id="usernameInput" layoutX="53.0" layoutY="215.0" prefWidth="200.0" promptText="User Name" style="-fx-background-color: transparent; -fx-border-color: #588157; -fx-border-width: 0px 0px 2px 0px;" />
             <PasswordField fx:id="passwordInput" layoutX="53.0" layoutY="279.0" onAction="#onPasswordInput" prefWidth="200.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #588157; -fx-border-width: 0px 0px 2px 0px;" />
+            <CheckBox fx:id="checkShowPass" layoutX="260.0" layoutY="285.0" mnemonicParsing="false" onAction="#onShowPass" />
             <Button fx:id="buttonLogin" layoutX="111.0" layoutY="352.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="35.0" prefWidth="84.0" style="-fx-background-color: #588157;" text="Login" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="15.0" />
@@ -28,8 +29,12 @@
                   <Font size="13.0" />
                </font>
             </Hyperlink>
+            <Hyperlink fx:id="linkLostData" alignment="CENTER" layoutX="82.0" layoutY="438.0" onAction="#onLostData" prefHeight="25.0" prefWidth="143.0" style="-fx-text-fill: #588157;" text="Lost Data?">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
             <Label fx:id="labelWrongPass" alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="319.0" prefHeight="17.0" prefWidth="223.0" textAlignment="CENTER" textFill="RED" />
-            <CheckBox fx:id="checkShowPass" layoutX="260.0" layoutY="285.0" mnemonicParsing="false" onAction="#onShowPass" />
             <TextField fx:id="passShow" layoutX="53.0" layoutY="279.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #588157; -fx-border-width: 0px 0px 2px 0px;" visible="false" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="78.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,11 +44,6 @@
                   <ColorAdjust brightness="-0.21" contrast="0.11" hue="-0.22" saturation="-0.64" />
                </effect>
             </ImageView>
-            <Hyperlink fx:id="linkLostData" alignment="CENTER" layoutX="82.0" layoutY="438.0" onAction="#onLostData" prefHeight="25.0" prefWidth="143.0" style="-fx-text-fill: #588157;" text="Lost Data?">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Hyperlink>
          </children>
       </AnchorPane>
    </children>

@@ -51,6 +51,7 @@ public class LoginController implements  Initializable  {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
 
+
     }
     public void onPasswordInput(ActionEvent actionEvent) {
         onLogin();

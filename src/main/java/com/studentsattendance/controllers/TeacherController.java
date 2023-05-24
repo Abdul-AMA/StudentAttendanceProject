@@ -258,8 +258,25 @@ public class TeacherController implements Initializable {
         });
     }
     public void onLogOut( ) {
-        navigationn.navigateTo(StackPane,Navigation.Login_FXML);
-    }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Do you want to save the changed data?");
+        alert.setContentText(null);
+
+        ButtonType save = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.FINISH);
+        ButtonType do_not_save = new ButtonType("Don't Save", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(save, cancel, do_not_save);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == save) {
+            dataModel.save_date();
+            navigationn.navigateTo(StackPane,Navigation.Login_FXML);
+        } else if (result.get() == do_not_save) {
+            navigationn.navigateTo(StackPane,Navigation.Login_FXML);
+        }    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -267,7 +284,7 @@ public class TeacherController implements Initializable {
         administrator = dataModel.getAdministrator();
         teacherAssistant = administrator.getTeacherAssistantList().get(IndexHolder.getInstance().getCurrentIndex());
         TeacherName.setText("Teacher: " + teacherAssistant.getUsername());
-
+        System.out.println(teacherAssistant.getStudentList());
 
         hover();
     }

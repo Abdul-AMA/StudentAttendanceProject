@@ -49,7 +49,7 @@ public class Main {
 
         course3.setStudentsList(studentsCourse3);
 
-
+        course3.getStudentsList().add(new Student("ali","ali","ali","ali","ali","ali",1));
 
         System.out.println(teacher1.getCourse().getCourseId());
 
