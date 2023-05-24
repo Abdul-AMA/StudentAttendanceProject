@@ -1,5 +1,7 @@
 package com.studentsattendance.models;
 
+
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -13,7 +15,8 @@ public class Administrator  implements Serializable {
 
     private ArrayList<Course> courseList;
     private ArrayList<TeacherAssistant> teacherAssistantList;
-  //  private ArrayList<Student> StudentList;//new
+
+   // private ArrayList<Student> StudentList;  //new
 
 //----------------------------------------------------------------
 // Constructors

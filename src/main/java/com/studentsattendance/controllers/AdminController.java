@@ -353,6 +353,8 @@ public class AdminController implements Initializable {
         page5.setVisible(true);
         fillTeacherTable();
         tableTA.refresh();
+        deleteRowsAccountTa();
+        tableTA.refresh();
 
     }
 
@@ -677,39 +679,71 @@ public class AdminController implements Initializable {
         TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
         teacherAssistant.setCourseName(teacherAssistantStringCellEditEvent.getNewValue());
     }
-   public void deleteRowsCourse(){
-       // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
-       tableCourses.setOnKeyPressed(event -> {
-           if (event.getCode() == KeyCode.DELETE) {
-               // الحصول على الصف المحدد في الـ TableView
-               ObservableList<Course> allCourses, singleCourse;
-               allCourses = tableCourses.getItems();
-               singleCourse = tableCourses.getSelectionModel().getSelectedItems();
+    public void deleteRowsCourse() {
+        // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
+        tableCourses.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE) {
+                // الحصول على الصف المحدد في الـ TableView
+                Course selectedCourse = tableCourses.getSelectionModel().getSelectedItem();
 
-               // التأكد من وجود صف محدد
-               if (singleCourse != null) {
-                   // إنشاء مربع حوار التأكيد
-                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                   alert.setTitle("تأكيد الحذف");
-                   alert.setHeaderText(null);
-                   alert.setContentText("هل أنت متأكد من رغبتك في حذف هذا الصف؟");
+                // التأكد من وجود صف محدد
+                if (selectedCourse != null) {
+                    // إنشاء مربع حوار التأكيد
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("تأكيد الحذف");
+                    alert.setHeaderText(null);
+                    alert.setContentText("هل أنت متأكد من رغبتك في حذف هذا الصف؟");
 
-                   // إضافة أزرار لمربع الحوار
-                   ButtonType deleteButton = new ButtonType("حذف", ButtonBar.ButtonData.OK_DONE);
-                   ButtonType cancelButton = new ButtonType("إلغاء", ButtonBar.ButtonData.CANCEL_CLOSE);
-                   alert.getButtonTypes().setAll(deleteButton, cancelButton);
+                    // إضافة أزرار لمربع الحوار
+                    ButtonType deleteButton = new ButtonType("حذف", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType cancelButton = new ButtonType("إلغاء", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(deleteButton, cancelButton);
 
-                   // عرض مربع الحوار وانتظار الاستجابة
-                   Optional<ButtonType> result = alert.showAndWait();
+                    // عرض مربع الحوار وانتظار الاستجابة
+                    Optional<ButtonType> result = alert.showAndWait();
 
-                   // التحقق من الاستجابة
-                   if (result.isPresent() && result.get() == deleteButton) {
-                       // قم بتنفيذ عملية الحذف هنا
-                       singleCourse.forEach(allCourses::remove);
-                   }
-               }
-           }
-       });
+                    // التحقق من الاستجابة
+                    if (result.isPresent() && result.get() == deleteButton) {
+                        // قم بتنفيذ عملية الحذف هنا
+                        tableCourses.getItems().remove(selectedCourse);
+                        administrator.removeCourse(selectedCourse);
+                    }
+                }
+            }
+        });
+    }
+    public void deleteRowsAccountTa() {
+        // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
+        tableTA.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE) {
+                // الحصول على الصف المحدد في الـ TableView
+                TeacherAssistant teacherAssistant = tableTA.getSelectionModel().getSelectedItem();
 
-   }
+                // التأكد من وجود صف محدد
+                if (teacherAssistant != null) {
+                    // إنشاء مربع حوار التأكيد
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("تأكيد الحذف");
+                    alert.setHeaderText(null);
+                    alert.setContentText("هل أنت متأكد من رغبتك في حذف هذا الصف؟");
+
+                    // إضافة أزرار لمربع الحوار
+                    ButtonType deleteButton = new ButtonType("حذف", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType cancelButton = new ButtonType("إلغاء", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(deleteButton, cancelButton);
+
+                    // عرض مربع الحوار وانتظار الاستجابة
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    // التحقق من الاستجابة
+                    if (result.isPresent() && result.get() == deleteButton) {
+                        // قم بتنفيذ عملية الحذف هنا
+                        tableTA.getItems().remove(teacherAssistant);
+                        administrator.removeTeacher(teacherAssistant);
+                    }
+                }
+            }
+        });
+    }
+
 }

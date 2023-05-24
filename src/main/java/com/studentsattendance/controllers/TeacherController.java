@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -30,6 +31,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TeacherController implements Initializable {
@@ -285,6 +287,8 @@ public class TeacherController implements Initializable {
         page2.setVisible(true);
         fillStudentTable();
         tableStudent.refresh();
+        deleteRowsStudent();
+        tableStudent.refresh();
     }
     public void onEditStudent(ActionEvent actionEvent) {
         setAllNotVisible();
@@ -302,6 +306,8 @@ public class TeacherController implements Initializable {
         setAllNotVisible();
         page5.setVisible(true);
         fillLectureTable();
+        tableLecture.refresh();
+        deleteRowsLectures();
         tableLecture.refresh();
     }
     public void onRegisterAttendance(ActionEvent actionEvent) {
@@ -325,11 +331,11 @@ public class TeacherController implements Initializable {
     public void onCreatStudent(){
         setAllNotVisible();
         page1.setVisible(true);
-        textFirstName.clear();
-        textLastName.clear();
-        textEmail.clear();
-        textMajor.clear();
-        textPhoneNumber.clear();
+        textAddFirstName.clear();
+        textAddLastName.clear();
+        textAddEmail.clear();
+        textAddMajor.clear();
+        textAddPhoneNumber.clear();
     }
     public void onCreatLecture(){
         setAllNotVisible();
@@ -337,6 +343,8 @@ public class TeacherController implements Initializable {
         textLectureTitle.clear();
         textLectureClassRome.clear();
         textDuration.clear();
+        textLectureDate.setValue(null);
+
 
     }
 //
@@ -524,6 +532,72 @@ public class TeacherController implements Initializable {
     public void onEditLectureDate(TableColumn.CellEditEvent<Lecture, String> lectureStringCellEditEvent) {
         Lecture lecture = tableLecture.getSelectionModel().getSelectedItem();
         lecture.setDateString(lectureStringCellEditEvent.getNewValue());
+    }
+    public void deleteRowsStudent() {
+        // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
+        tableStudent.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE) {
+                // الحصول على الصف المحدد في الـ TableView
+                Student student = tableStudent.getSelectionModel().getSelectedItem();
+
+                // التأكد من وجود صف محدد
+                if (student != null) {
+                    // إنشاء مربع حوار التأكيد
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("تأكيد الحذف");
+                    alert.setHeaderText(null);
+                    alert.setContentText("هل أنت متأكد من رغبتك في حذف هذا الصف؟");
+
+                    // إضافة أزرار لمربع الحوار
+                    ButtonType deleteButton = new ButtonType("حذف", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType cancelButton = new ButtonType("إلغاء", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(deleteButton, cancelButton);
+
+                    // عرض مربع الحوار وانتظار الاستجابة
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    // التحقق من الاستجابة
+                    if (result.isPresent() && result.get() == deleteButton) {
+                        // قم بتنفيذ عملية الحذف هنا
+                        tableStudent.getItems().remove(student);
+                        teacherAssistant.removeStudent(student);
+                    }
+                }
+            }
+        });
+    }
+    public void deleteRowsLectures() {
+        // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
+        tableLecture.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.DELETE) {
+                // الحصول على الصف المحدد في الـ TableView
+                Lecture lecture = tableLecture.getSelectionModel().getSelectedItem();
+
+                // التأكد من وجود صف محدد
+                if (lecture != null) {
+                    // إنشاء مربع حوار التأكيد
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("تأكيد الحذف");
+                    alert.setHeaderText(null);
+                    alert.setContentText("هل أنت متأكد من رغبتك في حذف هذا الصف؟");
+
+                    // إضافة أزرار لمربع الحوار
+                    ButtonType deleteButton = new ButtonType("حذف", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType cancelButton = new ButtonType("إلغاء", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(deleteButton, cancelButton);
+
+                    // عرض مربع الحوار وانتظار الاستجابة
+                    Optional<ButtonType> result = alert.showAndWait();
+
+                    // التحقق من الاستجابة
+                    if (result.isPresent() && result.get() == deleteButton) {
+                        // قم بتنفيذ عملية الحذف هنا
+                        tableLecture.getItems().remove(lecture);
+                        teacherAssistant.removeLecture(lecture);
+                    }
+                }
+            }
+        });
     }
 }
 

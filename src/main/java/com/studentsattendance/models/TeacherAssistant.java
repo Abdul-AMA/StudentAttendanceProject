@@ -110,6 +110,9 @@ public class TeacherAssistant implements Serializable {
     public void addLecture(Lecture lecture){
         this.lecturesList.add(lecture);
     }
+    public void removeLecture(Lecture lecture){
+        this.lecturesList.remove(lecture);
+    }
 
     public ArrayList<Lecture> getLecturesList() {
         return lecturesList;
