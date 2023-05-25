@@ -1,5 +1,9 @@
 package com.studentsattendance.controllers;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.google.zxing.*;
+import com.google.zxing.common.HybridBinarizer;
 import com.studentsattendance.Navigation;
 import com.studentsattendance.models.*;
 import com.studentsattendance.program;
@@ -12,6 +16,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
@@ -22,6 +30,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
@@ -30,6 +43,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
+
 
 import static javafx.scene.paint.Color.*;
 
@@ -40,6 +54,7 @@ public class TeacherController implements Initializable {
     public ToggleGroup group;
     public TextField textAddAddress;
     public ListView<String> listViewAttendance = new ListView<>();
+
     public TextField textEnterForAttendance;
     public Button buttonImportXLS;
     public Button buttonDoneAttendance;
@@ -129,6 +144,10 @@ public class TeacherController implements Initializable {
     DataModel dataModel;
     Administrator administrator;
     TeacherAssistant teacherAssistant;
+    Set<String> scannedCodes = new HashSet<>();
+
+    //-----------------------------------------
+
 
 
 
@@ -577,7 +596,7 @@ public class TeacherController implements Initializable {
     public void onImportXLS(ActionEvent event) {
     }
 
-    public void onDoneAttendance(ActionEvent event) {
+    public void onDoneAttendance() {
         textEnterForAttendance.clear();
         menuAddAttendance.setText("Choose Lecture");
         listViewAttendance.getItems().clear();
@@ -634,7 +653,51 @@ public class TeacherController implements Initializable {
 
 
     }
-}
+
+    public void onQrAttendance(ActionEvent event) {
+
+        Webcam webcam = Webcam.getDefault();   //Generate Webcam Object
+        webcam.setViewSize(new Dimension(320,240));
+        WebcamPanel webcamPanel = new WebcamPanel(webcam);
+        webcamPanel.setMirrored(false);
+        JFrame jFrame = new JFrame();
+        jFrame.add(webcamPanel);
+        jFrame.pack();
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setVisible(true);
+
+
+
+        do {
+            try {
+                BufferedImage image = webcam.getImage();
+                LuminanceSource source = new BufferedImageLuminanceSource(image);
+                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                Result result = new MultiFormatReader().decode(bitmap);
+                if (result.getText() != null && !scannedCodes.contains(result.getText())) {
+
+                    System.out.println(result.getText());
+                    textEnterForAttendance.setText(result.getText());
+                    scannedCodes.add(result.getText());
+                    jFrame.setVisible(false);
+                    jFrame.dispose();
+                    webcam.close();
+                    onDoneAttendance();
+                    break;
+
+                }
+            } catch (NotFoundException e) {
+                //pass
+            }
+        } while (true);
+
+
+    }
+    
+
+    }
+
 
 
 
