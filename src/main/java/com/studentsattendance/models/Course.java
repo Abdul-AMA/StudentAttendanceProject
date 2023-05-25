@@ -205,6 +205,17 @@ public class Course implements Serializable {
     }
 
 
+    public Lecture getLectureByName(String lectureName){
+        for (int i = 0; i < lecturesList.size(); i++) {
+            if (lecturesList.get(i).getLectureTitle().equals(lectureName)){
+                return lecturesList.get(i);
+            }
+        }
+        return null;
+    }
+
+
+
 
 // ----------------------------------------------------------------
 // getters and setters

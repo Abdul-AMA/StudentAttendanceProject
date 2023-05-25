@@ -17,6 +17,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,10 +29,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
+
+import static javafx.scene.paint.Color.*;
 
 public class TeacherController implements Initializable {
 
@@ -39,131 +39,92 @@ public class TeacherController implements Initializable {
     public RadioButton radioFemale;
     public ToggleGroup group;
     public TextField textAddAddress;
-    public ListView listViewAttendance;
+    public ListView<String> listViewAttendance = new ListView<>();
     public TextField textEnterForAttendance;
     public Button buttonImportXLS;
-    public MenuButton menuAddAttendance;
     public Button buttonDoneAttendance;
-    public AnchorPane page6;
+    public Label labelStudent;
     @FXML
     private StackPane StackPane;
-
     @FXML
     private Text TeacherName;
-
     @FXML
     private Button buttonAddLecture;
-
     @FXML
     private Button buttonPageDefault;
-
     @FXML
     private Button buttonRegisterAttendance;
-
     @FXML
     private Button buttonRegisterStudent;
-
     @FXML
     private Button buttonReports;
-
     @FXML
     private Button buttonShowLectures;
-
     @FXML
     private Button buttonShowStudents;
-
     @FXML
     private TableColumn<Lecture, Double> columnDuration;
-
     @FXML
     private TableColumn<Student, String> columnEmail;
-
     @FXML
     private TableColumn<Student, String> columnFirstName;
-
     @FXML
     private TableColumn<Student, String> columnLastName;
-
     @FXML
     private TableColumn<Lecture, String> columnLectureClassRome;
-
     @FXML
     private TableColumn<Lecture, String> columnLectureDate;
-
     @FXML
     private TableColumn<Lecture, String> columnLectureTitle;
-
     @FXML
     private TableColumn<Student, String> columnMajor;
-
     @FXML
     private TableColumn<Student, Long> columnPhoneNumber;
     @FXML
     private TableColumn<Student, String > columnID;
     @FXML
     private TableColumn<Student, String > columnAddress;
-
-
-
-
     @FXML
     private Button logout;
-
     @FXML
     private AnchorPane page1;
-
     @FXML
     private AnchorPane page2;
-
     @FXML
     private AnchorPane page3;
-
     @FXML
     private AnchorPane page4;
-
     @FXML
     private AnchorPane page5;
-
-
+    @FXML
+    public AnchorPane page6;
     @FXML
     private AnchorPane pageDefault;
-
+    public MenuButton menuAddAttendance;
     @FXML
     private TableView<Lecture> tableLecture;
-
     @FXML
     private TableView<Student> tableStudent;
-
     @FXML
     private TextField textAddEmail;
-
     @FXML
     private TextField textAddFirstName;
-
     @FXML
     private TextField textAddLastName;
-
     @FXML
     private TextField textAddMajor;
-
     @FXML
     private TextField textAddPhoneNumber;
-
     @FXML
     private TextField textDuration;
-
-
-
     @FXML
     private TextField textLectureClassRome;
-
-
-
     @FXML
     private TextField textLectureTitle;
-
     @FXML
     private DatePicker textLectureDate;
+    ArrayList<MenuItem> menuItemsLectures = new ArrayList<MenuItem>();
+    ArrayList<String> menuItemsLecturesNames = new ArrayList<String>();
     Navigation navigation = new Navigation();
     DataModel dataModel;
     Administrator administrator;
@@ -178,7 +139,7 @@ public class TeacherController implements Initializable {
 //        page3.setVisible(false);
         page4.setVisible(false);
         page5.setVisible(false);
-//        page6.setVisible(false);
+        page6.setVisible(false);
         pageDefault.setVisible(false);
 
     }
@@ -251,6 +212,7 @@ public class TeacherController implements Initializable {
         textAddLastName.clear();
         textAddEmail.clear();
         textAddMajor.clear();
+        textAddAddress.clear();
         textAddPhoneNumber.clear();
     }
     public void onShowStudents( ) {
@@ -261,10 +223,7 @@ public class TeacherController implements Initializable {
         deleteRowsStudent();
         tableStudent.refresh();
     }
-    public void onEditStudent( ) {
-        setAllNotVisible();
-        page3.setVisible(true);
-    }
+
     public void onAddLecture( ) {
         setAllNotVisible();
         page4.setVisible(true);
@@ -283,7 +242,30 @@ public class TeacherController implements Initializable {
         deleteRowsLectures();
         tableLecture.refresh();
     }
-    public void onRegisterAttendance(ActionEvent actionEvent) {
+    public void onRegisterAttendance() {
+        setAllNotVisible();
+        page6.setVisible(true);
+
+
+        labelStudent.setText("");
+        textEnterForAttendance.clear();
+
+        menuAddAttendance.getItems().clear();
+        menuItemsLectures.clear();
+        menuItemsLecturesNames.clear();
+        for (int i = 0; i < teacherAssistant.getCourse().getLecturesList().size(); i++) {
+            menuItemsLectures.add(new MenuItem(teacherAssistant.getCourse().getLecturesList().get(i).getLectureTitle()));
+            menuItemsLecturesNames.add(teacherAssistant.getCourse().getLecturesList().get(i).getLectureTitle());
+            int finalI = i;
+            menuItemsLectures.get(i).setOnAction(e -> handleMenuItem(menuItemsLecturesNames.get(finalI) , menuAddAttendance));
+
+
+        }
+        menuAddAttendance.getItems().addAll(menuItemsLectures);
+
+
+
+
     }
     public void onReports(ActionEvent actionEvent) {
     }
@@ -394,7 +376,7 @@ public class TeacherController implements Initializable {
     }
     public void fillLectureTable(){
         columnLectureTitle.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureTitle"));
-        columnLectureClassRome.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureClassRome"));
+        columnLectureClassRome.setCellValueFactory(new  PropertyValueFactory<Lecture,String>("lectureClassRome"));
         columnDuration.setCellValueFactory(new PropertyValueFactory<Lecture,Double>("duration"));
         columnLectureDate.setCellValueFactory(cellData -> {
             Lecture lecture = cellData.getValue();
@@ -579,14 +561,78 @@ public class TeacherController implements Initializable {
         });
     }
 
-
-    public void onListViewAttendance(ListView.EditEvent editEvent) {
+    private void handleMenuItem(String menuItemText, MenuButton menuButton) {
+        menuButton.setText(menuItemText);
+        Lecture lecture = teacherAssistant.getCourse().getLectureByName(menuItemText);
+        listViewAttendance.getItems().clear();
+        for (int i = 0; i < lecture.getAttendanceList().size(); i++) {
+            Student student = lecture.getAttendanceList().get(i).getStudent();
+            listViewAttendance.getItems().add(student.getFirstName() + " " + student.getLastName());
+        }
     }
+
+
+
 
     public void onImportXLS(ActionEvent event) {
     }
 
     public void onDoneAttendance(ActionEvent event) {
+        textEnterForAttendance.clear();
+        menuAddAttendance.setText("Choose Lecture");
+        listViewAttendance.getItems().clear();
+        onRegisterAttendance();
+    }
+
+    public Student StudentSearch(String  data) {
+        for (int i = 0; i < teacherAssistant.getCourse().getStudentsList().size(); i++) {
+            Student student = teacherAssistant.getCourse().getStudentsList().get(i);
+            if (data.equals(student.getUsername()) ||
+                    data.equals(student.getFirstName() + " " + student.getLastName())  ||
+                    data.equals(String.valueOf(student.getPhoneNumber()))
+            ){
+                return student;
+            }
+        }
+        return null;
+
+    }
+
+    public void onListViewAttendance(ListView.EditEvent editEvent) {
+    }
+
+
+
+    public void onSetAttendance(ActionEvent event) {
+        if (!menuAddAttendance.getText().equals("Choose Lecture")){
+            Student student =  StudentSearch(textEnterForAttendance.getText());
+            if (student != null){
+                Lecture lecture = teacherAssistant.getCourse().getLectureByName(menuAddAttendance.getText());
+                if (!lecture.getAttendanceValue(student)){
+                    teacherAssistant.markAttendance(lecture,student);
+                    listViewAttendance.getItems().add(student.getFirstName() + " " + student.getLastName());
+                    labelStudent.setTextFill(GREEN);
+                    labelStudent.setText(student.getUsername() + " added");
+                    textEnterForAttendance.clear();
+                }else {
+                    labelStudent.setTextFill(RED);
+                    labelStudent.setText("Already added");
+                }
+
+
+
+            }else{
+                labelStudent.setTextFill(RED);
+                labelStudent.setText("Can't find student*");
+            }
+
+        }else{
+            labelStudent.setTextFill(RED);
+            labelStudent.setText("Choose lecture*");
+        }
+
+
+
     }
 }
 

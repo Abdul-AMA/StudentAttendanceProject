@@ -59,21 +59,14 @@ public class AdminController implements Initializable {
     public AnchorPane pageDefault;
     public Button buttonPageDefault;
     public Button buttonCreateNewCourse;
-    public MenuButton menuButtonEditCourse;
-    public TextField textEditCourseId;
-    public TextField textEditCourseName;
-    public TextField textEditCourseHour;
-    public TextField textEditCourseBook;
-    public TextField textEditCourseDoctor;
-    public TextField textEditCourseDescription;
+
     @FXML
     private Button buttonCreateCourse;
 
     @FXML
     private Button buttonShowTeacher;
 
-    @FXML
-    private Button buttonEditCourse;
+
     @FXML
     private Button buttonShowCourses;
 
@@ -117,25 +110,11 @@ public class AdminController implements Initializable {
     private TextField textUserNameTA;
 
     @FXML
-    private TextField textEmailTAedit;
-    @FXML
-    private TextField textFirstNameTAedit;
-    @FXML
-    private TextField textLastNameTAedit;
-    @FXML
-    private TextField textPassTAedit;
-    @FXML
-    private TextField textUserNameTAedit;
-
-
-    @FXML
     private AnchorPane page1;
 
     @FXML
     private AnchorPane page2;
 
-    @FXML
-    private AnchorPane page3;
     @FXML
     private AnchorPane page4;
 
@@ -150,8 +129,6 @@ public class AdminController implements Initializable {
     DataModel dataModel;
     Administrator administrator;
 
-    ArrayList<MenuItem> menuItemsCourse1 = new ArrayList<MenuItem>();
-    ArrayList<String> menuItemsCourseNames1 = new ArrayList<String>();
 
     ArrayList<MenuItem> menuItemsCourse2 = new ArrayList<MenuItem>();
     ArrayList<String> menuItemsCourseNames2 = new ArrayList<String>();

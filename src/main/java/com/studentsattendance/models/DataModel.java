@@ -2,7 +2,7 @@ package com.studentsattendance.models;
 
 import java.io.*;
 
-public class DataModel {
+public class DataModel implements Serializable{
 
     private static Administrator administrator;
     private static TeacherAssistant teacherAssistant;
@@ -12,7 +12,7 @@ public class DataModel {
         initialize();
     }
 
-    public static void initialize(){
+    public static void initialize() {
         administrator = null;
         try (FileInputStream fis = new FileInputStream(new File("src/main/java/com/studentsattendance/models/Files/admin.bin"))) {
             try (ObjectInputStream ois = new ObjectInputStream(fis)) {
