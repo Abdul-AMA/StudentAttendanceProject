@@ -53,7 +53,7 @@ public class Main {
 
         System.out.println(teacher1.getCourse().getCourseId());
 
-        Lecture lecture  = new Lecture ("firstOne","K415",1.5,new Date());
+        Lecture lecture  = new Lecture ("firstOne","K415",1.5,new Date().toString());
         teacher1.getCourse().addLecture(lecture);
         teacher1.markAttendance(lecture,course1.getStudentByPhoneNumber(2));
         teacher1.markAttendance(lecture,course1.getStudentByPhoneNumber(1));

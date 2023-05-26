@@ -387,10 +387,12 @@ public class AdminController implements Initializable {
     }
 
     public void onCreateNewCourse(ActionEvent event) {
-        Course course = new Course(textCourseId.getText(),textCourseName.getText(),textCourseDoctor.getText(),Integer.parseInt(textCourseHour.getText()),
-                textCourseBook.getText(),textCourseDescription.getText());
-        administrator.addCourse(course);
-        onCreateCourse();
+        if (!textCourseId.getText().isEmpty()){
+            Course course = new Course(textCourseId.getText(),textCourseName.getText(),textCourseDoctor.getText(),Integer.parseInt(textCourseHour.getText()),
+                    textCourseBook.getText(),textCourseDescription.getText());
+            administrator.addCourse(course);
+            onCreateCourse();
+        }
     }
 
 

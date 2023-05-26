@@ -22,7 +22,7 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
     private final int top;
 
     public BufferedImageLuminanceSource(BufferedImage image) {
-        this(image, 0, 0, image.getWidth(), image.getHeight());
+        this(image, 0, 0, +image.getWidth(), image.getHeight());
     }
 
     public BufferedImageLuminanceSource(BufferedImage image, int left, int top, int width, int height) {

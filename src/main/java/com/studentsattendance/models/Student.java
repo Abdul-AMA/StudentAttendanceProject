@@ -13,7 +13,6 @@ public class Student implements Serializable {
     private String major;
     private boolean status;
     private String address;
-
     private long phoneNumber;
 
 
@@ -107,6 +106,9 @@ public class Student implements Serializable {
 
     public long getPhoneNumber() {
         return phoneNumber;
+    }
+    public String getPhoneNumbers() {
+        return String.valueOf(phoneNumber);
     }
 
     public void setPhoneNumber(long phoneNumber) {

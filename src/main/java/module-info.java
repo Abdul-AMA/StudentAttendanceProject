@@ -3,12 +3,11 @@ module com.studentsattendance {
     requires javafx.controls;
     requires javafx.fxml;
 //    requires core;
-//    requires webcam.capture;
+    requires webcam.capture;
 
     requires java.desktop;
 //    requires AbsoluteLayout;
     requires java.logging;
-    requires webcam.capture;
     requires com.google.zxing;
 
 

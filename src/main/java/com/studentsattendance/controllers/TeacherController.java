@@ -6,65 +6,72 @@ import com.google.zxing.*;
 import com.google.zxing.common.*;
 import com.studentsattendance.Navigation;
 import com.studentsattendance.models.*;
-import com.studentsattendance.program;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
-
 
 import static javafx.scene.paint.Color.*;
 
 public class TeacherController implements Initializable {
-
     public RadioButton radioMale;
     public RadioButton radioFemale;
     public ToggleGroup group;
     public TextField textAddAddress;
-    public ListView<String> listViewAttendance = new ListView<>();
+    public FileChooser fileChooserSave;
 
+    public ListView<String> listViewAttendance = new ListView<>();
     public TextField textEnterForAttendance;
     public Button buttonImportXLS;
     public Button buttonDoneAttendance;
     public Label labelStudent;
     public AnchorPane page7;
-    public TableView tableStudentAttendance;
-
+    public TableView<LectureAttendance> tableStudentAttendance;
+    public AnchorPane page8;
+    public TableView<LectureReport> tableLectureReport;
+    public TableColumn<LectureReport, String> columnLectureReportStudentId;
+    public TableColumn<LectureReport, String> columnLectureReportStudentName;
+    public TableColumn<LectureReport, Boolean> columnLectureReportStatus;
+    public TableColumn<LectureReport, String> columnLectureReportTime;
+    public TextField textAttendancePercentage;
+    public TextField textAttendanceNumber;
+    public TextField textLectureReportTitle;
+    public AnchorPane page9;
+    public TableView<Student> tableStudentDelete;
+    public TableColumn<Student, String> columnID1;
+    public TableColumn<Student, String> columnFirstName1;
+    public TableColumn<Student, String> columnEmail1;
+    public TableColumn<Student, String> columnLastName1;
+    public TableColumn<Student, String> columnMajor1;
+    public TableColumn<Student, String> columnAddress1;
+    public TableColumn<Student, Long> columnPhoneNumber1;
+    public Button buttonReportBad;
+    public Button buttonExportBad;
     @FXML
     private StackPane StackPane;
     @FXML
@@ -83,9 +90,11 @@ public class TeacherController implements Initializable {
     private Button buttonShowLectures;
     @FXML
     private Button buttonShowStudents;
-    public TableColumn<String, String > columnStudentAttendanceLectureName;
-    public TableColumn<String, String > columnStudentAttendanceLectureDate;
-    public TableColumn <String,String> columnStudentAttendanceStatus;
+    public TableColumn<LectureAttendance, String> columnStudentAttendanceLectureName;
+    public TableColumn<LectureAttendance, String> columnStudentAttendanceLectureDate;
+    public TableColumn<LectureAttendance, Boolean> columnStudentAttendanceStatus;
+    public TableColumn<LectureAttendance, String> columnStudentAttendanceTime;
+
     @FXML
     private TableColumn<Lecture, Double> columnDuration;
     @FXML
@@ -105,17 +114,15 @@ public class TeacherController implements Initializable {
     @FXML
     private TableColumn<Student, Long> columnPhoneNumber;
     @FXML
-    private TableColumn<Student, String > columnID;
+    private TableColumn<Student, String> columnID;
     @FXML
-    private TableColumn<Student, String > columnAddress;
+    private TableColumn<Student, String> columnAddress;
     @FXML
     private Button logout;
     @FXML
     private AnchorPane page1;
     @FXML
     private AnchorPane page2;
-    @FXML
-    private AnchorPane page3;
     @FXML
     private AnchorPane page4;
     @FXML
@@ -156,11 +163,6 @@ public class TeacherController implements Initializable {
     Set<String> scannedCodes = new HashSet<>();
 
     //-----------------------------------------
-
-
-
-
-
     public void setAllNotVisible() {
         page1.setVisible(false);
         page2.setVisible(false);
@@ -168,24 +170,26 @@ public class TeacherController implements Initializable {
         page5.setVisible(false);
         page6.setVisible(false);
         page7.setVisible(false);
+        page8.setVisible(false);
+        page9.setVisible(false);
         pageDefault.setVisible(false);
 
     }
 
-
-    public void hover(){
+    public void hover() {
         buttonEffect(buttonPageDefault);
         buttonEffect(buttonRegisterStudent);
         buttonEffect(buttonShowStudents);
         buttonEffect(buttonAddLecture);
         buttonEffect(buttonShowLectures);
         buttonEffect(buttonRegisterAttendance);
-        buttonEffect(buttonReports);
+        buttonEffect(buttonExportBad);
+        buttonEffect(buttonReportBad);
         buttonEffect(logout);
 
     }
 
-    public void buttonEffect(Button button){
+    public void buttonEffect(Button button) {
         String style1 = "-fx-background-color: #dad7cd; -fx-text-fill : #588157; -fx-border-color:  #A3B18A; -fx-border-width:  0px 0px 2px 0px;";
         String style2 = "-fx-background-color:  #588157; -fx-text-fill : #dad7cd;-fx-border-color:  #A3B18A; -fx-border-width:  0px 0px 2px 0px;";
 
@@ -197,7 +201,8 @@ public class TeacherController implements Initializable {
             button.setStyle(style1);
         });
     }
-    public void onLogOut( ) {
+
+    public void onLogOut() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
         alert.setHeaderText("Do you want to save the changed data?");
@@ -213,26 +218,26 @@ public class TeacherController implements Initializable {
 
         if (result.get() == save) {
             dataModel.save_date();
-            navigation.navigateTo(StackPane,Navigation.Login_FXML);
+            navigation.navigateTo(StackPane, Navigation.Login_FXML);
         } else if (result.get() == do_not_save) {
-            navigation.navigateTo(StackPane,Navigation.Login_FXML);
-        }    }
+            navigation.navigateTo(StackPane, Navigation.Login_FXML);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataModel = new DataModel();
         administrator = dataModel.getAdministrator();
         teacherAssistant = administrator.getTeacherAssistantList().get(IndexHolder.getInstance().getCurrentIndex());
-        TeacherName.setText("Teacher: " + teacherAssistant.getUsername());
+        TeacherName.setText(teacherAssistant.getUsername());
         hover();
     }
 
-
-
-    public void onPageDefault( ) {
+    public void onPageDefault() {
         setAllNotVisible();
         pageDefault.setVisible(true);
     }
+
     public void onRegisterStudent() {
         setAllNotVisible();
         page1.setVisible(true);
@@ -243,7 +248,8 @@ public class TeacherController implements Initializable {
         textAddAddress.clear();
         textAddPhoneNumber.clear();
     }
-    public void onShowStudents( ) {
+
+    public void onShowStudents() {
         setAllNotVisible();
         page2.setVisible(true);
         fillStudentTable();
@@ -252,7 +258,7 @@ public class TeacherController implements Initializable {
         tableStudent.refresh();
     }
 
-    public void onAddLecture( ) {
+    public void onAddLecture() {
         setAllNotVisible();
         page4.setVisible(true);
         textLectureTitle.clear();
@@ -262,14 +268,16 @@ public class TeacherController implements Initializable {
 
     }
 
-    public void onShowLectures( ) {
+    public void onShowLectures() {
         setAllNotVisible();
         page5.setVisible(true);
         fillLectureTable();
         tableLecture.refresh();
         deleteRowsLectures();
+        showLecturesStatistics();
         tableLecture.refresh();
     }
+
     public void onRegisterAttendance() {
         setAllNotVisible();
         page6.setVisible(true);
@@ -285,52 +293,57 @@ public class TeacherController implements Initializable {
             menuItemsLectures.add(new MenuItem(teacherAssistant.getCourse().getLecturesList().get(i).getLectureTitle()));
             menuItemsLecturesNames.add(teacherAssistant.getCourse().getLecturesList().get(i).getLectureTitle());
             int finalI = i;
-            menuItemsLectures.get(i).setOnAction(e -> handleMenuItem(menuItemsLecturesNames.get(finalI) , menuAddAttendance));
+            menuItemsLectures.get(i).setOnAction(e -> handleMenuItem(menuItemsLecturesNames.get(finalI), menuAddAttendance));
 
 
         }
         menuAddAttendance.getItems().addAll(menuItemsLectures);
 
 
+        if (!menuAddAttendance.getText().equals("Choose Lecture")) {
+            handleMenuItem(menuAddAttendance.getText(), menuAddAttendance);
+        }
 
 
     }
+
     public void onReports(ActionEvent actionEvent) {
     }
-    public void onCreateNewStudent(ActionEvent event){
-        String  id  = "";
-        if (radioMale.isSelected()){
-            id +=1;
-        }else if(radioFemale.isSelected()){
-            id +=2;
+
+    public void onCreateNewStudent(ActionEvent event) {
+        if (!textAddFirstName.getText().isEmpty()) {
+            String id = "";
+            if (radioMale.isSelected()) {
+                id += 1;
+            } else if (radioFemale.isSelected()) {
+                id += 2;
+            }
+            id += LocalDate.now().getYear();
+            id += teacherAssistant.getCourse().getStudentsList().size() + 1;
+            Student student = new Student(id, textAddFirstName.getText(), textAddLastName.getText(), textAddEmail.getText(), textAddMajor.getText(), textAddAddress.getText(), Long.parseLong(textAddPhoneNumber.getText()));
+            teacherAssistant.getCourse().addStudent(student);
+            onRegisterStudent();
+            System.out.println(student.toString());
         }
-        id += LocalDate.now().getYear();
-        id += teacherAssistant.getCourse().getStudentsList().size()+1;
-            Student student = new Student(id,textAddFirstName.getText(), textAddLastName.getText(),textAddEmail.getText(), textAddMajor.getText(),textAddAddress.getText() ,Long.parseLong(textAddPhoneNumber.getText()));
-        teacherAssistant.getCourse().addStudent(student);
-        onRegisterStudent();
-        System.out.println(student.toString());
 
     }
+
     public void onCreateNewLecture(ActionEvent event) {
-        Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), textLectureDate.getValue().toString());
-        teacherAssistant.getCourse().addLecture(lecture);
-        onAddLecture();
+        if (!textLectureTitle.getText().isEmpty()) {
+            Lecture lecture = new Lecture(textLectureTitle.getText(), textLectureClassRome.getText(), Double.parseDouble(textDuration.getText()), (String) textLectureDate.getValue().toString());
+            teacherAssistant.getCourse().addLecture(lecture);
+            onAddLecture();
+        }
     }
 
-
-
-
-
-//
-    public void fillStudentTable(){
-        columnID.setCellValueFactory(new PropertyValueFactory<Student,String >("username"));
-        columnFirstName.setCellValueFactory(new PropertyValueFactory<Student,String>("firstName"));
-        columnLastName.setCellValueFactory(new PropertyValueFactory<Student,String>("lastName"));
-        columnEmail.setCellValueFactory(new PropertyValueFactory<Student,String>("email"));
-        columnMajor.setCellValueFactory(new PropertyValueFactory<Student,String>("major"));
-        columnAddress.setCellValueFactory(new PropertyValueFactory<Student,String>("address"));
-        columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Student,Long>("phoneNumber"));
+    public void fillStudentTable() {
+        columnID.setCellValueFactory(new PropertyValueFactory<Student, String>("username"));
+        columnFirstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+        columnLastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+        columnEmail.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+        columnMajor.setCellValueFactory(new PropertyValueFactory<Student, String>("major"));
+        columnAddress.setCellValueFactory(new PropertyValueFactory<Student, String>("address"));
+        columnPhoneNumber.setCellValueFactory(new PropertyValueFactory<Student, Long>("phoneNumber"));
 
 
         ObservableList<Student> observableListStudent = FXCollections.observableArrayList(teacherAssistant.getCourse().getStudentsList());
@@ -402,14 +415,13 @@ public class TeacherController implements Initializable {
         columnPhoneNumber.setCellFactory(TextFieldTableCell.forTableColumn(longConverter));
 
     }
-    public void fillLectureTable(){
-        columnLectureTitle.setCellValueFactory(new PropertyValueFactory<Lecture,String>("lectureTitle"));
-        columnLectureClassRome.setCellValueFactory(new  PropertyValueFactory<Lecture,String>("lectureClassRome"));
-        columnDuration.setCellValueFactory(new PropertyValueFactory<Lecture,Double>("duration"));
-        columnLectureDate.setCellValueFactory(cellData -> {
-            Lecture lecture = cellData.getValue();
-            return lecture.dateStringProperty();
-        });
+
+    public void fillLectureTable() {
+
+        columnLectureTitle.setCellValueFactory(new PropertyValueFactory<Lecture, String>("lectureTitle"));
+        columnLectureClassRome.setCellValueFactory(new PropertyValueFactory<Lecture, String>("lectureClassRome"));
+        columnDuration.setCellValueFactory(new PropertyValueFactory<Lecture, Double>("duration"));
+        columnLectureDate.setCellValueFactory(new PropertyValueFactory<Lecture, String>("dateString"));
 
         ObservableList<Lecture> observableListLecture = FXCollections.observableArrayList(teacherAssistant.getCourse().getLecturesList());
         tableLecture.setItems(observableListLecture);
@@ -461,15 +473,71 @@ public class TeacherController implements Initializable {
 
     }
 
+    public void fillStudentReport(Student student) {
+
+        List<LectureAttendance> lectureAttendances = new ArrayList<>();
+        for (Lecture lecture : teacherAssistant.getCourse().getLecturesList()) {
+            Attendance studentAttendance = null;
+            boolean present = false;
+            String dates = "";
+            for (Attendance attendance : lecture.getAttendanceList()) {
+                if (attendance.getStudent().equals(student)) {
+                    studentAttendance = attendance;
+                    present = true;
+                    dates = studentAttendance.getTime().toString();
+                    System.out.println(student.getUsername());
+                    break;
+                }
+            }
+            LectureAttendance lectureAttendance = new LectureAttendance(lecture.getLectureTitle(), lecture.getDateString());
+            lectureAttendance.setAttendance(studentAttendance);
+            lectureAttendance.setDate(dates);
+            lectureAttendance.setPresent(present);
+            lectureAttendances.add(lectureAttendance);
+        }
+
+        ObservableList<LectureAttendance> data = FXCollections.observableArrayList(lectureAttendances);
+        tableStudentAttendance.setItems(data);
+
+        columnStudentAttendanceLectureName.setCellValueFactory(new PropertyValueFactory<>("lectureName"));
+        columnStudentAttendanceLectureDate.setCellValueFactory(new PropertyValueFactory<>("lectureDate"));
+        columnStudentAttendanceStatus.setCellValueFactory(new PropertyValueFactory<>("present"));
+        columnStudentAttendanceTime.setCellValueFactory(new PropertyValueFactory<>("date"));
 
 
+        columnStudentAttendanceStatus.setCellFactory(column -> new CheckBoxTableCell<LectureAttendance, Boolean>() {
+            @Override
+            public void updateItem(Boolean item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    CheckBox checkBox = new CheckBox();
+                    checkBox.setSelected(item != null && item);
+                    checkBox.setOnAction(event -> {
+                        LectureAttendance lectureAttendance = getTableRow().getItem();
+                        Lecture lecture = teacherAssistant.getCourse().getLectureByName(lectureAttendance.getLectureName());
+                        boolean newPresent = checkBox.isSelected();
+                        if (!newPresent) {
+                            lecture.removeAttendance(lectureAttendance.getAttendance());
+                        } else if (newPresent) {
+                            lecture.addAttendance(new Attendance(student, new Date()));
+                        }
+                    });
+                    setGraphic(checkBox);
+                }
+            }
+        });
 
 
+    }
 
     public void onEditStudentID(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
         Student student = tableStudent.getSelectionModel().getSelectedItem();
         student.setUsername(studentStringCellEditEvent.getNewValue());
     }
+
     public void onEditStudentFirstName(TableColumn.CellEditEvent<Student, String> studentStringCellEditEvent) {
         Student student = tableStudent.getSelectionModel().getSelectedItem();
         student.setFirstName(studentStringCellEditEvent.getNewValue());
@@ -520,7 +588,56 @@ public class TeacherController implements Initializable {
         lecture.setDateString(lectureStringCellEditEvent.getNewValue());
     }
 
+    public void showLecturesStatistics() {
+        tableLecture.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                setAllNotVisible();
+                page8.setVisible(true);
 
+                String selectedItem = tableLecture.getSelectionModel().getSelectedItem().getLectureTitle();
+                Lecture lecture = teacherAssistant.getCourse().getLectureByName(selectedItem);
+                textLectureReportTitle.setText(selectedItem);
+                textAttendancePercentage.setText(String.format("%%%.1f", teacherAssistant.getCourse().getLectureAttendancePercentage(lecture)));
+                textAttendanceNumber.setText(String.format("%d", teacherAssistant.getCourse().getLectureAttendanceNumber(lecture)));
+                fillLectureReport(lecture);
+                tableLectureReport.refresh();
+
+
+            }
+        });
+    }
+
+    private void fillLectureReport(Lecture lecture) {
+
+        List<LectureReport> lectureReports = new ArrayList<>();
+        for (Student student : teacherAssistant.getCourse().getStudentsList()) {
+            Attendance studentAttendance = null;
+            boolean present = false;
+            String dates = "";
+            for (Attendance attendance : lecture.getAttendanceList()) {
+                if (attendance.getStudent().equals(student)) {
+                    studentAttendance = attendance;
+                    present = true;
+                    dates = studentAttendance.getTime().toString();
+                    break;
+                }
+            }
+            LectureReport lectureReport = new LectureReport(student.getUsername(), student.getFirstName() + " " + student.getLastName());
+            lectureReport.setDate(dates);
+            lectureReport.setPresent(present);
+            lectureReports.add(lectureReport);
+        }
+
+        ObservableList<LectureReport> data = FXCollections.observableArrayList(lectureReports);
+        tableLectureReport.setItems(data);
+
+        columnLectureReportStudentId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnLectureReportStudentName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnLectureReportStatus.setCellValueFactory(new PropertyValueFactory<>("present"));
+        columnLectureReportTime.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+
+    }
 
     public void deleteRowsStudent() {
         // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
@@ -555,6 +672,7 @@ public class TeacherController implements Initializable {
             }
         });
     }
+
     public void deleteRowsLectures() {
         // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
         tableLecture.setOnKeyPressed(event -> {
@@ -603,14 +721,12 @@ public class TeacherController implements Initializable {
         }
     }
 
+    public void onImportXLS() {
 
+        FileChooser fileChooser = new FileChooser();
+        File file1 = fileChooser.showOpenDialog(null);
 
-    public void onImportXLS( )  {
-
-      FileChooser fileChooser = new FileChooser();
-      File file1 = fileChooser.showOpenDialog(null);
-
-        if (file1 != null){
+        if (file1 != null) {
             try (BufferedReader br = new BufferedReader(new FileReader(file1))) {
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -632,25 +748,26 @@ public class TeacherController implements Initializable {
         onRegisterAttendance();
     }
 
-    public Student StudentSearch(String  data) {
+    public Student StudentSearch(String data) {
         for (int i = 0; i < teacherAssistant.getCourse().getStudentsList().size(); i++) {
             Student student = teacherAssistant.getCourse().getStudentsList().get(i);
             if (data.equals(student.getUsername()) ||
-                    data.equals(student.getFirstName() + " " + student.getLastName())  ||
+                    data.equals(student.getFirstName() + " " + student.getLastName()) ||
                     data.equals(String.valueOf(student.getPhoneNumber()))
-            ){
+            ) {
                 return student;
             }
         }
         return null;
 
     }
+
     public void deleteRowsAttendance(Lecture lecture) {
         // في جزء الكود حيث تتم معالجة حدث الضغط على زر Delete
         listViewAttendance.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.DELETE) {
                 // الحصول على الصف المحدد في الـ TableView
-                String  selectedStudent = listViewAttendance.getSelectionModel().getSelectedItem();
+                String selectedStudent = listViewAttendance.getSelectionModel().getSelectedItem();
                 int index = listViewAttendance.getSelectionModel().getSelectedIndex();
                 // التأكد من وجود صف محدد
                 if (selectedStudent != null) {
@@ -678,6 +795,7 @@ public class TeacherController implements Initializable {
             }
         });
     }
+
     private void showStudentReport(Lecture lecture) {
         listViewAttendance.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
@@ -687,86 +805,39 @@ public class TeacherController implements Initializable {
                 String username = teacherAssistant.getCourse().getStudentIdByFullName(selectedItem);
                 Student student = teacherAssistant.getCourse().getStudentById(username);
                 fillStudentReport(student);
+                tableStudentAttendance.refresh();
 
             }
         });
 
     }
 
-    public void fillStudentReport(Student student){
-
-//        ObservableList<ObservableList<String>> items = FXCollections.observableArrayList();
-//
-//
-//        ArrayList<Boolean> statusList = new ArrayList<Boolean>();
-//        ArrayList<String> lectureList = new ArrayList<String>();
-//        ArrayList<String > dateList = new ArrayList<String>();
-//
-//
-//        for (int i = 0; i < teacherAssistant.getCourse().getLecturesList().size(); i++) {
-//            statusList.add(teacherAssistant.getCourse().getLecturesList().get(i).getAttendanceValue(student));
-//            lectureList.add(teacherAssistant.getCourse().getLecturesList().get(i).getLectureTitle());
-//            lectureList.add(teacherAssistant.getCourse().getLecturesList().get(i).getDateString());
-//        }
-//
-//
-//
-//        tableLecture.setEditable(true);
-//        columnLectureTitle.setCellFactory(TextFieldTableCell.forTableColumn());
-//        columnLectureClassRome.setCellFactory(TextFieldTableCell.forTableColumn());
-//        columnLectureDate.setCellFactory(TextFieldTableCell.forTableColumn());
-//
-//
-//        // Populate the items list with data from the ArrayLists
-//        for (int i = 0; i < lectureList.size(); i++) {
-//            ObservableList<String> row = FXCollections.observableArrayList();
-//            row.add(lectureList.get(i));
-//            row.add(dateList.get(i));
-//            row.add(String.valueOf(statusList.get(i)));
-//            items.add(row);
-//        }
-//
-//        columnStudentAttendanceLectureName.setCellValueFactory(new PropertyValueFactory<>());
-//
-//        columnStudentAttendanceLectureDate.setCellValueFactory(param -> param.getValue().get(1));
-//
-//        columnStudentAttendanceStatus.setCellValueFactory(param -> param.getValue().get(2));
-//
-//        tableStudentAttendance.getColumns().addAll(columnStudentAttendanceLectureName, columnStudentAttendanceLectureDate, columnStudentAttendanceStatus);
-//        tableStudentAttendance.setItems(items);
-
-    }
-
-
-
-    public void onSetAttendance( ) {
-        if (!menuAddAttendance.getText().equals("Choose Lecture")){
-            Student student =  StudentSearch(textEnterForAttendance.getText());
-            if (student != null){
+    public void onSetAttendance() {
+        if (!menuAddAttendance.getText().equals("Choose Lecture")) {
+            Student student = StudentSearch(textEnterForAttendance.getText());
+            if (student != null) {
                 Lecture lecture = teacherAssistant.getCourse().getLectureByName(menuAddAttendance.getText());
-                if (!lecture.getAttendanceValue(student)){
-                    teacherAssistant.markAttendance(lecture,student);
+                if (!lecture.getAttendanceValue(student)) {
+                    teacherAssistant.markAttendance(lecture, student);
                     listViewAttendance.getItems().add(student.getFirstName() + " " + student.getLastName());
                     labelStudent.setTextFill(GREEN);
                     labelStudent.setText(student.getUsername() + " added");
                     textEnterForAttendance.clear();
-                }else {
+                } else {
                     labelStudent.setTextFill(RED);
                     labelStudent.setText("Already added");
                 }
 
 
-
-            }else{
+            } else {
                 labelStudent.setTextFill(RED);
                 labelStudent.setText("Can't find student*");
             }
 
-        }else{
+        } else {
             labelStudent.setTextFill(RED);
             labelStudent.setText("Choose lecture*");
         }
-
 
 
     }
@@ -774,7 +845,7 @@ public class TeacherController implements Initializable {
     public void onQrAttendance(ActionEvent event) {
 
         Webcam webcam = Webcam.getDefault();   //Generate Webcam Object
-        webcam.setViewSize(new Dimension(320,240));
+        webcam.setViewSize(new Dimension(320, 240));
         WebcamPanel webcamPanel = new WebcamPanel(webcam);
         webcamPanel.setMirrored(false);
         JFrame jFrame = new JFrame();
@@ -783,7 +854,6 @@ public class TeacherController implements Initializable {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setVisible(true);
-
 
 
         do {
@@ -816,13 +886,85 @@ public class TeacherController implements Initializable {
 
     }
 
+    public void onReportBad(ActionEvent event) {
+        setAllNotVisible();
+        page9.setVisible(true);
+        tableStudentDelete.getItems().clear();
+        tableStudent.refresh();
+        fillDeleteTable();
 
-
-    public void onStudentAttendanceStatus(TableColumn.CellEditEvent cellEditEvent) {
     }
+
+    private void fillDeleteTable() {
+        ArrayList<Student> students = teacherAssistant.getCourse().getFailureStudents();
+
+        columnID1.setCellValueFactory(new PropertyValueFactory<Student, String>("username"));
+        columnFirstName1.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+        columnLastName1.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+        columnEmail1.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+        columnMajor1.setCellValueFactory(new PropertyValueFactory<Student, String>("major"));
+        columnAddress1.setCellValueFactory(new PropertyValueFactory<Student, String>("address"));
+        columnPhoneNumber1.setCellValueFactory(new PropertyValueFactory<Student, Long>("phoneNumber"));
+
+
+        ObservableList<Student> observableListStudent = FXCollections.observableArrayList(students);
+        tableStudentDelete.setItems(observableListStudent);
+
+    }
+
+    public void onExportBad(ActionEvent event) {
+        fileChooserSave = new FileChooser();
+        ArrayList<Student> students = teacherAssistant.getCourse().getFailureStudents();
+        fileChooserSave.setTitle("Save");
+        fileChooserSave.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("CSV Files", "*.csv")
+        );
+
+        File selectedFile = fileChooserSave.showSaveDialog(null);
+        if (selectedFile != null) {
+            saveFile(selectedFile.getPath(), students);
+        }
+    }
+
+    public void saveFile(String filePath, ArrayList<Student> students) {
+
+        if (students != null) {
+            if (!filePath.toLowerCase().endsWith(".csv")) {
+                filePath += ".csv";
+            }
+
+            try (FileWriter writer = new FileWriter(filePath)) {
+                // Write CSV header
+                writer.append("Username,First Name,Last Name,Email,Major,Address,Phone Number\n");
+
+                // Write student data
+                for (Student student : students) {
+                    writer.append(student.getUsername()).append(",");
+                    writer.append(student.getFirstName()).append(",");
+                    writer.append(student.getLastName()).append(",");
+                    writer.append(student.getEmail()).append(",");
+                    writer.append(student.getMajor()).append(",");
+                    writer.append(student.getAddress()).append(",");
+                    writer.append(student.getPhoneNumbers()).append("\n");
+                }
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Noice");
+                alert.setHeaderText("CSV file has been created successfully!");
+                alert.setContentText(null);
+
+                ButtonType yes = new ButtonType("ok", ButtonBar.ButtonData.OK_DONE);
+
+                alert.getButtonTypes().setAll(yes);
+
+                Optional<ButtonType> result = alert.showAndWait();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
-
-
-
-
-

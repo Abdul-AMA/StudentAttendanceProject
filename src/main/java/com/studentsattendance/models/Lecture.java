@@ -1,15 +1,9 @@
 package com.studentsattendance.models;
 
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.DatePicker;
-
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Lecture implements Serializable {
 
@@ -18,12 +12,7 @@ public class Lecture implements Serializable {
     private String lectureTitle;
     private String lectureClassRome;
     private double duration;
-    private Date lectureDate;
-    private DatePicker datePicker;
-    private LocalDate localDate;
-    private String date;
-    private ObjectProperty<DatePicker> datePickerProperty;
-    private StringProperty dateStringProperty;
+    private String  dateString;
 
 
     private ArrayList<Attendance> attendanceList;
@@ -34,49 +23,21 @@ public class Lecture implements Serializable {
         this.attendanceList = new ArrayList<>();
 
     }
-    public Lecture(DatePicker datePicker) {
-        this.datePickerProperty = new SimpleObjectProperty<>(datePicker);
-        this.attendanceList = new ArrayList<>();
-    }
-    public Lecture(String dateString) {
-        this.dateStringProperty = new SimpleStringProperty(dateString);
-        this.attendanceList = new ArrayList<>();
-    }
 
-    public Lecture(String lectureTitle, String lectureClassRome, double duration, Date lectureDate, ArrayList<Attendance> attendanceList) {
+    public Lecture(String lectureTitle, String lectureClassRome, double duration,String dateString,  ArrayList<Attendance> attendanceList) {
         this.lectureTitle = lectureTitle;
         this.lectureClassRome = lectureClassRome;
         this.duration = duration;
-        this.lectureDate = lectureDate;
+        this.dateString = dateString;
         this.attendanceList = attendanceList;
 
     }
-
-    public Lecture(String lectureTitle, String lectureClassRome, double duration, Date lectureDate) {
-        this.lectureTitle = lectureTitle;
-        this.lectureClassRome = lectureClassRome;
-        this.duration = duration;
-        this.lectureDate = lectureDate;
-        this.attendanceList = new ArrayList<>();
-    }
-
-
-
-    public Lecture(String lectureTitle, String lectureClassRome, double duration, DatePicker datePicker) {
-        this.lectureTitle = lectureTitle;
-        this.lectureClassRome = lectureClassRome;
-        this.duration = duration;
-        this.datePickerProperty = new SimpleObjectProperty<>(datePicker);
-        this.attendanceList = new ArrayList<>();
-    }
-
-
 
     public Lecture(String lectureTitle, String lectureClassRome, double duration, String dateString) {
         this.lectureTitle = lectureTitle;
         this.lectureClassRome = lectureClassRome;
         this.duration = duration;
-        this.dateStringProperty = new SimpleStringProperty(dateString);
+        this.dateString = dateString;
         this.attendanceList = new ArrayList<>();
     }
 
@@ -101,31 +62,14 @@ public class Lecture implements Serializable {
         return false;
 
     }
-    public ObjectProperty<DatePicker> datePickerProperty() {
-        return datePickerProperty;
-    }
-
-    public DatePicker getDatePicker() {
-        return datePickerProperty.get();
-    }
-
-    public void setDatePicker(DatePicker datePicker) {
-        datePickerProperty.set(datePicker);
-    }
-    public StringProperty dateStringProperty() {
-        return dateStringProperty;
-    }
 
     public String getDateString() {
-        return dateStringProperty.get();
+        return dateString;
     }
 
     public void setDateString(String dateString) {
-        dateStringProperty.set(dateString);
+        this.dateString = dateString;
     }
-
-
-
 
 // ----------------------------------------------------------------
 // getters and setters
@@ -155,13 +99,7 @@ public class Lecture implements Serializable {
         this.duration = duration;
     }
 
-    public Date getLectureDate() {
-        return lectureDate;
-    }
 
-    public void setLectureDate(Date lectureDate) {
-        this.lectureDate = lectureDate;
-    }
 
     public ArrayList<Attendance> getAttendanceList() {
         return attendanceList;
@@ -178,7 +116,7 @@ public class Lecture implements Serializable {
                 "lectureTitle='" + lectureTitle + '\'' +
                 ", lectureClassRome='" + lectureClassRome + '\'' +
                 ", duration=" + duration +
-                ", lectureDate=" + lectureDate +
+                ", lectureDate=" + dateString +
                 ", attendanceList=" + attendanceList +
                 '}';
     }
