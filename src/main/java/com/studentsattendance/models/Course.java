@@ -204,6 +204,15 @@ public class Course implements Serializable {
         return null;
     }
 
+    public String getStudentIdByFullName(String fullName){
+        for (int i = 0; i < studentsList.size(); i++) {
+            if ((studentsList.get(i).getFirstName() + " " + studentsList.get(i).getLastName()).equals(fullName) ){
+                return studentsList.get(i).getUsername();
+            }
+        }
+        return null;
+    }
+
 
     public Lecture getLectureByName(String lectureName){
         for (int i = 0; i < lecturesList.size(); i++) {

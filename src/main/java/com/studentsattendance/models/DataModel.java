@@ -46,15 +46,25 @@ public class DataModel implements Serializable{
             throw new RuntimeException(e);
         }
 
+
     }
 
     public void loadRecoveryFile() throws IOException {
-        BufferedInputStream in = new BufferedInputStream(new FileInputStream("src/main/java/com/studentsattendance/models/Files/adminRecovery.bin"));
-        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File("src/main/java/com/studentsattendance/models/Files/admin.bin")));
-        while(in.available() > 0) {
-            byte[] bytes = in.readNBytes(in.available());
-            out.write(bytes);
-            out.flush();
+        String sourceFilePath = "src/main/java/com/studentsattendance/models/Files/adminRecovery.bin"; // Replace with the actual path to the source file
+        String destinationFilePath = "src/main/java/com/studentsattendance/models/Files/admin.bin"; // Replace with the actual path to the destination file
+
+        try (FileInputStream inputStream = new FileInputStream(sourceFilePath);
+             FileOutputStream outputStream = new FileOutputStream(destinationFilePath)) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+
+        } catch (IOException e) {
         }
     }
 

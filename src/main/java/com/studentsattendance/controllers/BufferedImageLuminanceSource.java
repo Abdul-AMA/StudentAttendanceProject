@@ -7,12 +7,13 @@ package com.studentsattendance.controllers;
 
 
 
-import com.google.zxing.LuminanceSource;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.awt.image.WritableRaster;
+import com.google.zxing.LuminanceSource;
+
 
 public final class BufferedImageLuminanceSource extends LuminanceSource {
     private static final double MINUS_45_IN_RADIANS = -0.7853981633974483;

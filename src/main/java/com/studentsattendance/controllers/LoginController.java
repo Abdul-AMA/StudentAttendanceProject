@@ -48,8 +48,6 @@ public class LoginController implements  Initializable  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dataModel = new DataModel();
-        administrator = dataModel.getAdministrator();
 
 
     }
@@ -58,6 +56,9 @@ public class LoginController implements  Initializable  {
     }
 
     public void onLogin() {
+        dataModel = new DataModel();
+        administrator = dataModel.getAdministrator();
+
         if (usernameInput.getText().isEmpty()){
             labelWrongPass.setText("Enter username");
             return;
