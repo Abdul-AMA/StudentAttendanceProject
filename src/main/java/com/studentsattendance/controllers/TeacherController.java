@@ -72,6 +72,9 @@ public class TeacherController implements Initializable {
     public TableColumn<Student, Long> columnPhoneNumber1;
     public Button buttonReportBad;
     public Button buttonExportBad;
+    public TextField textAttendancePercentageS;
+    public TextField textAttendanceNumberS;
+    public TextField textStudentReportName;
     @FXML
     private StackPane StackPane;
     @FXML
@@ -256,6 +259,21 @@ public class TeacherController implements Initializable {
         tableStudent.refresh();
         deleteRowsStudent();
         tableStudent.refresh();
+        tableStudent.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                setAllNotVisible();
+                page7.setVisible(true);
+
+                String selectedItem = tableStudent.getSelectionModel().getSelectedItem().getUsername();
+                Student student = teacherAssistant.getCourse().getStudentById(selectedItem);
+                textStudentReportName.setText(student.getFirstName() +" " + student.getLastName());
+                textAttendancePercentageS.setText(String.format("%%%.1f", teacherAssistant.getCourse().getStudentStatistics(student)));
+                textAttendanceNumberS.setText(String.format("%d", teacherAssistant.getCourse().getStudentAttendantLectures(student).size()));
+                fillStudentReport(student);
+                tableStudent.refresh();
+
+            }
+        });
     }
 
     public void onAddLecture() {
@@ -323,7 +341,6 @@ public class TeacherController implements Initializable {
             Student student = new Student(id, textAddFirstName.getText(), textAddLastName.getText(), textAddEmail.getText(), textAddMajor.getText(), textAddAddress.getText(), Long.parseLong(textAddPhoneNumber.getText()));
             teacherAssistant.getCourse().addStudent(student);
             onRegisterStudent();
-            System.out.println(student.toString());
         }
 
     }
@@ -485,7 +502,6 @@ public class TeacherController implements Initializable {
                     studentAttendance = attendance;
                     present = true;
                     dates = studentAttendance.getTime().toString();
-                    System.out.println(student.getUsername());
                     break;
                 }
             }
@@ -804,6 +820,9 @@ public class TeacherController implements Initializable {
                 String selectedItem = listViewAttendance.getSelectionModel().getSelectedItem();
                 String username = teacherAssistant.getCourse().getStudentIdByFullName(selectedItem);
                 Student student = teacherAssistant.getCourse().getStudentById(username);
+                textStudentReportName.setText(selectedItem);
+                textAttendancePercentage.setText(String.format("%%%.1f", teacherAssistant.getCourse().getStudentStatistics(student)));
+                textAttendanceNumber.setText(String.format("%d", teacherAssistant.getCourse().getStudentAttendantLectures(student).size()));
                 fillStudentReport(student);
                 tableStudentAttendance.refresh();
 
