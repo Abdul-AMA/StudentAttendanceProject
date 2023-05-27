@@ -886,11 +886,11 @@ public class TeacherController implements Initializable {
 
                         System.out.println(result.getText());
                         textEnterForAttendance.setText(result.getText());
+                        onSetAttendance();
                         scannedCodes.add(result.getText());
                         jFrame.setVisible(false);
                         jFrame.dispose();
                         webcam.close();
-                        onDoneAttendance();
                         break;
 
                     }
