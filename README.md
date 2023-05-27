@@ -34,3 +34,5 @@ finally, this program is full of small details and I would appreciate you givein
 
 made with ❤ by Abdulrahman Abu Amouna & ِ AbdelRahim Ouda
  
+note:
+you will find the UML diagrams in the resources directory in a pdf file
