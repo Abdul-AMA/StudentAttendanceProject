@@ -23,19 +23,19 @@ The Student Attendance Project offers the following key features:
 3. **Lost Data** option to restore previous data (Note: Last modification may be lost).
 4. Two account types: Admin and Teacher.
 5. **Admin Interface** with the ability to:
-    - Create, edit, and display courses.
-    - Create, edit, and display teachers.
-    - Link teachers to their respective courses.
+   - Create, edit, and display courses.
+   - Create, edit, and display teachers.
+   - Link teachers to their respective courses.
 
 6. **Teacher Interface** with the ability to:
-    - Create, add, edit, and remove students from courses.
-    - View student statistics within a course.
-    - Create, edit, and remove lectures for a course.
-    - View lecture statistics within a course.
-    - Mark attendance for students in lectures using name, ID, phone number, or CSV import.
-    - Use a webcam to scan ID cards for student identification and marking attendance.
-    - View individual student records and make attendance changes for other lectures.
-    - Display a table of students with an absence of 25% or more and export them to a CSV file.
+   - Create, add, edit, and remove students from courses.
+   - View student statistics within a course.
+   - Create, edit, and remove lectures for a course.
+   - View lecture statistics within a course.
+   - Mark attendance for students in lectures using name, ID, phone number, or CSV import.
+   - Use a webcam to scan ID cards for student identification and marking attendance.
+   - View individual student records and make attendance changes for other lectures.
+   - Display a table of students with an absence of 25% or more and export them to a CSV file.
 
 
 ## Usage
@@ -49,8 +49,8 @@ Follow the steps below to use the Student Attendance Project:
 The Student Attendance Project supports two account types:
 
 1. **Admin Account**: The Admin account has fixed credentials with the following information:
-    - Username: admin
-    - Password: admin
+   - Username: admin
+   - Password: admin
 
 2. **Teacher Account**: The Teacher account is created by the Admin and can be accessed using the credentials provided by the Admin.
 
